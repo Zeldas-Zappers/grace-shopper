@@ -1,18 +1,64 @@
-'use strict'
-
+// 'use strict'
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+// const {User} = require('../server/db/models')
+const {Product} = require('../server/db/models')
+const faker = require('faker')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const lightingArray = [
+    'This plant does well in low light.',
+    'This plant does best in partial shade.',
+    'This plant does best in bright direct sunlight.'
+  ]
 
-  console.log(`seeded ${users.length} users`)
+  const wateringArray = [
+    'This plant needs to be watered once a week.',
+    'This plant needs to be watered daily.',
+    'This plant needs to be watered every 30 minutes or it will DIE!'
+  ]
+
+  const categoriesArray = ['Succulents', 'Indoor', 'Outdoor', 'Pet-Friendly']
+
+  const productArray = []
+  for (let i = 1; i <= 100; i++) {
+    const name = faker.commerce.productName()
+    const description = faker.commerce.productDescription()
+    const price = faker.commerce.price(99, 1000)
+    const category = faker.helpers.shuffle(categoriesArray)[0]
+    const lighting = faker.helpers.shuffle(lightingArray)[0]
+    const watering = faker.helpers.shuffle(wateringArray)[0]
+    const inventory = faker.random.number({
+      min: 0,
+      max: 100
+    })
+    productArray.push({
+      name,
+      description,
+      price,
+      category,
+      lighting,
+      watering,
+      inventory
+    })
+  }
+
+  console.log('hello', productArray)
+
+  // const users = await Promise.all([
+  //   User.create({email: 'cody@email.com', password: '123'}),
+  //   User.create({email: 'murphy@email.com', password: '123'}),
+  // ])
+
+  await Promise.all(
+    productArray.map(product => {
+      return Product.create(product)
+    })
+  )
+
+  // console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }
 
