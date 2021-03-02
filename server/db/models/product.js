@@ -43,11 +43,11 @@ const Product = db.define('product', {
     }
   },
   imageUrl: {
-    type: Sequelize.TEXT,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.TEXT
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true
+    // }
   }
 })
 
