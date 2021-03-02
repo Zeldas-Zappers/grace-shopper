@@ -8,16 +8,6 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  // console.log('hello', {
-  //   productName,
-  //   productDescription,
-  //   productPrice,
-  //   productCategory,
-  //   productLighting,
-  //   productWatering,
-  //   productInventory,
-  // })
-
   const lightingArray = [
     'This plant does well in low light.',
     'This plant does best in partial shade.',
@@ -31,10 +21,9 @@ async function seed() {
   ]
 
   const categoriesArray = ['Succulents', 'Indoor', 'Outdoor', 'Pet-Friendly']
-  // const randomElement = array[Math.floor(Math.random() * array.length)]
 
   const productArray = []
-  for (let i = 1; i <= 1; i++) {
+  for (let i = 1; i <= 100; i++) {
     const name = faker.commerce.productName()
     const description = faker.commerce.productDescription()
     const price = faker.commerce.price(99, 1000)
@@ -64,7 +53,7 @@ async function seed() {
   // ])
 
   await Promise.all(
-    productArray.forEach(product => {
+    productArray.map(product => {
       return Product.create(product)
     })
   )
