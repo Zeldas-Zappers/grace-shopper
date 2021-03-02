@@ -5,6 +5,10 @@ import {Router} from 'react-router-dom'
 import history from './history'
 import store from './store'
 import App from './app'
+//import 'bootstrap/dist/css/bootstrap.min.css';
+// import $ from 'jquery';
+// import Popper from 'popper.js';
+//import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 // establishes socket connection
 import './socket'
