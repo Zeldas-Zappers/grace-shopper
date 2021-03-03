@@ -49,6 +49,18 @@ const Product = db.define('product', {
     //   notEmpty: true
     // }
   },
+
+  count: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+    allowNull: false,
+    validate: {
+      min: 0,
+      notEmpty: true,
+      isInt: true
+    }
+  }
+
 })
 
 module.exports = Product
