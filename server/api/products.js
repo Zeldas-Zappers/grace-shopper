@@ -16,7 +16,19 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id
+
+    if (isNaN(Number(id))) {
+      res.sendStatus(400)
+      return
+    }
+
     const singleProduct = await Product.findByPk(id)
+
+    if (!singleProduct) {
+      res.sendStatus(404)
+      return
+    }
+
     res.json(singleProduct)
   } catch (error) {
     next(error)
@@ -70,10 +82,10 @@ router.delete('/:id', async (req, res, next) => {
     if (productToBeDeleted) {
       await Product.destroy({
         where: {
-          id: id
-        }
+          id: id,
+        },
       })
-      res.sendStatus(204)
+      res.json(productToBeDeleted)
       return
     }
   } catch (error) {
