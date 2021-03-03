@@ -11,16 +11,18 @@ async function seed() {
   const lightingArray = [
     'This plant does well in low light.',
     'This plant does best in partial shade.',
-    'This plant does best in bright direct sunlight.',
+    'This plant does best in bright direct sunlight.'
   ]
 
   const wateringArray = [
     'This plant needs to be watered once a week.',
     'This plant needs to be watered daily.',
-    'This plant needs to be watered every 30 minutes or it will DIE!',
+    'This plant needs to be watered every 30 minutes or it will DIE!'
   ]
 
   const categoriesArray = ['Succulents', 'Indoor', 'Outdoor', 'Pet-Friendly']
+
+  //const imageUrlArray = ['']
 
   const productArray = []
   for (let i = 1; i <= 100; i++) {
@@ -32,8 +34,10 @@ async function seed() {
     const watering = faker.helpers.shuffle(wateringArray)[0]
     const inventory = faker.random.number({
       min: 0,
-      max: 100,
+      max: 100
     })
+    const imageUrl =
+      'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_potted-succulent-assortment_variant_6_growpot_none_900x.jpg?v=1613080263'
     productArray.push({
       name,
       description,
@@ -42,6 +46,7 @@ async function seed() {
       lighting,
       watering,
       inventory,
+      imageUrl
     })
   }
 
@@ -54,7 +59,7 @@ async function seed() {
       firstName: 'Cody',
       lastName: 'Abc',
       address: 'fake address',
-      phone: '555-555-1234',
+      phone: '555-555-1234'
     }),
     User.create({
       email: 'murphy@email.com',
@@ -62,12 +67,12 @@ async function seed() {
       firstName: 'Murphy',
       lastName: 'DEF',
       address: 'another fake address',
-      phone: '555-555-4567',
-    }),
+      phone: '555-555-4567'
+    })
   ])
 
   const products = await Promise.all(
-    productArray.map((product) => {
+    productArray.map(product => {
       return Product.create(product)
     })
   )
