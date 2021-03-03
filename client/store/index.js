@@ -7,7 +7,7 @@ import productsReducer from './products'
 
 const reducer = combineReducers({
   user: userReducer,
-  products: productsReducer
+  products: productsReducer,
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
