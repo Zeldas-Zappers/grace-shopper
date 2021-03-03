@@ -1,6 +1,5 @@
-const router = require('express').router()
-const {Product} = require('../db/models')
-module.exports = router
+const router = require('express').Router()
+const Product = require('../db/models/product')
 
 // already mounted on /api/products
 router.get('/', async (req, res, next) => {
@@ -11,3 +10,5 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+module.exports = router
