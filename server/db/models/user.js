@@ -54,10 +54,11 @@ const User = db.define('user', {
   phone: {
     type: Sequelize.STRING,
     allowNull: false,
-    // not sure if this validation is worth the trouble it would cause
-    // validate: {
-    //   isNumeric: true
-    // }
+    validate: {
+      notEmpty: true,
+      // not sure if this validation is worth the trouble it would cause
+      //   isNumeric: true
+    },
   },
   adminStatus: {
     type: Sequelize.BOOLEAN,
