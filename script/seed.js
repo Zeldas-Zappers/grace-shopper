@@ -1,7 +1,7 @@
 // 'use strict'
 const db = require('../server/db')
-const {User} = require('../server/db/models')
-const {Product} = require('../server/db/models')
+const {User, Product} = require('../server/db/models')
+// const {Product} = require('../server/db/models')
 const faker = require('faker')
 
 async function seed() {
@@ -45,7 +45,7 @@ async function seed() {
     })
   }
 
-  console.log('hello', productArray)
+  // console.log('hello', productArray)
 
   const users = await Promise.all([
     User.create({
@@ -66,13 +66,14 @@ async function seed() {
     }),
   ])
 
-  await Promise.all(
+  const products = await Promise.all(
     productArray.map((product) => {
       return Product.create(product)
     })
   )
 
-  // console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${products.length} products`)
   console.log(`seeded successfully`)
 }
 
