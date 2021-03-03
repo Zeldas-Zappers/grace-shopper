@@ -26,47 +26,62 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           {isLoggedIn ? (
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link to="/" className="nav-link active" aria-current="page">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link to="/products" className="nav-link">
                   Shop
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#" onClick={handleClick}>
+                <Link to="/logout" className="nav-link" onClick={handleClick}>
                   Logout
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#" tabIndex="-1" aria-disabled="true">
+                <Link
+                  to="/cart"
+                  className="nav-link"
+                  tabIndex="-1"
+                  aria-disabled="true"
+                >
                   Cart
-                </a>
+                </Link>
               </li>
             </ul>
           ) : (
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link to="/" className="nav-link active" aria-current="page">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link to="/products" className="nav-link">
                   Shop
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link to="/login" className="nav-link">
                   Login
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#" tabIndex="-1" aria-disabled="true">
+                <Link to="/signup" className="nav-link">
+                  Signup
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/cart"
+                  className="nav-link"
+                  tabIndex="-1"
+                  aria-disabled="true"
+                >
                   Cart
-                </a>
+                </Link>
               </li>
             </ul>
           )}
