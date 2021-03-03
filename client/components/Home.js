@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const Home = () => {
   return (
@@ -9,8 +10,13 @@ const Home = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
+      className="d-flex align-items-center justify-content-center"
     >
-        <div className="box">  </div> {' '}
+      <div>
+        <Link to="/products">
+          <button className="btn btn-primary">Shop Now!</button>
+        </Link>
+      </div>
     </section>
   )
 }
