@@ -1,4 +1,15 @@
 import React from 'react'
+
+const product = {
+  name: 'A lovely fern',
+  price: 448,
+  description:
+    'This fern will make it seem like life is worth living sometimes. You should buy it!',
+  lighting: 'This plant does well in bright light',
+  watering: 'This plant needs to be watered every 30 minutes or it will DIE!',
+  imageUrl:
+    'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_360x.jpg?v=1613171147',
+}
 class Cart extends React.Component {
   render() {
     return (
@@ -7,10 +18,7 @@ class Cart extends React.Component {
           <div className="col-md-4">
             <div className="row">
               <div className="col-md-12">
-                <img
-                  alt="Bootstrap Image Preview"
-                  src="https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_360x.jpg?v=1613171147"
-                />
+                <img alt="whatever alt we want" src={product.imageUrl} />
               </div>
             </div>
             <div className="row">
@@ -25,16 +33,11 @@ class Cart extends React.Component {
             <div className="row">
               <div className="col-md-12">
                 <ul>
-                  <li className="list-item">A lovely fern</li>
-                  <li className="list-item">$448</li>
-                  <li className="list-item">
-                    This fern will make it seem like life is worth living
-                    sometimes. You should buy it!
-                  </li>
-                  <li className="list-item">
-                    This plant needs to be watered every 30 minutes or it will
-                    DIE!
-                  </li>
+                  <li className="list-item">{product.name}</li>
+                  <li className="list-item">${product.price}</li>
+                  <li className="list-item">{product.description}</li>
+                  <li className="list-item">{product.lighting}</li>
+                  <li className="list-item">{product.watering}</li>
                 </ul>
               </div>
             </div>
@@ -78,7 +81,7 @@ class Cart extends React.Component {
           <div className="col-md-12">
             <div className="row">
               <div className="col-md-12">
-                <p>Subtotal: $448</p>
+                <p>Subtotal: ${product.price}</p>
               </div>
             </div>
             <div className="row">
