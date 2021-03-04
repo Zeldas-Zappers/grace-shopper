@@ -21,12 +21,18 @@ Product.belongsToMany(Cart, {through: CartItem})
 Cart.belongsToMany(Product, {through: CartItem})
 
 //UserCart through table will just have UserIds and CartIds
-User.belongsToMany(Cart, {through: 'UserCart'})
-Cart.belongsToMany(User, {through: 'UserCart'})
+// User.belongsToMany(Cart, {through: 'UserCart'})
+// Cart.belongsToMany(User, {through: 'UserCart'})
+
+User.hasMany(Cart)
+Cart.belongsTo(User)
+
+Cart.hasMany(CartItem)
+CartItem.belongsTo(Cart)
 
 module.exports = {
   User,
   Product,
   Cart,
-  CartItem
+  CartItem,
 }
