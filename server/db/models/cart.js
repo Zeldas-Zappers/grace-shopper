@@ -2,17 +2,37 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Cart = db.define('cart', {
-  sessionId: {
-    type: Sequelize.NUMBER,
+  total: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+    validate: {
+      min: 0,
+    },
   },
 
-  expiration: {
-    type: Sequelize.DATE,
+  shippingAddress: {
+    type: Sequelize.TEXT,
+    allowNull: false,
   },
 
-  status: {
+  orderStatus: {
+    type: Sequelize.ENUM('Processing', 'Fulfilled'),
+    allowNull: false,
+  },
+
+  promoCode: {
     type: Sequelize.STRING,
-    defaultValue: 'In progress',
+  },
+
+  giftWrapping: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+
+  giftStatus: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
 })
 
