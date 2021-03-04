@@ -1,74 +1,15 @@
 import React from 'react'
+import {fetchProducts} from '../store/products'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
-const data = [
-  {
-    id: 1,
-    name: 'Plant',
-    description: 'Please buy this plant',
-    price: 30,
-    imageUrl:
-      'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_540x.jpg?v=1613171147'
-  },
-  {
-    id: 2,
-    name: 'Plant',
-    description: 'Please buy this plant',
-    price: 30,
-    imageUrl:
-      'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_540x.jpg?v=1613171147'
-  },
-  {
-    id: 3,
-    name: 'Plant',
-    description: 'Please buy this plant',
-    price: 30,
-    imageUrl:
-      'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_540x.jpg?v=1613171147'
-  },
-  {
-    id: 4,
-    name: 'Plant',
-    description: 'Please buy this plant',
-    price: 30,
-    imageUrl:
-      'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_540x.jpg?v=1613171147'
-  },
-  {
-    id: 5,
-    name: 'Plant',
-    description: 'Please buy this plant',
-    price: 30,
-    imageUrl:
-      'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_540x.jpg?v=1613171147'
-  },
-  {
-    id: 6,
-    name: 'Plant',
-    description: 'Please buy this plant',
-    price: 30,
-    imageUrl:
-      'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_540x.jpg?v=1613171147'
-  },
-  {
-    id: 7,
-    name: 'Plant',
-    description: 'Please buy this plant',
-    price: 30,
-    imageUrl:
-      'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_540x.jpg?v=1613171147'
-  },
-  {
-    id: 8,
-    name: 'Plant',
-    description: 'Please buy this plant',
-    price: 30,
-    imageUrl:
-      'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_540x.jpg?v=1613171147'
+export class AllProducts extends React.Component {
+  componentDidMount() {
+    this.props.getProducts()
   }
-]
 
-class AllProducts extends React.Component {
   render() {
+    const {products} = this.props
     return (
       <div className="container">
         <div className="row">
@@ -100,16 +41,23 @@ class AllProducts extends React.Component {
           </div>
         </div>
         <div className="row">
-          {data.map(plant => {
+          {products.map((product) => {
             return (
-              <div key={plant.id} className="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div className="card">
-                  <img src={plant.imageUrl} className="card-img-top" />
-                  <div className="card-body row ">
-                    <h5 className="card-text col-8">{plant.name}</h5>
-                    <p className="card-text col-4 text-right">${plant.price}</p>
+              <div
+                key={product.id}
+                className="col-lg-3 col-md-6 col-sm-12 mb-4"
+              >
+                <Link to={`/products/${product.id}`}>
+                  <div className="card">
+                    <img src={product.imageUrl} className="card-img-top" />
+                    <div className="card-body row ">
+                      <h5 className="card-text col-8">{product.name}</h5>
+                      <p className="card-text col-4 text-right">
+                        ${product.price}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             )
           })}
@@ -162,4 +110,16 @@ class AllProducts extends React.Component {
   }
 }
 
-export default AllProducts
+const mapStateToProps = (state) => {
+  return {
+    products: state.products,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProducts: () => dispatch(fetchProducts()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
