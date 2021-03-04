@@ -9,6 +9,11 @@ const Cart = db.define('cart', {
   expiration: {
     type: Sequelize.DATE,
   },
+
+  status: {
+    type: Sequelize.STRING,
+    defaultValue: 'In progress',
+  },
 })
 
 module.exports = Cart
