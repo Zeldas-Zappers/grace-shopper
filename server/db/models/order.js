@@ -3,6 +3,7 @@ const db = require('../db')
 
 const Order = db.define('order', {
   items: {
+    // this will probably change, maybe to a cartId?
     type: Sequelize.ARRAY(Sequelize.STRING),
     defaultValue: [],
   },
