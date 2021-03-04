@@ -9,7 +9,6 @@ export class AllProducts extends React.Component {
   }
 
   render() {
-    console.log('ALL PRODUCTS DATA', this.props.products)
     const {products} = this.props
     return (
       <div className="container">
@@ -42,7 +41,7 @@ export class AllProducts extends React.Component {
           </div>
         </div>
         <div className="row">
-          {products.map(product => {
+          {products.map((product) => {
             return (
               <div
                 key={product.id}
@@ -111,15 +110,16 @@ export class AllProducts extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+
+const mapStateToProps = (state) => {
   return {
-    products: state.products
+    products: state.products,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getProducts: () => dispatch(fetchProducts())
+    getProducts: () => dispatch(fetchProducts()),
   }
 }
 
