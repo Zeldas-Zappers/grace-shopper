@@ -7,43 +7,43 @@ const Product = db.define('product', {
     unique: true,
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   description: {
     type: Sequelize.TEXT,
-    defaultValue: 'Product description here',
+    defaultValue: 'Product description here'
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
-      notEmpty: true,
-      isDecimal: true,
-    },
+      notEmpty: true
+      //isDecimal: true,
+    }
   },
   category: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   lighting: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   watering: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   inventory: {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   imageUrl: {
-    type: Sequelize.TEXT,
+    type: Sequelize.TEXT
     // allowNull: false,
     // validate: {
     //   notEmpty: true
@@ -57,9 +57,9 @@ const Product = db.define('product', {
     validate: {
       min: 0,
       notEmpty: true,
-      isInt: true,
-    },
-  },
+      isInt: true
+    }
+  }
 })
 
 module.exports = Product
