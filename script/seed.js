@@ -11,13 +11,13 @@ async function seed() {
   const lightingArray = [
     'This plant does well in low light.',
     'This plant does best in partial shade.',
-    'This plant does best in bright direct sunlight.',
+    'This plant does best in bright direct sunlight.'
   ]
 
   const wateringArray = [
     'This plant needs to be watered once a week.',
     'This plant needs to be watered daily.',
-    'This plant needs to be watered every 30 minutes or it will DIE!',
+    'This plant needs to be watered every 30 minutes or it will DIE!'
   ]
 
   const categoriesArray = ['Succulents', 'Indoor', 'Outdoor', 'Pet-Friendly']
@@ -82,21 +82,24 @@ async function seed() {
     'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_large-fiddle-leaf-fig-bush_gallery_all_all_02_360x.jpg?v=1606159741',
     'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_housewarming_duo_gallery_all_03_360x.jpg?v=1606800698',
     'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_calathea-dottie_gallery_small_all_all_04_360x.jpg?v=1611098512',
-    'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-gift-bundle_gallery_all_04_360x.jpg?v=1613398524',
+    'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-gift-bundle_gallery_all_04_360x.jpg?v=1613398524'
   ]
 
   const productArray = []
   for (let i = 1; i <= 100; i++) {
     const name = faker.commerce.productName()
     const description = faker.commerce.productDescription()
-    const price = faker.commerce.price(99, 1000)
+    const price = faker.random.number({
+      min: 99,
+      max: 1000
+    })
     const category = faker.helpers.shuffle(categoriesArray)[0]
     const lighting = faker.helpers.shuffle(lightingArray)[0]
     const watering = faker.helpers.shuffle(wateringArray)[0]
     const imageUrl = faker.helpers.shuffle(imageUrlArray)[0]
     const inventory = faker.random.number({
       min: 0,
-      max: 100,
+      max: 100
     })
     productArray.push({
       name,
@@ -106,33 +109,40 @@ async function seed() {
       lighting,
       watering,
       inventory,
-      imageUrl,
+      imageUrl
     })
   }
 
   // console.log('hello', productArray)
+  const usersArray = []
+  for (let i = 0; i <= 100; i++) {
+    const firstName = faker.name.firstName()
+    const lastName = faker.name.lastName()
+    const email = faker.internet.email()
+    const password = faker.internet.password()
+    const address = faker.address.streetAddress()
+    const phone = faker.phone.phoneNumber()
+    const adminStatus = faker.random.boolean()
 
-  const users = await Promise.all([
-    User.create({
-      email: 'cody@email.com',
-      password: '123',
-      firstName: 'Cody',
-      lastName: 'Abc',
-      address: 'fake address',
-      phone: '555-555-1234',
-    }),
-    User.create({
-      email: 'murphy@email.com',
-      password: '123',
-      firstName: 'Murphy',
-      lastName: 'DEF',
-      address: 'another fake address',
-      phone: '555-555-4567',
-    }),
-  ])
+    usersArray.push({
+      firstName,
+      lastName,
+      email,
+      password,
+      address,
+      phone,
+      adminStatus
+    })
+  }
+
+  const users = await Promise.all(
+    usersArray.map(user => {
+      return User.create(user)
+    })
+  )
 
   const products = await Promise.all(
-    productArray.map((product) => {
+    productArray.map(product => {
       return Product.create(product)
     })
   )

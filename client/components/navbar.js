@@ -22,7 +22,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div
+          className="collapse navbar-collapse justify-content-end m-0"
+          id="navbarNav"
+        >
           {isLoggedIn ? (
             <ul className="navbar-nav">
               <li className="nav-item">
@@ -88,8 +91,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         </div>
       </div>
     </nav>
-
-    <hr />
   </div>
 )
 
@@ -119,29 +120,3 @@ Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
-
-////////
-/*<nav>
-      {isLoggedIn ? (
-        <div>
-          // {/* The navbar will show these links after you log in */ //}
-//   <Link to="/home">Home</Link>
-//   <Link to="/products">Shop</Link>
-//   <Link to="/cart">Cart</Link>
-//   <a href="#" onClick={handleClick}>
-//     Logout
-//   </a>
-// </div>
-// ) : (
-//   <div>
-//     {/* The navbar will show these links before you log in */}
-//     <Link to="/login">Login</Link>
-//     <Link to="/signup">Sign Up</Link>
-//     <Link to="/products">Shop</Link>
-//     <Link to="/cart">Cart</Link>
-
-//     </div>
-//   )}
-// </nav>
-
-//////
