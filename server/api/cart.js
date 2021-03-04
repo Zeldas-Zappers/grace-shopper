@@ -11,7 +11,7 @@ router.get('/:cartId', async (req, res, next) => {
       where: {
         id: req.params.cartId,
       },
-      include: [{model: Product}],
+      include: [{model: CartItem}],
     })
     res.json(cart)
   } catch (err) {
@@ -87,3 +87,5 @@ router.put('/:cartId/:cartItemId', async (req, res, next) => {
     next(err)
   }
 })
+
+module.exports = router
