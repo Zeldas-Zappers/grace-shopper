@@ -55,7 +55,7 @@ router.put('/:id', async (req, res, next) => {
 
 //Create a new single product
 //POST /api/products/
-router.post('/', async (req, res, next) => {
+router.post('/', isAdmin, async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body)
     res.status(201).send(newProduct)
@@ -85,7 +85,7 @@ router.delete('/:id', async (req, res, next) => {
           id: id,
         },
       })
-      res.json(productToBeDeleted)
+      res.json(productToBeDeleted) //201
       return
     }
   } catch (error) {
