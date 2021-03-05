@@ -22,6 +22,28 @@ async function seed() {
     })
   }
 
+  const cartItemsArray = []
+  for (let i = 1; i <= 50; i++) {
+    cartItemsArray.push({
+      cartId: faker.random.number({
+        min: 1,
+        max: 50,
+      }),
+      productId: faker.random.number({
+        min: 1,
+        max: 50,
+      }),
+      quantity: faker.random.number({
+        min: 1,
+        max: 12,
+      }),
+      price: faker.random.number({
+        min: 1,
+        max: 499,
+      }),
+    })
+  }
+
   const lightingArray = [
     'This plant does well in low light.',
     'This plant does best in partial shade.',
@@ -167,9 +189,11 @@ async function seed() {
     })
   )
 
-  const cartItems = await Promise.all([
-    CartItem.create({cartId: 1, productId: 1, quantity: 2, price: 3}),
-  ])
+  const cartItems = await Promise.all(
+    cartItemsArray.map((items) => {
+      return CartItem.create(items)
+    })
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
