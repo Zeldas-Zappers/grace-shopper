@@ -7,7 +7,8 @@ const CartItem = db.define('cartItem', {
     allowNull: false,
     defaultValue: 0,
     validate: {
-      isEmpty: false,
+      // isEmpty: false,
+      notEmpty: true,
       min: 0,
     },
   },
@@ -17,7 +18,8 @@ const CartItem = db.define('cartItem', {
     allowNull: false,
     defaultValue: 0,
     validate: {
-      isEmpty: false,
+      // isEmpty: false,
+      notEmpty: true,
       min: 0,
     },
   },
