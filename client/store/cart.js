@@ -1,10 +1,18 @@
 import axios from 'axios'
 
 //Action type
+const FETCH_CART_ITEMS = 'FETCH_CART_ITEMS'
 const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
 const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART'
 
 //Action creator
+export const fetchCartItems = products => {
+  return {
+    type: FETCH_CART_ITEMS,
+    products
+  }
+}
+
 export const addItemToCart = product => {
   return {
     type: ADD_ITEM_TO_CART,
@@ -20,6 +28,17 @@ export const removeItemFromCart = product => {
 }
 
 //Thunk
+export const _setCartItems = products => {
+  return async dispatch => {
+    try {
+      const {data} = axios.get('/api/cart') //needs to be cart/cartId but not sure how to generate cartId for guest
+      dispatch(fetchCartItems(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
 export const _addItemToCart = product => {
   return async dispatch => {
     try {
@@ -46,6 +65,8 @@ export const _removeItemFromCart = product => {
 const initialState = []
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
+    case FETCH_CART_ITEMS:
+      return action.products
     case ADD_ITEM_TO_CART:
       return [...state, action.product]
     case REMOVE_ITEM_FROM_CART:

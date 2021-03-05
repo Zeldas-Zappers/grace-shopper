@@ -4,36 +4,36 @@ const db = require('../db')
 const Cart = db.define('cart', {
   total: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    //allowNull: false, SM commented this out
     defaultValue: 0,
     validate: {
-      min: 0,
-    },
+      min: 0
+    }
   },
 
   shippingAddress: {
-    type: Sequelize.TEXT,
-    allowNull: false,
+    type: Sequelize.TEXT
+    //allowNull: false, SM commented this out
   },
 
   orderStatus: {
     type: Sequelize.ENUM('Processing', 'Fulfilled'),
-    allowNull: false,
+    defaultValue: 'Processing' //SM added default
   },
 
   promoCode: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
 
   giftWrapping: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false,
+    defaultValue: false
   },
 
   giftStatus: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false,
-  },
+    defaultValue: false
+  }
 })
 
 module.exports = Cart
