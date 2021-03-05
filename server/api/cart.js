@@ -3,79 +3,91 @@ const Cart = require('../db/models/cart')
 const CartItem = require('../db/models/cartItem')
 const User = require('../db/models/user')
 const Product = require('../db/models/product')
+const {ensureAdmin, ensureLogin} = require('./middleware')
 
-// get cart for guest
-router.get('/:cartId', async (req, res, next) => {
+// get all carts/orders (only for admin)
+router.get('/', ensureAdmin, async (req, res, next) => {
   try {
-    let cart = Cart.findOne({
-      where: {
-        id: req.params.cartId,
-      },
-      include: [{model: Product}],
-    })
-    res.json(cart)
+    const allCarts = await Cart.findAll()
+    res.json(allCarts)
   } catch (err) {
     next(err)
   }
 })
 
+// // get cart for guest
+// router.get('/:cartId', async (req, res, next) => {
+//   try {
+//     let cart = await Cart.findOne({
+//       where: {
+//         id: req.params.cartId,
+//       },
+//       include: [{model: Product}],
+//     })
+//     res.json(cart)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
 // get cart for user
-router.get('/:userId', async (req, res, next) => {
+router.get('/user/:userId', ensureLogin, async (req, res, next) => {
   try {
-    let cart = Cart.findOne({
+    let cart = await Cart.findOne({
       where: {
         userId: req.params.userId,
       },
       include: [{model: Product}],
     })
-    // if the cart doesn't exist yet, create cart for user
-    if (!cart) {
-      cart = await Cart.create({
-        userId: req.params.guestId,
-      })
-      cart = await Cart.findOne({
-        where: {
-          userId: req.params.userId,
-        },
-        include: [{model: Product}, {model: User}],
-      })
+    if (cart) {
+      res.json(cart)
+    } else {
+      res.sendStatus(401)
     }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:cartId', ensureLogin, async (req, res, next) => {
+  try {
+    const cart = await Cart.findOne({
+      where: {
+        id: req.params.cartId,
+      },
+      include: [{model: CartItem}, {model: Product}],
+    })
     res.json(cart)
   } catch (err) {
     next(err)
   }
 })
 
-/*
-update (put), create new cart (post), delete
-*/
-
-router.put('/:cartId', async (req, res, next) => {
-  try {
-    const cart = await Cart.findByPk(req.params.cartId)
-    const updated = await cart.update(req.body)
-    const updatedCart = await Cart.findOne({
-      where: {
-        id: req.params.cartId,
-      },
-      include: [{model: Product}, {model: User}],
-    })
-    res.json(updatedCart)
-  } catch (err) {
-    next(err)
-  }
-})
+// router.put('/:cartId', async (req, res, next) => {
+//   try {
+//     const cart = await Cart.findByPk(req.params.cartId)
+//     const updated = await cart.update(req.body)
+//     const updatedCart = await Cart.findOne({
+//       where: {
+//         id: req.params.cartId,
+//       },
+//       include: [{model: Product}, {model: User}],
+//     })
+//     res.json(updatedCart)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 //updating quantity in cart
-router.put('/:cartId/:cartItemId', async (req, res, next) => {
+router.put('/:cartId/:productId', async (req, res, next) => {
   try {
-    const item = await CartItem.findOne({
+    const updated = await CartItem.update(req.body, {
       where: {
-        productId: req.params.cartItemId,
         cartId: req.params.cartId,
+        productId: req.params.productId,
       },
     })
-    const updated = await item.update(req.body)
     const updatedItem = await CartItem.findOne({
       where: {
         productId: req.params.cartItemId,
@@ -87,3 +99,13 @@ router.put('/:cartId/:cartItemId', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/item', ensureLogin, async (req, res, next) => {
+  try {
+    const addedItem = await CartItem.create(req.body)
+    res.json(addedItem)
+  } catch (err) {
+    next(err)
+  }
+})
+module.exports = router
