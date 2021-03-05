@@ -3,6 +3,7 @@ import axios from 'axios'
 // want to rename this to 'get' instead of 'set'
 const SET_PRODUCT = 'SET_PRODUCT'
 const EDIT_PRODUCT = 'EDIT_PRODUCT'
+const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART'
 
 //action creators
 
@@ -10,6 +11,14 @@ const EDIT_PRODUCT = 'EDIT_PRODUCT'
 export const setProduct = (product) => {
   return {
     type: SET_PRODUCT,
+    product,
+  }
+}
+
+// post single product to cart
+export const addProductToCart = (product) => {
+  return {
+    type: ADD_PRODUCT_TO_CART,
     product,
   }
 }
@@ -29,6 +38,18 @@ export const fetchProduct = (id) => {
     try {
       const product = (await axios.get(`/api/products/${id}`)).data
       dispatch(setProduct(product))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+// add product to cart
+export const addProductToCartThunk = (cartId) => {
+  return async (dispatch) => {
+    try {
+      const product = (await axios.post(`/api/cart/${cartId}`)).data
+      dispatch(addProductToCart(product))
     } catch (err) {
       console.log(err)
     }
@@ -55,6 +76,9 @@ export default function productReducer(state = initialState, action) {
     case SET_PRODUCT:
       return action.product
     case EDIT_PRODUCT:
+      return action.product
+    // not sure if we need to update state to include an array of products, since
+    case ADD_PRODUCT_TO_CART:
       return action.product
     default:
       return state
