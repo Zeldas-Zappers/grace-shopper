@@ -21,6 +21,7 @@ Product.belongsToMany(Cart, {through: CartItem})
 Cart.belongsToMany(Product, {through: CartItem})
 
 //UserCart through table will just have UserIds and CartIds
+// these two are potentially deletable
 User.belongsToMany(Cart, {through: 'UserCart'})
 Cart.belongsToMany(User, {through: 'UserCart'})
 

@@ -1,6 +1,8 @@
+/* eslint-disable no-warning-comments */
+/* eslint-disable max-statements */
 // 'use strict'
 const db = require('../server/db')
-const {User, Product} = require('../server/db/models')
+const {User, Product, Cart, CartItem} = require('../server/db/models')
 // const {Product} = require('../server/db/models')
 const faker = require('faker')
 
@@ -8,16 +10,60 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
+  const userId = []
+  for (let i = 1; i <= 50; i++) {
+    userId.push(i)
+  }
+  const randomUserId = faker.helpers.shuffle(userId)
+  console.log('hello', userId, randomUserId)
+
+  const cartArray = []
+  for (let i = 0; i < 50; i++) {
+    cartArray.push({
+      shippingAddress: faker.address.streetAddress(),
+
+      // all orders are not fulfilled!
+      orderStatus: 'Processing',
+      total: faker.random.number({
+        min: 1,
+        max: 500,
+      }),
+      userId: randomUserId[i],
+    })
+  }
+
+  const cartItemsArray = []
+  for (let i = 0; i < 49; i++) {
+    cartItemsArray.push({
+      cartId: faker.random.number({
+        min: 1,
+        max: 50,
+      }),
+      productId: faker.random.number({
+        min: 1,
+        max: 50,
+      }),
+      quantity: faker.random.number({
+        min: 1,
+        max: 12,
+      }),
+      price: faker.random.number({
+        min: 1,
+        max: 499,
+      }),
+    })
+  }
+
   const lightingArray = [
     'This plant does well in low light.',
     'This plant does best in partial shade.',
-    'This plant does best in bright direct sunlight.'
+    'This plant does best in bright direct sunlight.',
   ]
 
   const wateringArray = [
     'This plant needs to be watered once a week.',
     'This plant needs to be watered daily.',
-    'This plant needs to be watered every 30 minutes or it will DIE!'
+    'This plant needs to be watered every 30 minutes or it will DIE!',
   ]
 
   const categoriesArray = ['Succulents', 'Indoor', 'Outdoor', 'Pet-Friendly']
@@ -82,16 +128,16 @@ async function seed() {
     'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_large-fiddle-leaf-fig-bush_gallery_all_all_02_360x.jpg?v=1606159741',
     'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_housewarming_duo_gallery_all_03_360x.jpg?v=1606800698',
     'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_calathea-dottie_gallery_small_all_all_04_360x.jpg?v=1611098512',
-    'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-gift-bundle_gallery_all_04_360x.jpg?v=1613398524'
+    'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-gift-bundle_gallery_all_04_360x.jpg?v=1613398524',
   ]
 
   const productArray = []
-  for (let i = 1; i <= 100; i++) {
+  for (let i = 1; i <= 50; i++) {
     const name = faker.commerce.productName()
     const description = faker.commerce.productDescription()
     const price = faker.random.number({
       min: 99,
-      max: 1000
+      max: 1000,
     })
     const category = faker.helpers.shuffle(categoriesArray)[0]
     const lighting = faker.helpers.shuffle(lightingArray)[0]
@@ -99,7 +145,7 @@ async function seed() {
     const imageUrl = faker.helpers.shuffle(imageUrlArray)[0]
     const inventory = faker.random.number({
       min: 0,
-      max: 100
+      max: 100,
     })
     productArray.push({
       name,
@@ -109,7 +155,7 @@ async function seed() {
       lighting,
       watering,
       inventory,
-      imageUrl
+      imageUrl,
     })
   }
 
@@ -131,25 +177,39 @@ async function seed() {
       password,
       address,
       phone,
-      adminStatus
+      adminStatus,
     })
     //console.log(usersArray)
   }
 
   const users = await Promise.all(
-    usersArray.map(user => {
+    usersArray.map((user) => {
       return User.create(user)
     })
   )
 
   const products = await Promise.all(
-    productArray.map(product => {
+    productArray.map((product) => {
       return Product.create(product)
+    })
+  )
+
+  const carts = await Promise.all(
+    cartArray.map((cart) => {
+      return Cart.create(cart)
+    })
+  )
+
+  const cartItems = await Promise.all(
+    cartItemsArray.map((items) => {
+      // TODO: need to modify this so that if the cart already exists with that particular product, it updates rather than trying to create the same thing (because that would create an error in the CartItems table, which uses the cartId and productId to make a composite primary key)
+      return CartItem.create(items)
     })
   )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
+  console.log(`seeded ${carts.length} carts`)
   console.log(`seeded successfully`)
 }
 
