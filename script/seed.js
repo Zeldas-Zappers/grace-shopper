@@ -179,6 +179,7 @@ async function seed() {
       phone,
       adminStatus,
     })
+    //console.log(usersArray)
   }
 
   const users = await Promise.all(

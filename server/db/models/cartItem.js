@@ -4,7 +4,7 @@ const db = require('../db')
 const CartItem = db.define('cartItem', {
   price: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    //allowNull: false,
     defaultValue: 0,
     validate: {
       // isEmpty: false,
@@ -15,7 +15,7 @@ const CartItem = db.define('cartItem', {
 
   quantity: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    //allowNull: false,
     defaultValue: 0,
     validate: {
       // isEmpty: false,
