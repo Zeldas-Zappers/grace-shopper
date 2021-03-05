@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 /* eslint-disable max-statements */
 // 'use strict'
 const db = require('../server/db')
@@ -9,21 +10,30 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const cartArray = []
+  const userId = []
   for (let i = 1; i <= 50; i++) {
+    userId.push(i)
+  }
+  const randomUserId = faker.helpers.shuffle(userId)
+  console.log('hello', userId, randomUserId)
+
+  const cartArray = []
+  for (let i = 0; i < 50; i++) {
     cartArray.push({
       shippingAddress: faker.address.streetAddress(),
+
+      // all orders are not fulfilled!
       orderStatus: 'Processing',
       total: faker.random.number({
-        min: 0,
+        min: 1,
         max: 500,
       }),
-      userId: i,
+      userId: randomUserId[i],
     })
   }
 
   const cartItemsArray = []
-  for (let i = 1; i <= 50; i++) {
+  for (let i = 0; i < 49; i++) {
     cartItemsArray.push({
       cartId: faker.random.number({
         min: 1,
@@ -191,6 +201,7 @@ async function seed() {
 
   const cartItems = await Promise.all(
     cartItemsArray.map((items) => {
+      // TODO: need to modify this so that if the cart already exists with that particular product, it updates rather than trying to create the same thing (because that would create an error in the CartItems table, which uses the cartId and productId to make a composite primary key)
       return CartItem.create(items)
     })
   )
