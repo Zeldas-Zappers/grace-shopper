@@ -9,7 +9,18 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const cart = []
+  const cartArray = []
+  for (let i = 1; i <= 50; i++) {
+    cartArray.push({
+      shippingAddress: faker.address.streetAddress(),
+      orderStatus: 'Processing',
+      total: faker.random.number({
+        min: 0,
+        max: 500,
+      }),
+      userId: i,
+    })
+  }
 
   const lightingArray = [
     'This plant does well in low light.',
@@ -150,13 +161,11 @@ async function seed() {
     })
   )
 
-  const carts = await Promise.all([
-    Cart.create({
-      shippingAddress: faker.address.streetAddress(),
-      orderStatus: 'Processing',
-      total: 30,
-    }),
-  ])
+  const carts = await Promise.all(
+    cartArray.map((cart) => {
+      return Cart.create(cart)
+    })
+  )
 
   const cartItems = await Promise.all([
     CartItem.create({cartId: 1, productId: 1, quantity: 2, price: 3}),
