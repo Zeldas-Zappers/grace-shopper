@@ -4,6 +4,7 @@ const CartItem = require('../db/models/cartItem')
 const User = require('../db/models/user')
 const Product = require('../db/models/product')
 
+
 // //Just another approach below - I don't think this is right other than using the magic method on line 33
 // router.post('/:userId', async (req, res, next) => {
 //   //would be sending the product from the frontend to this route so product will be on req.body
@@ -37,27 +38,7 @@ const Product = require('../db/models/product')
 //   }
 // })
 
-// get cart for guest
-// router.get('/:cartId', async (req, res, next) => {
-//   try {
-//     let cart = Cart.findOne({
-//       where: {
-//         id: req.params.cartId
-//       },
-//       include: [{model: Product}]
-//     })
-//     res.json(cart)
-
-//     //below comments are just another way to grab products from a cart - not sure if this will work but want to keep it as a note:
-//     // const cart = await Cart.findByPk(req.params.cartId)
-//     // const products = await cart.getProducts();
-//     // res.json(products)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
-// get cart for user
+// get cart for logged in user
 router.get('/:userId', async (req, res, next) => {
   try {
     const {userId} = req.params
@@ -85,9 +66,9 @@ router.put('/:cartId', async (req, res, next) => {
     const updated = await cart.update(req.body)
     const updatedCart = await Cart.findOne({
       where: {
-        id: req.params.cartId
+        id: req.params.cartId,
       },
-      include: [{model: Product}, {model: User}]
+      include: [{model: Product}, {model: User}],
     })
     res.json(updatedCart)
   } catch (err) {
@@ -101,15 +82,16 @@ router.put('/:cartId/:cartItemId', async (req, res, next) => {
     const item = await CartItem.findOne({
       where: {
         productId: req.params.cartItemId,
-        cartId: req.params.cartId
-      }
+
+        cartId: req.params.cartId,
+      },
     })
     const updated = await item.update(req.body)
     const updatedItem = await CartItem.findOne({
       where: {
         productId: req.params.cartItemId,
-        cartId: req.params.cartId
-      }
+        cartId: req.params.cartId,
+      },
     })
     res.json(updatedItem)
   } catch (err) {

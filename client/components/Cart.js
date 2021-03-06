@@ -4,22 +4,41 @@ import {_setCartItems} from '../store/cart'
 import {me} from '../store/user'
 
 class Cart extends React.Component {
+  constructor(props) {
+    super(props)
+    this.removefromCart = this.removefromCart.bind(this)
+    this.state = {
+      cart: !this.props.loggedIn
+        ? JSON.parse(localStorage.getItem('cart')) || []
+        : this.props.cart || [],
+    }
+  }
+
   componentDidMount() {
     const userId = this.props.user.id
     this.props.getCartItems(userId)
   }
+
+  removefromCart(id) {
+    if (this.props.loggedIn) {
+      this.props.addItemToCart(this.props.product)
+    }
+
+    const cart = this.state.cart.filter((item) => item.id !== id)
+    localStorage.setItem('cart', JSON.stringify(cart))
+    this.setState({
+      cart: cart,
+    })
+  }
+
   render() {
-    //if user is not logged in then cart will equal what is currently in local storage, else cart will equal the user's cart in the database
-    const cart = !this.props.loggedIn
-      ? JSON.parse(localStorage.getItem('cart')) || []
-      : this.props.cart || []
-    const subTotal = cart
-      .map(product => product.count * product.price)
+    const subTotal = this.state.cart
+      .map((product) => product.count * product.price)
       .reduce((a, b) => a + b, 0)
 
     return (
       <div className="container">
-        {cart.map(product => {
+        {this.state.cart.map((product) => {
           return (
             <div key={product.id}>
               <div className="row mt-4">
@@ -31,7 +50,11 @@ class Cart extends React.Component {
                   </div>
                   <div className="row">
                     <div className="col-md-12 mt-4">
-                      <button type="button" className="btn btn-warning">
+                      <button
+                        onClick={() => this.removefromCart(product.id)}
+                        type="button"
+                        className="btn btn-warning"
+                      >
                         Remove from cart
                       </button>
                     </div>
@@ -111,7 +134,7 @@ class Cart extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cart: state.cart,
     loggedIn: !!state.user.id,
@@ -119,7 +142,7 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToCart = dispatch => {
+const mapDispatchToCart = (dispatch) => {
   return {
     getCartItems: userId => dispatch(_setCartItems(userId)),
     getUser: () => dispatch(me())
