@@ -29,8 +29,8 @@ export const removeItemFromCart = (product) => {
 
 //Thunk
 
-export const _setCartItems = userId => {
-  return async dispatch => {
+export const _setCartItems = (userId) => {
+  return async (dispatch) => {
     try {
       const {data} = await axios.get(`/api/cart/${userId}`)
       dispatch(fetchCartItems(data))
@@ -46,6 +46,7 @@ export const _addItemToCart = (product, userId) => {
       const {data} = await axios.post(`/api/cart/${userId}`, product)
       console.log('hello', 'in addItem thunk', 'product', product)
       dispatch(addItemToCart(data))
+      history.push('/cart')
     } catch (err) {
       console.error(err)
     }

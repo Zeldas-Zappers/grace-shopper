@@ -12,14 +12,19 @@ class Cart extends React.Component {
         ? JSON.parse(localStorage.getItem('cart')) || []
         : this.props.cart || [],
     }
+    console.log('in cart constructor state', this.state)
+    console.log('in cart constructor props', this.props)
   }
 
   componentDidMount() {
     const userId = this.props.user.id
     this.props.getCartItems(userId)
+    console.log('in cart componentDidMount state', this.state)
+    console.log('in cart componentDidMount props', this.props)
   }
 
   removefromCart(id) {
+    // not sure why this is here -- Jae
     if (this.props.loggedIn) {
       this.props.addItemToCart(this.props.product)
     }
@@ -32,9 +37,22 @@ class Cart extends React.Component {
   }
 
   render() {
-    const subTotal = this.state.cart
-      .map((product) => product.count * product.price)
-      .reduce((a, b) => a + b, 0)
+    // define the subtotal for guests
+    let subTotal
+    if (!this.props.loggedIn) {
+      subTotal = this.state.cart
+        .map((product) => product.count * product.price)
+        .reduce((a, b) => a + b, 0)
+    }
+
+    // define subtotal for users
+
+    if (this.props.loggedIn) {
+      subTotal = this.state.cart
+        .map((product) => product.cartItem.quantity * product.cartItem.price)
+        .reduce((a, b) => a + b, 0)
+      console.log('logged in', subTotal)
+    }
 
     console.log('hello', 'in Cart render', 'props', this.props)
     console.log('hello', 'hello', 'in Cart render', 'state', this.state)
@@ -140,16 +158,14 @@ const mapStateToProps = (state) => {
   return {
     cart: state.cart,
     loggedIn: !!state.user.id,
-
-    user: state.user
+    user: state.user,
   }
 }
 
 const mapDispatchToCart = (dispatch) => {
   return {
-
-    getCartItems: userId => dispatch(_setCartItems(userId)),
-    getUser: () => dispatch(me())
+    getCartItems: (userId) => dispatch(_setCartItems(userId)),
+    getUser: () => dispatch(me()),
   }
 }
 

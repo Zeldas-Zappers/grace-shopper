@@ -17,7 +17,8 @@ export class SingleProduct extends React.Component {
     this.props.getUser()
   }
 
-  addToCart() {
+  addToCart(event) {
+    event.preventDefault()
     //dispatch thunk if user (or loggedIn is true)
     if (this.props.loggedIn) {
       // check the redux state to see if item is already in cart
@@ -30,7 +31,6 @@ export class SingleProduct extends React.Component {
       console.log('hello', 'in SingleProduct addToCart props', this.props)
       console.log('user.id', 'expect 2', this.props.user.id)
       this.props.addItemToCart(this.props.product, this.props.user.id)
-
     }
     //if !loggedIn then add to local storage!!!
     let cart
