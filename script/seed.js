@@ -22,7 +22,8 @@ async function seed() {
     cartArray.push({
       shippingAddress: faker.address.streetAddress(),
 
-      // all orders are not fulfilled!
+      // all orders are not processing (open carts)!
+      //  we can change this later if necessary
       orderStatus: 'Processing',
       total: faker.random.number({
         min: 1,
