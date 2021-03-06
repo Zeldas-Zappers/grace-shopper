@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/product'
@@ -23,6 +24,7 @@ export class SingleProduct extends React.Component {
       // check the redux state to see if item is already in cart
       // if it is, then dispatch PUT with increment quantity
       // grab the quantity from state, add 1, and pass it to the PUT
+      // TODO: will update here once Rachel finishes connecting the PUT route
 
       // if not, then dispatch POST
 
