@@ -3,12 +3,14 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {me} from '../store/user'
 
 class Navbar extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       showCollapsedMenu: false
+      //cart: !this.props.isLoggedIn ? JSON.parse(localStorage.getItem('cart')) || [] : this.props.cart || []
     }
     this.toggleMenu = this.toggleMenu.bind(this)
   }
@@ -19,7 +21,12 @@ class Navbar extends React.Component {
     })
   }
   render() {
+    const adminStatus = this.props.user.adminStatus
     const show = this.state.showCollapsedMenu ? 'show' : ''
+    const cart = !this.props.isLoggedIn
+      ? JSON.parse(localStorage.getItem('cart')) || []
+      : this.props.cart || []
+
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -58,7 +65,17 @@ class Navbar extends React.Component {
                   </li>
                   <li className="nav-item">
                     <Link to="/products" className="nav-link">
-                      Shop
+                      All Products
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      to="/admin"
+                      className="nav-link"
+                      tabIndex="-1"
+                      aria-disabled="true"
+                    >
+                      Admin
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -77,7 +94,7 @@ class Navbar extends React.Component {
                       tabIndex="-1"
                       aria-disabled="true"
                     >
-                      Cart
+                      Cart({cart.length})
                     </Link>
                   </li>
                 </ul>
@@ -94,7 +111,7 @@ class Navbar extends React.Component {
                   </li>
                   <li className="nav-item">
                     <Link to="/products" className="nav-link">
-                      Shop
+                      All Products
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -114,7 +131,7 @@ class Navbar extends React.Component {
                       tabIndex="-1"
                       aria-disabled="true"
                     >
-                      Cart
+                      Cart({cart.length})
                     </Link>
                   </li>
                 </ul>
@@ -132,7 +149,9 @@ class Navbar extends React.Component {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user,
+    cart: state.cart
   }
 }
 
@@ -141,6 +160,7 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(logout())
     }
+    //getUser: () => dispatch(me()),
   }
 }
 

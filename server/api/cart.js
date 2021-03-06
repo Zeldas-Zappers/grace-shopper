@@ -41,14 +41,14 @@ const Product = require('../db/models/product')
 // get cart for logged in user
 router.get('/:userId', async (req, res, next) => {
   try {
-    const { userId } = req.params;
+    const {userId} = req.params
     const cart = await Cart.findOne({
       where: {
-        userId: userId,
+        userId: userId
       }
     })
-    if(cart) {
-      const products = await cart.getProducts();
+    if (cart) {
+      const products = await cart.getProducts()
       res.json(products)
     }
   } catch (err) {

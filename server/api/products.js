@@ -57,6 +57,7 @@ router.put('/:id', async (req, res, next) => {
 //POST /api/products/
 router.post('/', async (req, res, next) => {
   try {
+    console.log('BODY', req.body)
     const newProduct = await Product.create(req.body)
     res.status(201).send(newProduct)
   } catch (error) {
