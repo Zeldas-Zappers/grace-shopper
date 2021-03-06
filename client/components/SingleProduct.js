@@ -13,14 +13,14 @@ export class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.getSingleProduct(this.props.match.params.productId)
     this.props.getUser()
-    console.log('USER IN SINGLE PRODUCT', this.props.user)
-    console.log('PROPS IN SINGLE PRODUCT', this.props)
+    // console.log('USER IN SINGLE PRODUCT', this.props.user)
+    // console.log('PROPS IN SINGLE PRODUCT', this.props)
   }
 
   addToCart() {
     //dispatch thunk if user (or loggedIn is true)
     if (this.props.loggedIn) {
-      this.props.addItemToCart(this.props.product)
+      //this.props.addItemToCart(this.props.product)
     }
     //if !loggedIn then add to local storage!!!
     let cart
@@ -49,11 +49,11 @@ export class SingleProduct extends React.Component {
     let product = this.props.product
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-md-5">
+        <div className="row mt-4">
+          <div className="col-lg-5 col-md-6">
             <img src={product.imageUrl} />
           </div>
-          <div className="col-md-7">
+          <div className="col-lg-7 col-md-6">
             <h3>{product.name}</h3>
             <p>
               <strong>$ {product.price}</strong>
@@ -121,7 +121,6 @@ export class SingleProduct extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log('STATE', state)
   return {
     product: state.product,
     loggedIn: !!state.user.id,

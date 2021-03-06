@@ -28,10 +28,10 @@ export const removeItemFromCart = product => {
 }
 
 //Thunk
-export const _setCartItems = products => {
+export const _setCartItems = userId => {
   return async dispatch => {
     try {
-      const {data} = axios.get('/api/cart') //needs to be cart/cartId but not sure how to generate cartId for guest
+      const {data} = await axios.get(`/api/cart/${userId}`)
       dispatch(fetchCartItems(data))
     } catch (err) {
       console.error(err)
@@ -75,12 +75,3 @@ export default function cartReducer(state = initialState, action) {
       return state
   }
 }
-
-//User clicks on 'add to cart'
-//handleSubmit function on button dispatches "_addItemToCart" thunk from single product view
-//User is redirected to cart
-//cart array in store is mapped to props on cart component and renders when new cart items are added or deleted
-
-//User clicks on "dete item from cart"
-//delete item from cart function dispatches "_removeItemFromCart" thunk from cart component
-//"_removeItemFromCart" thunk is mappedToDispatch on cart component
