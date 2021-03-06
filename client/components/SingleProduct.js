@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetchProduct} from '../store/product'
 import {_addItemToCart} from '../store/cart'
 import {me} from '../store/user'
+import ProductForm from './ProductForm'
 
 export class SingleProduct extends React.Component {
   constructor() {
@@ -13,8 +14,6 @@ export class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.getSingleProduct(this.props.match.params.productId)
     this.props.getUser()
-    // console.log('USER IN SINGLE PRODUCT', this.props.user)
-    // console.log('PROPS IN SINGLE PRODUCT', this.props)
   }
 
   addToCart() {
@@ -111,9 +110,25 @@ export class SingleProduct extends React.Component {
                 >
                   Add to Cart
                 </button>
+                {/* {user.isAdmin && buttons below} */}
+                <button
+                  onClick={this.addToCart}
+                  type="button"
+                  className="btn btn-success"
+                >
+                  Add Product
+                </button>
+                <button
+                  onClick={this.addToCart}
+                  type="button"
+                  className="btn btn-success"
+                >
+                  Edit Product
+                </button>
               </div>
             </div>
           </div>
+          <ProductForm />
         </div>
       </div>
     )

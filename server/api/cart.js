@@ -60,32 +60,12 @@ const Product = require('../db/models/product')
 // get cart for user
 router.get('/:userId', async (req, res, next) => {
   try {
-    //console.log("GET USER ROUTE", req.body)
-    // let cart = Cart.findOne({
-    //   where: {
-    //     userId: req.params.userId
-    //   },
-    //   include: [{model: Product}]
-    // })
-    // // if the cart doesn't exist yet, create cart for user
-    // if (!cart) {
-    //   cart = await Cart.create({
-    //     userId: req.params.guestId
-    //   })
-    //   cart = await Cart.findOne({
-    //     where: {
-    //       userId: req.params.userId
-    //     },
-    //     include: [{model: Product}, {model: User}]
-    //   })
-    // }
     const {userId} = req.params
     const cart = await Cart.findOne({
       where: {
         userId: userId
       }
     })
-    console.log('CART', cart)
     if (cart) {
       const products = await cart.getProducts()
       res.json(products)
