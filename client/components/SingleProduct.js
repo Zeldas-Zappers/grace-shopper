@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {fetchProduct} from '../store/product'
 import {_addItemToCart} from '../store/cart'
 import {me} from '../store/user'
+import ProductForm from './ProductForm'
 
 export class SingleProduct extends React.Component {
   constructor() {
@@ -14,8 +15,6 @@ export class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.getSingleProduct(this.props.match.params.productId)
     this.props.getUser()
-    console.log('USER IN SINGLE PRODUCT', this.props.user)
-    console.log('PROPS IN SINGLE PRODUCT', this.props)
   }
 
   addToCart() {
@@ -31,6 +30,7 @@ export class SingleProduct extends React.Component {
       console.log('hello', 'in SingleProduct addToCart props', this.props)
       console.log('user.id', 'expect 2', this.props.user.id)
       this.props.addItemToCart(this.props.product, this.props.user.id)
+
     }
     //if !loggedIn then add to local storage!!!
     let cart
@@ -59,11 +59,11 @@ export class SingleProduct extends React.Component {
     let product = this.props.product
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-md-5">
+        <div className="row mt-4">
+          <div className="col-lg-5 col-md-6">
             <img src={product.imageUrl} />
           </div>
-          <div className="col-md-7">
+          <div className="col-lg-7 col-md-6">
             <h3>{product.name}</h3>
             <p>
               <strong>$ {product.price}</strong>
@@ -121,9 +121,25 @@ export class SingleProduct extends React.Component {
                 >
                   Add to Cart
                 </button>
+                {/* {user.isAdmin && buttons below} */}
+                <button
+                  onClick={this.addToCart}
+                  type="button"
+                  className="btn btn-success"
+                >
+                  Add Product
+                </button>
+                <button
+                  onClick={this.addToCart}
+                  type="button"
+                  className="btn btn-success"
+                >
+                  Edit Product
+                </button>
               </div>
             </div>
           </div>
+          <ProductForm />
         </div>
       </div>
     )
@@ -131,7 +147,6 @@ export class SingleProduct extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('STATE', state)
   return {
     product: state.product,
     loggedIn: !!state.user.id,
@@ -144,6 +159,7 @@ const mapDispatchToProps = (dispatch) => {
     getSingleProduct: (productId) => dispatch(fetchProduct(productId)),
     addItemToCart: (product, userId) =>
       dispatch(_addItemToCart(product, userId)),
+
     getUser: () => dispatch(me()),
   }
 }
