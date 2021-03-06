@@ -23,7 +23,7 @@ export class SingleProduct extends React.Component {
       // if the user already has that item in the cart, increment the count
 
       // if the user doesn't already have that item in the cart, add it to the cart
-      this.props.addItemToCart(this.props.product)
+      this.props.addItemToCart(this.props.product, this.props.user.id)
     }
     //if !loggedIn then add to local storage!!!
     let cart

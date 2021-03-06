@@ -34,12 +34,14 @@ class Cart extends React.Component {
       ? JSON.parse(localStorage.getItem('cart')) || []
       : this.props.cart || []
     const subTotal = cart
-      .map(product => product.count * product.price)
+      .map((product) => product.count * product.price)
       .reduce((a, b) => a + b, 0)
 
+    console.log('hello', 'in Cart render', 'props', this.props)
+    console.log('hello', 'hello', 'in Cart render', 'state', this.state)
     return (
       <div className="container">
-        {cart.map(product => {
+        {cart.map((product) => {
           return (
             <div key={product.id}>
               <div className="row mt-4">
@@ -131,17 +133,17 @@ class Cart extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cart: state.cart,
-    loggedIn: !!state.user.id
+    loggedIn: !!state.user.id,
   }
 }
 
-const mapDispatchToCart = dispatch => {
+const mapDispatchToCart = (dispatch) => {
   return {
     getCartItems: () => dispatch(_setCartItems()),
-    getUser: () => dispatch(me())
+    getUser: () => dispatch(me()),
   }
 }
 

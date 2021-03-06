@@ -31,7 +31,7 @@ export const removeItemFromCart = (product) => {
 export const _setCartItems = (products) => {
   return async (dispatch) => {
     try {
-      const {data} = axios.get('/api/cart') //needs to be cart/cartId but not sure how to generate cartId for guest
+      const {data} = await axios.get('/api/cart') //needs to be cart/cartId but not sure how to generate cartId for guest
       dispatch(fetchCartItems(data))
     } catch (err) {
       console.error(err)
@@ -39,10 +39,11 @@ export const _setCartItems = (products) => {
   }
 }
 
-export const _addItemToCart = (product) => {
+export const _addItemToCart = (product, userId) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.post('/api/cart', product)
+      const {data} = await axios.post(`/api/cart/${userId}`, product)
+      console.log('hello', 'in addItem thunk', 'product', product)
       dispatch(addItemToCart(data))
     } catch (err) {
       console.error(err)
@@ -67,32 +68,8 @@ export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_CART_ITEMS:
       return action.products
-    case ADD_ITEM_TO_CART: {
-      // find out if the product is already in cart
-
-      let alreadyInCart = false
-      let quantityOfProductInCart
-      let idx
-
-      for (let i = 0; i < state.length; i++) {
-        if (state[i].id === action.product.id) {
-          quantityOfProductInCart = action.product.cartItem.quantity
-
-          idx = i
-          alreadyInCart = true
-          break
-        }
-      }
-      if (alreadyInCart) {
-        var updatedProductQuantity
-        updatedProductQuantity = quantityOfProductInCart + 1
-        const result = [...state]
-        result[idx].cartItem.quantity = updatedProductQuantity
-        return result
-      } else {
-        return [...state, action.product]
-      }
-    }
+    case ADD_ITEM_TO_CART:
+      return [...state, action.product]
     case REMOVE_ITEM_FROM_CART:
       return state.filter((product) => product.id !== action.product.id)
     default:
