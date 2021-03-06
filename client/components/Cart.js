@@ -3,43 +3,43 @@ import {connect} from 'react-redux'
 import {_setCartItems} from '../store/cart'
 import {me} from '../store/user'
 
-// const products = [
-//   {
-//     id: 1,
-//     name: 'A lovely fern',
-//     price: 448,
-//     description:
-//       'This fern will make it seem like life is worth living sometimes. You should buy it!',
-//     lighting: 'This plant does well in bright light',
-//     watering: 'This plant needs to be watered every 30 minutes or it will DIE!',
-//     imageUrl:
-//       'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_360x.jpg?v=1613171147',
-//   },
-//   {
-//     id: 2,
-//     name: 'A lonely pine cone',
-//     price: 12,
-//     description:
-//       'This pine cone is the last of its species. Cuddle with it so it can feel less lonely!',
-//     lighting: 'This plant does well in low light.',
-//     watering: 'This plant needs more cuddles than water',
-//     imageUrl:
-//       'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_coffee-plant_variant_small_grant_mint_360x.jpg?v=1613663664',
-//   },
-// ]
 class Cart extends React.Component {
+  constructor(props) {
+    super(props)
+    this.removefromCart = this.removefromCart.bind(this)
+    this.state = {
+      cart: !this.props.loggedIn
+        ? JSON.parse(localStorage.getItem('cart')) || []
+        : this.props.cart || [],
+    }
+  }
+
+  componentDidMount() {
+    this.props.getUser()
+    console.log('USER IN SINGLE PRODUCT', this.props.user)
+    console.log('PROPS IN SINGLE PRODUCT', this.props)
+  }
+
+  removefromCart(id) {
+    if (this.props.loggedIn) {
+      this.props.addItemToCart(this.props.product)
+    }
+
+    const cart = this.state.cart.filter((item) => item.id !== id)
+    localStorage.setItem('cart', JSON.stringify(cart))
+    this.setState({
+      cart: cart,
+    })
+  }
+
   render() {
-    //if user is not logged in then cart will equal what is currently in local storage, else cart will equal the user's cart in the database
-    const cart = !this.props.loggedIn
-      ? JSON.parse(localStorage.getItem('cart')) || []
-      : this.props.cart || []
-    const subTotal = cart
-      .map(product => product.count * product.price)
+    const subTotal = this.state.cart
+      .map((product) => product.count * product.price)
       .reduce((a, b) => a + b, 0)
 
     return (
       <div className="container">
-        {cart.map(product => {
+        {this.state.cart.map((product) => {
           return (
             <div key={product.id}>
               <div className="row mt-4">
@@ -51,7 +51,11 @@ class Cart extends React.Component {
                   </div>
                   <div className="row">
                     <div className="col-md-12 mt-4">
-                      <button type="button" className="btn btn-warning">
+                      <button
+                        onClick={() => this.removefromCart(product.id)}
+                        type="button"
+                        className="btn btn-warning"
+                      >
                         Remove from cart
                       </button>
                     </div>
@@ -131,17 +135,17 @@ class Cart extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cart: state.cart,
-    loggedIn: !!state.user.id
+    loggedIn: !!state.user.id,
   }
 }
 
-const mapDispatchToCart = dispatch => {
+const mapDispatchToCart = (dispatch) => {
   return {
     getCartItems: () => dispatch(_setCartItems()),
-    getUser: () => dispatch(me())
+    getUser: () => dispatch(me()),
   }
 }
 
