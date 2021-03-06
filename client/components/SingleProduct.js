@@ -23,6 +23,8 @@ export class SingleProduct extends React.Component {
       // if the user already has that item in the cart, increment the count
 
       // if the user doesn't already have that item in the cart, add it to the cart
+      console.log('hello', 'in SingleProduct addToCart props', this.props)
+      console.log('user.id', 'expect 2', this.props.user.id)
       this.props.addItemToCart(this.props.product, this.props.user.id)
     }
     //if !loggedIn then add to local storage!!!
@@ -135,7 +137,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getSingleProduct: (productId) => dispatch(fetchProduct(productId)),
-    addItemToCart: (product) => dispatch(_addItemToCart(product)),
+    addItemToCart: (product, userId) =>
+      dispatch(_addItemToCart(product, userId)),
     getUser: () => dispatch(me()),
   }
 }
