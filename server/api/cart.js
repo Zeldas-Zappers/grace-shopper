@@ -3,7 +3,7 @@ const Cart = require('../db/models/cart')
 const CartItem = require('../db/models/cartItem')
 const User = require('../db/models/user')
 const Product = require('../db/models/product')
-
+const {ensureAdmin, ensureLogin} = require('./middleware')
 
 router.post('/:userId', ensureLogin, async (req, res, next) => {
   // if the user is logged in,
@@ -49,19 +49,14 @@ router.post('/:userId', ensureLogin, async (req, res, next) => {
   }
 })
 
-
-
-
-
-
 // get cart for logged in user
 router.get('/:userId', async (req, res, next) => {
   try {
     const {userId} = req.params
     const cart = await Cart.findOne({
       where: {
-        userId: userId
-      }
+        userId: userId,
+      },
     })
     if (cart) {
       const products = await cart.getProducts()
