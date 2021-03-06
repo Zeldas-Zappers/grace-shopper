@@ -182,6 +182,25 @@ async function seed() {
     //console.log(usersArray)
   }
 
+  const testUsers = await Promise.all([
+    User.create({
+      firstName: 'Cody',
+      lastName: 'Something',
+      address: '123 main st',
+      phone: '555-555-5555',
+      email: 'cody@email.com',
+      password: '123',
+    }),
+    User.create({
+      firstName: 'Murph',
+      lastName: 'lsdkj',
+      address: 'sdklfsjf',
+      phone: '333-333-3333',
+      email: 'murphy@email.com',
+      password: '123',
+    }),
+  ])
+
   const users = await Promise.all(
     usersArray.map((user) => {
       return User.create(user)
@@ -200,16 +219,18 @@ async function seed() {
     })
   )
 
-  const cartItems = await Promise.all(
+  await Promise.all(
     cartItemsArray.map((items) => {
       // TODO: need to modify this so that if the cart already exists with that particular product, it updates rather than trying to create the same thing (because that would create an error in the CartItems table, which uses the cartId and productId to make a composite primary key)
       return CartItem.create(items)
     })
   )
 
-  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${testUsers.length} test users with passwords`)
+  console.log(`seeded ${users.length} other users with salted passwords`)
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${carts.length} carts`)
+
   console.log(`seeded successfully`)
 }
 

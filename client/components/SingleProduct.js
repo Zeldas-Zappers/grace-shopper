@@ -20,6 +20,9 @@ export class SingleProduct extends React.Component {
   addToCart() {
     //dispatch thunk if user (or loggedIn is true)
     if (this.props.loggedIn) {
+      // if the user already has that item in the cart, increment the count
+
+      // if the user doesn't already have that item in the cart, add it to the cart
       this.props.addItemToCart(this.props.product)
     }
     //if !loggedIn then add to local storage!!!
@@ -31,7 +34,7 @@ export class SingleProduct extends React.Component {
       } else {
         cart = JSON.parse(localStorage.getItem('cart'))
         let existingCartItem = cart.find(
-          product => product.id === this.props.product.id
+          (product) => product.id === this.props.product.id
         )
 
         if (existingCartItem) {
@@ -120,20 +123,20 @@ export class SingleProduct extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   console.log('STATE', state)
   return {
     product: state.product,
     loggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getSingleProduct: productId => dispatch(fetchProduct(productId)),
-    addItemToCart: product => dispatch(_addItemToCart(product)),
-    getUser: () => dispatch(me())
+    getSingleProduct: (productId) => dispatch(fetchProduct(productId)),
+    addItemToCart: (product) => dispatch(_addItemToCart(product)),
+    getUser: () => dispatch(me()),
   }
 }
 
