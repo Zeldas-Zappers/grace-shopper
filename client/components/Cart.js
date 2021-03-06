@@ -15,9 +15,8 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getUser()
-    console.log('USER IN SINGLE PRODUCT', this.props.user)
-    console.log('PROPS IN SINGLE PRODUCT', this.props)
+    const userId = this.props.user.id
+    this.props.getCartItems(userId)
   }
 
   removefromCart(id) {
@@ -67,7 +66,7 @@ class Cart extends React.Component {
                       <ul>
                         <li className="list-item">{product.name}</li>
                         <li className="list-item">${product.price}</li>
-                        <li className="list-item">Count: {product.count}</li>
+                        <li className="list-item">Quantity: {product.count}</li>
                         <li className="list-item">{product.description}</li>
                         <li className="list-item">{product.lighting}</li>
                         <li className="list-item">{product.watering}</li>
@@ -139,13 +138,14 @@ const mapStateToProps = (state) => {
   return {
     cart: state.cart,
     loggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
 const mapDispatchToCart = (dispatch) => {
   return {
-    getCartItems: () => dispatch(_setCartItems()),
-    getUser: () => dispatch(me()),
+    getCartItems: userId => dispatch(_setCartItems(userId)),
+    getUser: () => dispatch(me())
   }
 }
 

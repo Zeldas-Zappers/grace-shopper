@@ -4,44 +4,53 @@ const CartItem = require('../db/models/cartItem')
 const User = require('../db/models/user')
 const Product = require('../db/models/product')
 
-// get cart for guest
-router.get('/:cartId', async (req, res, next) => {
-  // /u
-  try {
-    let cart = await Cart.findOne({
-      where: {
-        id: req.params.cartId,
-      },
-      include: [{model: CartItem}],
-    })
-    res.json(cart)
-  } catch (err) {
-    next(err)
-  }
-})
+
+// //Just another approach below - I don't think this is right other than using the magic method on line 33
+// router.post('/:userId', async (req, res, next) => {
+//   //would be sending the product from the frontend to this route so product will be on req.body
+
+//   try {
+//     //create cart item (this needs to be findOrCreate({ where: {id: req.params.userId}}))
+//     const newCart = await Cart.create();
+
+//     //find the product
+//     const productToAdd = await Product.findOne({
+//       where: {
+//         id: req.body.id,
+//       }
+//     })
+
+//     //create new CartItem
+//     const newCartItem = await CartItem.create({
+//       cartId: newCart.id,
+//       productId: productToAdd.id,
+//       quantity: 1,
+//       price: productToAdd.price
+//     });
+
+//     //Send all products in that cart
+//     const getCart = await Cart.findByPk(newCart.id)
+//     const products = await getCart.getProducts();
+
+//     res.status(201).send(products);
+//   } catch(err) {
+//     next(err);
+//   }
+// })
 
 // get cart for logged in user
 router.get('/:userId', async (req, res, next) => {
   try {
-    let cart = await Cart.findOne({
+    const { userId } = req.params;
+    const cart = await Cart.findOne({
       where: {
-        userId: req.params.userId,
-      },
-      include: [{model: Product}],
+        userId: userId,
+      }
     })
-    // if the cart doesn't exist yet, create cart for user
-    if (!cart) {
-      cart = await Cart.create({
-        userId: req.params.guestId,
-      })
-      cart = await Cart.findOne({
-        where: {
-          userId: req.params.userId,
-        },
-        include: [{model: Product}, {model: User}],
-      })
+    if(cart) {
+      const products = await cart.getProducts();
+      res.json(products)
     }
-    res.json(cart)
   } catch (err) {
     next(err)
   }
@@ -73,6 +82,7 @@ router.put('/:cartId/:cartItemId', async (req, res, next) => {
     const item = await CartItem.findOne({
       where: {
         productId: req.params.cartItemId,
+
         cartId: req.params.cartId,
       },
     })
