@@ -5,7 +5,7 @@ const User = require('../db/models/user')
 const Product = require('../db/models/product')
 const {ensureAdmin, ensureLogin} = require('./middleware')
 
-router.post('/:userId', async (req, res, next) => {
+router.post('/:userId', ensureLogin, async (req, res, next) => {
   // if the user is logged in,
   // if there is no cart open at all, create one
   // if there is a cart but it's 'Fulfilled', create one

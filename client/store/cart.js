@@ -68,6 +68,31 @@ export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_CART_ITEMS:
       return action.products
+    // unnecessary b/c we will check state for the quantity
+    // case ADD_ITEM_TO_CART: {
+    //   // find out if the product is already in cart
+    //   let alreadyInCart = false
+    //   let quantityOfProductInCart
+    //   let idx
+    //   // loop through the cart and try to match the product id
+    //   for (let i = 0; i < state.length; i++) {
+    //     if (state[i].id === action.product.id) {
+    //       quantityOfProductInCart = action.product.cartItem.quantity
+    //       idx = i
+    //       alreadyInCart = true
+    //       break
+    //     }
+    //   }
+    //   if (alreadyInCart) {
+    //     var updatedProductQuantity
+    //     updatedProductQuantity = quantityOfProductInCart + 1
+    //     const result = [...state]
+    //     result[idx].cartItem.quantity = updatedProductQuantity
+    //     return result
+    //   } else {
+    //     return [...state, action.product]
+    //   }
+    // }
     case ADD_ITEM_TO_CART:
       return [...state, action.product]
     case REMOVE_ITEM_FROM_CART:

@@ -20,9 +20,12 @@ export class SingleProduct extends React.Component {
   addToCart() {
     //dispatch thunk if user (or loggedIn is true)
     if (this.props.loggedIn) {
-      // if the user already has that item in the cart, increment the count
+      // check the redux state to see if item is already in cart
+      // if it is, then dispatch PUT with increment quantity
+      // grab the quantity from state, add 1, and pass it to the PUT
 
-      // if the user doesn't already have that item in the cart, add it to the cart
+      // if not, then dispatch POST
+
       console.log('hello', 'in SingleProduct addToCart props', this.props)
       console.log('user.id', 'expect 2', this.props.user.id)
       this.props.addItemToCart(this.props.product, this.props.user.id)
