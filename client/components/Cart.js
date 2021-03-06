@@ -36,6 +36,8 @@ class Cart extends React.Component {
       .map((product) => product.count * product.price)
       .reduce((a, b) => a + b, 0)
 
+    console.log('hello', 'in Cart render', 'props', this.props)
+    console.log('hello', 'hello', 'in Cart render', 'state', this.state)
     return (
       <div className="container">
         {this.state.cart.map((product) => {
@@ -138,12 +140,14 @@ const mapStateToProps = (state) => {
   return {
     cart: state.cart,
     loggedIn: !!state.user.id,
+
     user: state.user
   }
 }
 
 const mapDispatchToCart = (dispatch) => {
   return {
+
     getCartItems: userId => dispatch(_setCartItems(userId)),
     getUser: () => dispatch(me())
   }
