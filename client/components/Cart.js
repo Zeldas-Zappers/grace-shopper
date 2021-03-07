@@ -100,7 +100,7 @@ class Cart extends React.Component {
     // define the subtotal for guests
     let subTotal
     if (!this.props.loggedIn) {
-      subTotal = this.state.cart
+      subTotal = cartToRender
         .map((product) => product.count * product.price)
         .reduce((a, b) => a + b, 0)
     }
@@ -108,7 +108,7 @@ class Cart extends React.Component {
     // define subtotal for users
 
     if (this.props.loggedIn) {
-      subTotal = this.state.cart
+      subTotal = cartToRender
         .map((product) => product.cartItem.quantity * product.cartItem.price)
         .reduce((a, b) => a + b, 0)
       console.log('logged in', subTotal)
@@ -201,7 +201,7 @@ class Cart extends React.Component {
           <div className="col-md-12">
             <div className="row">
               <div className="col-md-12">
-                {/* <p>Subtotal: ${subTotal}</p> */}
+                <p>Subtotal: ${subTotal}</p>
               </div>
             </div>
             <div className="row">
