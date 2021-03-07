@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -14,6 +15,8 @@ class Navbar extends React.Component {
     }
     this.toggleMenu = this.toggleMenu.bind(this)
   }
+
+  // TODO: we will have to udpate this with componentDidMount and componentDidUpdate to get the cart counter to work properly. Will probably need to use logic similar to what is found in Cart.js. Also will have to use this.setState in componentDidUpdate in order for the counter to work for guests
 
   toggleMenu() {
     this.setState({
