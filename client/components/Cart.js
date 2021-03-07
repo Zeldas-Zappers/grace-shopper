@@ -234,4 +234,5 @@ const mapDispatchToCart = (dispatch) => {
   }
 }
 
+// later refactor: rename to mapDispatchToProps
 export default connect(mapStateToProps, mapDispatchToCart)(Cart)
