@@ -41,7 +41,7 @@ class Routes extends Component {
         <Route exact path="/admin" component={Admin} />
 
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        {/* <Route component={Login} /> */}
         {/* // </Switch> */}
       </div>
     )
