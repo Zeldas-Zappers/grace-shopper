@@ -5,47 +5,43 @@ const User = require('../db/models/user')
 const Product = require('../db/models/product')
 const {ensureAdmin, ensureLogin} = require('./middleware')
 
-router.post(
-  '/:userId',
-  // ensureLogin,
-  async (req, res, next) => {
-    console.log('hello', 'in POST route to add cart item', 'req.body', req.body)
-    try {
-      // need to destructure newCart because it's returned as an array
-      const [newCart] = await Cart.findOrCreate({
-        where: {userId: req.params.userId, orderStatus: 'Processing'},
-      })
-      // console.log('hello', 'cart', newCart)
-      // console.log('hello', req.params.userId)
-      // find the product
-      const productToAdd = await Product.findOne({
-        where: {
-          id: req.body.id,
-        },
-      })
+router.post('/:userId', ensureLogin, async (req, res, next) => {
+  console.log('hello', 'in POST route to add cart item', 'req.body', req.body)
+  try {
+    // need to destructure newCart because it's returned as an array
+    const [newCart] = await Cart.findOrCreate({
+      where: {userId: req.params.userId, orderStatus: 'Processing'},
+    })
+    // console.log('hello', 'cart', newCart)
+    // console.log('hello', req.params.userId)
+    // find the product
+    const productToAdd = await Product.findOne({
+      where: {
+        id: req.body.id,
+      },
+    })
 
-      //create new CartItem
-      const newCartItem = await CartItem.create({
-        cartId: newCart.id,
-        productId: productToAdd.id,
-        quantity: 1,
-        price: productToAdd.price,
-      })
+    //create new CartItem
+    const newCartItem = await CartItem.create({
+      cartId: newCart.id,
+      productId: productToAdd.id,
+      quantity: 1,
+      price: productToAdd.price,
+    })
 
-      console.log('hello', newCartItem)
+    console.log('hello', newCartItem)
 
-      //Send all products in that cart
-      const getCart = await Cart.findByPk(newCart.id)
-      const products = await getCart.getProducts()
-      console.log('hello', 'products', products)
+    //Send all products in that cart
+    const getCart = await Cart.findByPk(newCart.id)
+    const products = await getCart.getProducts()
+    console.log('hello', 'products', products)
 
-      res.status(201).send(products)
-      // res.send(newCart)
-    } catch (err) {
-      next(err)
-    }
+    res.status(201).send(products)
+    // res.send(newCart)
+  } catch (err) {
+    next(err)
   }
-)
+})
 
 // get cart for logged in user
 router.get('/:userId', async (req, res, next) => {
