@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/product'
@@ -16,10 +17,20 @@ export class SingleProduct extends React.Component {
     this.props.getUser()
   }
 
-  addToCart() {
+  addToCart(event) {
+    event.preventDefault()
     //dispatch thunk if user (or loggedIn is true)
     if (this.props.loggedIn) {
-      //this.props.addItemToCart(this.props.product)
+      // check the redux state to see if item is already in cart
+      // if it is, then dispatch PUT with increment quantity
+      // grab the quantity from state, add 1, and pass it to the PUT
+      // TODO: will update here once Rachel finishes connecting the PUT route
+
+      // if not, then dispatch POST
+
+      console.log('hello', 'in SingleProduct addToCart props', this.props)
+      console.log('user.id', 'expect 2', this.props.user.id)
+      this.props.addItemToCart(this.props.product, this.props.user.id)
     }
     //if !loggedIn then add to local storage!!!
     let cart
@@ -125,6 +136,7 @@ export class SingleProduct extends React.Component {
 }
 
 const mapStateToProps = (state, {match}) => {
+
   return {
     product: state.product,
     loggedIn: !!state.user.id,
@@ -134,9 +146,12 @@ const mapStateToProps = (state, {match}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSingleProduct: productId => dispatch(fetchProduct(productId)),
-    addItemToCart: product => dispatch(_addItemToCart(product)),
-    getUser: () => dispatch(me())
+
+    getSingleProduct: (productId) => dispatch(fetchProduct(productId)),
+    addItemToCart: (product, userId) =>
+      dispatch(_addItemToCart(product, userId)),
+
+    getUser: () => dispatch(me()),
   }
 }
 
