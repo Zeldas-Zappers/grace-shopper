@@ -104,4 +104,20 @@ router.put('/:cartId/:cartItemId', async (req, res, next) => {
   }
 })
 
+// delete an item from the cart
+router.delete('/:cartId/:productId', ensureLogin, async (req, res, next) => {
+  try {
+    const cartItem = await CartItem.findOne({
+      where: {
+        cartId: req.params.cartId,
+        productId: req.params.productId,
+      },
+    })
+    await cartItem.destroy()
+    res.json(cartItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
