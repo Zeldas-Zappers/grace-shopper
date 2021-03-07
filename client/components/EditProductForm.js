@@ -12,7 +12,7 @@ const initState = {
   lighting: '',
   watering: '',
   inventory: '',
-  count: 0
+  count: 0,
 }
 
 class EditProductForm extends React.Component {
@@ -34,7 +34,7 @@ class EditProductForm extends React.Component {
         lighting: this.props.product.lighting,
         watering: this.props.product.watering,
         inventory: this.props.product.inventory,
-        count: this.props.product.count
+        count: this.props.product.count,
       })
     }
   }
@@ -50,7 +50,7 @@ class EditProductForm extends React.Component {
         lighting: this.props.product.lighting,
         watering: this.props.product.watering,
         inventory: this.props.product.inventory,
-        count: this.props.product.count
+        count: this.props.product.count,
       })
     }
   }
@@ -58,7 +58,7 @@ class EditProductForm extends React.Component {
   handleChange(e) {
     this.setState({
       ...this.state,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     })
   }
 
@@ -197,20 +197,20 @@ class EditProductForm extends React.Component {
 const mapStateToProps = (state, {match}) => {
   let product
   if (state.products.length) {
-    product = state.products.find(p => p.id === match.params.productId * 1)
+    product = state.products.find((p) => p.id === match.params.productId * 1)
   } else {
     product = state.product
   }
   product = product || {}
   return {
-    product
+    product,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     editProduct: (product, productId) =>
-      dispatch(_editProduct(product, productId))
+      dispatch(_editProduct(product, productId)),
   }
 }
 

@@ -41,7 +41,7 @@ export class SingleProduct extends React.Component {
       } else {
         cart = JSON.parse(localStorage.getItem('cart'))
         let existingCartItem = cart.find(
-          product => product.id === this.props.product.id
+          (product) => product.id === this.props.product.id
         )
 
         if (existingCartItem) {
@@ -137,18 +137,16 @@ export class SingleProduct extends React.Component {
 }
 
 const mapStateToProps = (state, {match}) => {
-
   return {
     product: state.product,
     loggedIn: !!state.user.id,
     user: state.user,
-    adminStatus: state.user.adminStatus
+    adminStatus: state.user.adminStatus,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-
     getSingleProduct: (productId) => dispatch(fetchProduct(productId)),
     addItemToCart: (product, userId) =>
       dispatch(_addItemToCart(product, userId)),

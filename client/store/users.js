@@ -2,15 +2,15 @@ import axios from 'axios'
 
 const FETCH_USERS = 'FETCH_USERS'
 
-export const fetchUsers = users => {
+export const fetchUsers = (users) => {
   return {
     type: FETCH_USERS,
-    users
+    users,
   }
 }
 
 export const setUsers = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const {data} = await axios.get('/api/users')
       dispatch(fetchUsers(data))
@@ -22,7 +22,7 @@ export const setUsers = () => {
 
 const initialState = []
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_USERS:
       return action.users

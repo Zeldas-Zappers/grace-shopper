@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const Admin = props => {
+const Admin = (props) => {
   console.log(props)
   return (
     <div className="container">
@@ -14,9 +14,9 @@ const Admin = props => {
   )
 }
 
-const mapState = state => {
+const mapState = (state) => {
   return {
-    email: state.user.email
+    email: state.user.email,
   }
 }
 

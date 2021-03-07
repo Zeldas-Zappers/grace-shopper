@@ -50,7 +50,7 @@ export class AllProducts extends React.Component {
           </div>
         )}
         <div className="row">
-          {products.map(product => {
+          {products.map((product) => {
             return (
               <div
                 key={product.id}
@@ -127,18 +127,18 @@ export class AllProducts extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     products: state.products,
     user: state.user,
-    adminStatus: state.user.adminStatus
+    adminStatus: state.user.adminStatus,
   }
 }
 
 const mapDispatchToProps = (dispatch, {history}) => {
   return {
     getProducts: () => dispatch(fetchProducts()),
-    deleteProduct: product => dispatch(removeProduct(product, history))
+    deleteProduct: (product) => dispatch(removeProduct(product, history)),
   }
 }
 

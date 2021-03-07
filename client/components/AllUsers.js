@@ -43,7 +43,7 @@ class AllUsers extends React.Component {
           </div>
         </div>
         <div className="row">
-          {users.map(user => {
+          {users.map((user) => {
             return (
               <div className="col-md-4 mb-4" key={user.id}>
                 <div className="card">
@@ -108,15 +108,15 @@ class AllUsers extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    users: state.users
+    users: state.users,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getAllUsers: () => dispatch(setUsers())
+    getAllUsers: () => dispatch(setUsers()),
   }
 }
 

@@ -11,7 +11,7 @@ class Navbar extends React.Component {
     super(props)
     this.state = {
       showCollapsedMenu: false,
-      cart: JSON.parse(localStorage.getItem('cart'))
+      cart: JSON.parse(localStorage.getItem('cart')),
       //cart: !this.props.isLoggedIn ? JSON.parse(localStorage.getItem('cart')) || [] : this.props.cart || []
     }
     this.toggleMenu = this.toggleMenu.bind(this)
@@ -194,8 +194,7 @@ const mapDispatch = (dispatch) => {
     handleClick() {
       dispatch(logout())
     },
-    getUser: () => dispatch(me())
-
+    getUser: () => dispatch(me()),
   }
 }
 

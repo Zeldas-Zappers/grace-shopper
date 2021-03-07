@@ -11,7 +11,7 @@ const initState = {
   lighting: '',
   watering: '',
   inventory: '',
-  count: 0
+  count: 0,
 }
 
 class AddProductForm extends React.Component {
@@ -25,7 +25,7 @@ class AddProductForm extends React.Component {
   handleChange(e) {
     this.setState({
       ...this.state,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     })
   }
 
@@ -160,9 +160,9 @@ class AddProductForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    addProduct: product => dispatch(addNewProduct(product))
+    addProduct: (product) => dispatch(addNewProduct(product)),
   }
 }
 

@@ -83,8 +83,8 @@ router.delete('/:id', async (req, res, next) => {
     if (productToBeDeleted) {
       await Product.destroy({
         where: {
-          id: id
-        }
+          id: id,
+        },
       })
       res.json(productToBeDeleted) //201
       return

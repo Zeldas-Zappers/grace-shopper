@@ -61,44 +61,19 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-/*
-update (put), create new cart (post), delete
-*/
-
-router.put('/:cartId', async (req, res, next) => {
-  try {
-    const cart = await Cart.findByPk(req.params.cartId)
-    const updated = await cart.update(req.body)
-    const updatedCart = await Cart.findOne({
-      where: {
-        id: req.params.cartId,
-      },
-      include: [{model: Product}, {model: User}],
-    })
-    res.json(updatedCart)
-  } catch (err) {
-    next(err)
-  }
-})
-
 //updating quantity in cart
-router.put('/:cartId/:cartItemId', async (req, res, next) => {
+router.put('/:cartId/product/:productId', async (req, res, next) => {
   try {
-    const item = await CartItem.findOne({
+    //might delete product eager load
+    const cart = await CartItem.findOne({
       where: {
         productId: req.params.cartItemId,
 
         cartId: req.params.cartId,
       },
+      include: [{model: Cart, include: [{model: Product}]}],
     })
-    const updated = await item.update(req.body)
-    const updatedItem = await CartItem.findOne({
-      where: {
-        productId: req.params.cartItemId,
-        cartId: req.params.cartId,
-      },
-    })
-    res.json(updatedItem)
+    res.json(await cart.update(req.body))
   } catch (err) {
     next(err)
   }
