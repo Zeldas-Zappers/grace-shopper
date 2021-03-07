@@ -57,7 +57,8 @@ export class SingleProduct extends React.Component {
 
   render() {
     const {product} = this.props || {}
-    const {adminStatus} = this.props || ''
+    const adminStatus = this.props.adminStatus || ''
+
     return (
       <div className="container">
         <div className="row mt-4">
@@ -140,7 +141,8 @@ const mapStateToProps = (state, {match}) => {
   return {
     product: state.product,
     loggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
+    adminStatus: state.user.adminStatus
   }
 }
 

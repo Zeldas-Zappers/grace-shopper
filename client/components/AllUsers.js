@@ -1,18 +1,16 @@
 import React from 'react'
-import {fetchProducts} from '../store/products'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import AddProductForm from './AddProductForm'
-import {removeProduct} from '../store/products'
+import {setUsers} from '../store/users'
 
-export class AllProducts extends React.Component {
+class AllUsers extends React.Component {
   componentDidMount() {
-    this.props.getProducts()
+    console.log(this.props)
+    this.props.getAllUsers()
   }
 
   render() {
-    const {products} = this.props || []
-    const adminStatus = this.props.adminStatus || ''
+    console.log('USERS', this.props)
+    const {users} = this.props || []
 
     return (
       <div className="container">
@@ -44,36 +42,19 @@ export class AllProducts extends React.Component {
             </div>
           </div>
         </div>
-        {adminStatus && (
-          <div className="row mb-4">
-            <AddProductForm />
-          </div>
-        )}
         <div className="row">
-          {products.map(product => {
+          {users.map(user => {
             return (
-              <div
-                key={product.id}
-                className="col-lg-3 col-md-6 col-sm-12 mb-4"
-              >
+              <div className="col-md-4 mb-4" key={user.id}>
                 <div className="card">
-                  <Link to={`/products/${product.id}`}>
-                    <img src={product.imageUrl} className="card-img-top" />
-                    <div className="card-body row ">
-                      <h5 className="card-text col-8">{product.name}</h5>
-                      <p className="card-text col-4 text-right">
-                        ${product.price}
-                      </p>
-                    </div>
-                  </Link>
-                  {adminStatus && (
-                    <button
-                      onClick={() => this.props.deleteProduct(product)}
-                      className="btn btn-danger"
-                    >
-                      Delete
-                    </button>
-                  )}
+                  <h5 className="card-header">
+                    {user.firstName} {user.lastName}
+                  </h5>
+                  <div className="card-body">
+                    <p className="card-text">E: {user.email}</p>
+                    <p className="card-text">P: {user.phone}</p>
+                    <p className="card-text">Address: {user.address}</p>
+                  </div>
                 </div>
               </div>
             )
@@ -129,17 +110,14 @@ export class AllProducts extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    products: state.products,
-    user: state.user,
-    adminStatus: state.user.adminStatus
+    users: state.users
   }
 }
 
-const mapDispatchToProps = (dispatch, {history}) => {
+const mapDispatchToProps = dispatch => {
   return {
-    getProducts: () => dispatch(fetchProducts()),
-    deleteProduct: product => dispatch(removeProduct(product, history))
+    getAllUsers: () => dispatch(setUsers())
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
+export default connect(mapStateToProps, mapDispatchToProps)(AllUsers)
