@@ -31,7 +31,16 @@ class Cart extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.cart.length === 0) {
+    console.log(
+      'in componentDidUpdate, prevProps',
+      prevProps,
+      'this.props.cart',
+      this.props.cart
+    )
+    if (
+      prevProps.cart.length === 0 ||
+      prevProps.cart.length !== this.props.cart.length
+    ) {
       if (this.props.user.id) {
         // console.log(
         //   'in Cart componentDidMount before getCartItems thunk,this.props.user.id',

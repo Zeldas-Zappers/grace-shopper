@@ -98,7 +98,8 @@ export default function cartReducer(state = initialState, action) {
     //   }
     // }
     case ADD_ITEM_TO_CART:
-      return [...state, action.product]
+      // this has to be action.product and not [...state, action.product] because of the way the route is configured to get all the products in the cart
+      return action.product
     case REMOVE_ITEM_FROM_CART:
       return state.filter((product) => product.id !== action.product.id)
     default:
