@@ -24,8 +24,16 @@ class Routes extends Component {
     const adminStatus = this.props.adminStatus || ''
 
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
+      // had to remove the Switch to get the welcome message to load correctly. Also had to change component={Home} to exact path -- JC
+      // <Switch>
+      // {/* Routes placed here are available to all visitors */}
+      <div>
+        {isLoggedIn && (
+          // <Switch>
+          // {/* Routes placed here are only available after logging in */}
+          <Route path="/" component={UserHome} />
+          // {/* </Switch> */}
+        )}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
@@ -35,15 +43,10 @@ class Routes extends Component {
         <Route exact path="/users" component={AllUsers} />
         <Route path="/" component={Home} />
 
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-          </Switch>
-        )}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
-      </Switch>
+        {/* <Route component={Login} /> */}
+        {/* // </Switch> */}
+      </div>
     )
   }
 }
@@ -51,20 +54,21 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
     adminStatus: state.user.adminStatus
+
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me())
-    }
+    },
   }
 }
 
@@ -77,5 +81,5 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
  */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 }
