@@ -98,7 +98,7 @@ export default function cartReducer(state = initialState, action) {
     //   }
     // }
     case ADD_ITEM_TO_CART:
-      // this has to be action.product and not [...state, action.product] because of the way the route is configured to get all the products in the cart
+      // this has to be action.product and not [...state, action.product] because of the way the route is configured to get all the products in the cart and because the backend route returns the entire array of products, not just the new product. Not sure if this is best practice
       return action.product
     case REMOVE_ITEM_FROM_CART:
       return state.filter((product) => product.id !== action.product.id)
