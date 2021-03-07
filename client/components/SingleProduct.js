@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {fetchProduct} from '../store/product'
 import {_addItemToCart} from '../store/cart'
 import {me} from '../store/user'
-import ProductForm from './ProductForm'
+import EditProductForm from './EditProductForm'
 
 export class SingleProduct extends React.Component {
   constructor() {
@@ -30,7 +30,7 @@ export class SingleProduct extends React.Component {
       } else {
         cart = JSON.parse(localStorage.getItem('cart'))
         let existingCartItem = cart.find(
-          (product) => product.id === this.props.product.id
+          product => product.id === this.props.product.id
         )
 
         if (existingCartItem) {
@@ -101,7 +101,6 @@ export class SingleProduct extends React.Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-6" />
               <div className="col-md-6">
                 <button
                   onClick={this.addToCart}
@@ -110,45 +109,32 @@ export class SingleProduct extends React.Component {
                 >
                   Add to Cart
                 </button>
-                {/* {user.isAdmin && buttons below} */}
-                <button
-                  onClick={this.addToCart}
-                  type="button"
-                  className="btn btn-success"
-                >
-                  Add Product
-                </button>
-                <button
-                  onClick={this.addToCart}
-                  type="button"
-                  className="btn btn-success"
-                >
-                  Edit Product
-                </button>
+              </div>
+              {/* {user.isAdmin && buttons below} */}
+              <div className="col-md-6">
+                <EditProductForm />
               </div>
             </div>
           </div>
-          <ProductForm />
         </div>
       </div>
     )
   }
 }
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     product: state.product,
     loggedIn: !!state.user.id,
-    user: state.user,
+    user: state.user
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    getSingleProduct: (productId) => dispatch(fetchProduct(productId)),
-    addItemToCart: (product) => dispatch(_addItemToCart(product)),
-    getUser: () => dispatch(me()),
+    getSingleProduct: productId => dispatch(fetchProduct(productId)),
+    addItemToCart: product => dispatch(_addItemToCart(product)),
+    getUser: () => dispatch(me())
   }
 }
 

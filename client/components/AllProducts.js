@@ -2,6 +2,7 @@ import React from 'react'
 import {fetchProducts} from '../store/products'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import AddProductForm from './AddProductForm'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ export class AllProducts extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-6">
             <div className="dropdown mb-4 mt-4">
               <button
                 className="btn btn-primary dropdown-toggle"
@@ -39,6 +40,9 @@ export class AllProducts extends React.Component {
               </div>
             </div>
           </div>
+        </div>
+        <div className="row mb-4">
+          <AddProductForm />
         </div>
         <div className="row">
           {products.map(product => {
