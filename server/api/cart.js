@@ -3,7 +3,7 @@ const Cart = require('../db/models/cart')
 const CartItem = require('../db/models/cartItem')
 const User = require('../db/models/user')
 const Product = require('../db/models/product')
-
+const {ensureLogin} = require('./middleware')
 
 router.post('/:userId', ensureLogin, async (req, res, next) => {
   // if the user is logged in,
@@ -49,19 +49,14 @@ router.post('/:userId', ensureLogin, async (req, res, next) => {
   }
 })
 
-
-
-
-
-
 // get cart for logged in user
 router.get('/:userId', async (req, res, next) => {
   try {
     const {userId} = req.params
     const cart = await Cart.findOne({
       where: {
-        userId: userId
-      }
+        userId: userId,
+      },
     })
     if (cart) {
       const products = await cart.getProducts()
@@ -110,6 +105,22 @@ router.put('/:cartId/:cartItemId', async (req, res, next) => {
       },
     })
     res.json(updatedItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// delete an item from the cart
+router.delete('/:cartId/:productId', ensureLogin, async (req, res, next) => {
+  try {
+    const cartItem = await CartItem.findOne({
+      where: {
+        cartId: req.params.cartId,
+        productId: req.params.productId,
+      },
+    })
+    await cartItem.destroy()
+    res.json(cartItem)
   } catch (err) {
     next(err)
   }
