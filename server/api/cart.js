@@ -3,15 +3,9 @@ const Cart = require('../db/models/cart')
 const CartItem = require('../db/models/cartItem')
 const User = require('../db/models/user')
 const Product = require('../db/models/product')
-
+const {ensureAdmin, ensureLogin} = require('./middleware')
 
 router.post('/:userId', ensureLogin, async (req, res, next) => {
-  // if the user is logged in,
-  // if there is no cart open at all, create one
-  // if there is a cart but it's 'Fulfilled', create one
-  // if there is a cart with status 'Processing', check if product already exists
-  // if product exists, update quantity
-  // otherwise, if cart doesn't exist, create the cart and add the product
   console.log('hello', 'in POST route to add cart item', 'req.body', req.body)
   try {
     // need to destructure newCart because it's returned as an array
@@ -49,19 +43,14 @@ router.post('/:userId', ensureLogin, async (req, res, next) => {
   }
 })
 
-
-
-
-
-
 // get cart for logged in user
 router.get('/:userId', async (req, res, next) => {
   try {
     const {userId} = req.params
     const cart = await Cart.findOne({
       where: {
-        userId: userId
-      }
+        userId: userId,
+      },
     })
     if (cart) {
       const products = await cart.getProducts()

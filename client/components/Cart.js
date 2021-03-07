@@ -7,40 +7,127 @@ class Cart extends React.Component {
   constructor(props) {
     super(props)
     this.removefromCart = this.removefromCart.bind(this)
+
+    // this block is obsolete
+    // this.state = {
+    //   cart: !this.props.loggedIn
+    //     ? JSON.parse(localStorage.getItem('cart')) || []
+    //     : this.props.cart || [],
+    // }
+
+    // local state to manage guest carts only
     this.state = {
-      cart: !this.props.loggedIn
-        ? JSON.parse(localStorage.getItem('cart')) || []
-        : this.props.cart || [],
+      cart: JSON.parse(localStorage.getItem('cart')),
     }
+    console.log('in Cart constructor state', this.state)
+    console.log('in Cart constructor props', this.props)
   }
 
   componentDidMount() {
-    const userId = this.props.user.id
-    this.props.getCartItems(userId)
+    this.props.getUser()
+    // now we should have a user, go get the cart
+    // run the thunk to get the cart
+    console.log('in Cart componentDidMount state', this.state)
+    console.log('in Cart componentDidMount props', this.props)
   }
 
-  removefromCart(id) {
-    if (this.props.loggedIn) {
-      this.props.addItemToCart(this.props.product)
+  componentDidUpdate(prevProps, prevState) {
+    console.log(
+      'in componentDidUpdate, prevProps',
+      prevProps,
+      'this.props.cart',
+      this.props.cart
+    )
+    if (prevProps.cart.length === 0) {
+      console.log('cart is empty!!')
+      return
     }
 
-    const cart = this.state.cart.filter((item) => item.id !== id)
-    localStorage.setItem('cart', JSON.stringify(cart))
-    this.setState({
-      cart: cart,
-    })
+    if (
+      // prevProps.cart.length === 0 ||
+      prevProps.cart.length !== this.props.cart.length
+    ) {
+      // this.state = {
+      // did you check if the cart is empty? : false
+      // }
+      if (this.props.user.id) {
+        // console.log(
+        //   'in Cart componentDidMount before getCartItems thunk,this.props.user.id',
+        //   this.props.user.id
+        // )
+
+        const userId = this.props.user.id
+        // console.log(
+        //   'in Cart componentDidMount',
+        //   'userId',
+        //   userId,
+        //   'about to run getCartItems'
+        // )
+        this.props.getCartItems(userId)
+        // if cart is still empty, set flag to true
+      }
+    }
+  }
+  removefromCart(id) {
+    // TODO: not sure why this is here -- Jae
+    // if (this.props.loggedIn) {
+    //   this.props.addItemToCart(this.props.product)
+    // }
+
+    // if not logged in, then
+
+    if (!this.props.loggedIn) {
+      // const cart = this.state.cart.filter((item) => item.id !== id)
+      // localStorage.setItem('cart', JSON.stringify(cart))
+      // this.setState({
+      //   cart: cart,
+      // })
+      // get from localStorage
+      // splice it out
+      // put back into localStorage
+    }
   }
 
   render() {
-    const subTotal = this.state.cart
-      .map((product) => product.count * product.price)
-      .reduce((a, b) => a + b, 0)
+    console.log('in Cart render', 'props', this.props)
+    console.log('in Cart render', 'state', this.state)
 
-    console.log('hello', 'in Cart render', 'props', this.props)
-    console.log('hello', 'hello', 'in Cart render', 'state', this.state)
+    const cartToRender = !this.props.loggedIn
+      ? this.state.cart || []
+      : this.props.cart || []
+
+    /*
+
+      this.state = {
+        cart : JSON.parse(localStorage.getItem('cart'))
+      }
+
+      */
+
+    if (cartToRender.length === 0) {
+      return <div>Your cart is empty!!!</div>
+    }
+    // define the subtotal for guests
+    let subTotal
+    if (!this.props.loggedIn) {
+      subTotal = cartToRender
+        .map((product) => product.count * product.price)
+        .reduce((a, b) => a + b, 0)
+    }
+
+    // define subtotal for users
+
+    if (this.props.loggedIn) {
+      subTotal = cartToRender
+        .map((product) => product.cartItem.quantity * product.cartItem.price)
+        .reduce((a, b) => a + b, 0)
+      console.log('logged in', subTotal)
+    }
+    // if the cart is empty, display an empty cart message
     return (
       <div className="container">
-        {this.state.cart.map((product) => {
+        {cartToRender.map((product) => {
+          // console.log('in cartToRender, product', product)
           return (
             <div key={product.id}>
               <div className="row mt-4">
@@ -68,7 +155,12 @@ class Cart extends React.Component {
                       <ul>
                         <li className="list-item">{product.name}</li>
                         <li className="list-item">${product.price}</li>
-                        <li className="list-item">Quantity: {product.count}</li>
+                        <li className="list-item">
+                          Quantity:{' '}
+                          {!this.props.loggedIn
+                            ? product.count
+                            : product.cartItem.quantity}
+                        </li>
                         <li className="list-item">{product.description}</li>
                         <li className="list-item">{product.lighting}</li>
                         <li className="list-item">{product.watering}</li>
@@ -137,20 +229,20 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('in Cart mapState Redux state', state)
   return {
     cart: state.cart,
     loggedIn: !!state.user.id,
-
-    user: state.user
+    user: state.user,
   }
 }
 
 const mapDispatchToCart = (dispatch) => {
   return {
-
-    getCartItems: userId => dispatch(_setCartItems(userId)),
-    getUser: () => dispatch(me())
+    getCartItems: (userId) => dispatch(_setCartItems(userId)),
+    getUser: () => dispatch(me()),
   }
 }
 
+// later refactor: rename to mapDispatchToProps
 export default connect(mapStateToProps, mapDispatchToCart)(Cart)
