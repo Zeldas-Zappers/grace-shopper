@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -9,15 +10,17 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showCollapsedMenu: false
+      showCollapsedMenu: false,
       //cart: !this.props.isLoggedIn ? JSON.parse(localStorage.getItem('cart')) || [] : this.props.cart || []
     }
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
+  // TODO: we will have to udpate this with componentDidMount and componentDidUpdate to get the cart counter to work properly. Will probably need to use logic similar to what is found in Cart.js. Also will have to use this.setState in componentDidUpdate in order for the counter to work for guests
+
   toggleMenu() {
     this.setState({
-      showCollapsedMenu: !this.state.showCollapsedMenu
+      showCollapsedMenu: !this.state.showCollapsedMenu,
     })
   }
   render() {
@@ -147,19 +150,19 @@ class Navbar extends React.Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
     user: state.user,
-    cart: state.cart
+    cart: state.cart,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+    },
     //getUser: () => dispatch(me()),
   }
 }
@@ -171,5 +174,5 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 }
