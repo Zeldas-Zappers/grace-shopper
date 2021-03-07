@@ -30,21 +30,23 @@ class Cart extends React.Component {
     console.log('in Cart componentDidMount props', this.props)
   }
 
-  componentDidUpdate() {
-    if (this.props.user.id) {
-      console.log(
-        'in Cart componentDidMount before getCartItems thunk,this.props.user.id',
-        this.props.user.id
-      )
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.cart.length === 0) {
+      if (this.props.user.id) {
+        // console.log(
+        //   'in Cart componentDidMount before getCartItems thunk,this.props.user.id',
+        //   this.props.user.id
+        // )
 
-      const userId = this.props.user.id
-      console.log(
-        'in Cart componentDidMount',
-        'userId',
-        userId,
-        'about to run getCartItems'
-      )
-      this.props.getCartItems(userId)
+        const userId = this.props.user.id
+        // console.log(
+        //   'in Cart componentDidMount',
+        //   'userId',
+        //   userId,
+        //   'about to run getCartItems'
+        // )
+        this.props.getCartItems(userId)
+      }
     }
   }
   removefromCart(id) {
@@ -106,7 +108,7 @@ class Cart extends React.Component {
     return (
       <div className="container">
         {cartToRender.map((product) => {
-          console.log('in cartToRender, product', product)
+          // console.log('in cartToRender, product', product)
           return (
             <div key={product.id}>
               <div className="row mt-4">
