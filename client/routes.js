@@ -22,6 +22,7 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
+      // had to remove the Switch to get the welcome message to load correctly. Also had to change component={Home} to exact path -- JC
       // <Switch>
       // {/* Routes placed here are available to all visitors */}
       <div>
