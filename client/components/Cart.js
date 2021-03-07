@@ -7,58 +7,92 @@ class Cart extends React.Component {
   constructor(props) {
     super(props)
     this.removefromCart = this.removefromCart.bind(this)
+
+    // this block is obsolete
+    // this.state = {
+    //   cart: !this.props.loggedIn
+    //     ? JSON.parse(localStorage.getItem('cart')) || []
+    //     : this.props.cart || [],
+    // }
+
+    // local state to manage guest carts only
     this.state = {
-      cart: !this.props.loggedIn
-        ? JSON.parse(localStorage.getItem('cart')) || []
-        : this.props.cart || [],
+      cart: JSON.parse(localStorage.getItem('cart')),
     }
-    console.log('in cart constructor state', this.state)
-    console.log('in cart constructor props', this.props)
+    console.log('in Cart constructor state', this.state)
+    console.log('in Cart constructor props', this.props)
   }
 
   componentDidMount() {
+    console.log(
+      'in Cart componentDidMount before getCartItems thunk,this.props.user.id',
+      this.props.user.id
+    )
     const userId = this.props.user.id
     this.props.getCartItems(userId)
-    console.log('in cart componentDidMount state', this.state)
-    console.log('in cart componentDidMount props', this.props)
+    console.log('in Cart componentDidMount state', this.state)
+    console.log('in Cart componentDidMount props', this.props)
   }
 
   removefromCart(id) {
-    // not sure why this is here -- Jae
-    if (this.props.loggedIn) {
-      this.props.addItemToCart(this.props.product)
-    }
+    // TODO: not sure why this is here -- Jae
+    // if (this.props.loggedIn) {
+    //   this.props.addItemToCart(this.props.product)
+    // }
 
-    const cart = this.state.cart.filter((item) => item.id !== id)
-    localStorage.setItem('cart', JSON.stringify(cart))
-    this.setState({
-      cart: cart,
-    })
+    // if not logged in, then
+
+    if (!this.props.loggedIn) {
+      // const cart = this.state.cart.filter((item) => item.id !== id)
+      // localStorage.setItem('cart', JSON.stringify(cart))
+      // this.setState({
+      //   cart: cart,
+      // })
+      // get from localStorage
+      // splice it out
+      // put back into localStorage
+    }
   }
 
   render() {
-    // define the subtotal for guests
-    let subTotal
-    if (!this.props.loggedIn) {
-      subTotal = this.state.cart
-        .map((product) => product.count * product.price)
-        .reduce((a, b) => a + b, 0)
+    console.log('in Cart render', 'props', this.props)
+    console.log('in Cart render', 'state', this.state)
+
+    const cartToRender = !this.props.loggedIn
+      ? this.state.cart || []
+      : this.props.cart || []
+
+    /*
+
+      this.state = {
+        cart : JSON.parse(localStorage.getItem('cart'))
+      }
+
+      */
+
+    if (cartToRender.length === 0) {
+      return <div>Loading</div>
     }
+    // // define the subtotal for guests
+    // let subTotal
+    // if (!this.props.loggedIn) {
+    //   subTotal = this.state.cart
+    //     .map((product) => product.count * product.price)
+    //     .reduce((a, b) => a + b, 0)
+    // }
 
-    // define subtotal for users
+    // // define subtotal for users
 
-    if (this.props.loggedIn) {
-      subTotal = this.state.cart
-        .map((product) => product.cartItem.quantity * product.cartItem.price)
-        .reduce((a, b) => a + b, 0)
-      console.log('logged in', subTotal)
-    }
+    // if (this.props.loggedIn) {
+    //   subTotal = this.state.cart
+    //     .map((product) => product.cartItem.quantity * product.cartItem.price)
+    //     .reduce((a, b) => a + b, 0)
+    //   console.log('logged in', subTotal)
+    // }
 
-    console.log('hello', 'in Cart render', 'props', this.props)
-    console.log('hello', 'hello', 'in Cart render', 'state', this.state)
     return (
       <div className="container">
-        {this.state.cart.map((product) => {
+        {cartToRender.map((product) => {
           return (
             <div key={product.id}>
               <div className="row mt-4">
@@ -137,7 +171,7 @@ class Cart extends React.Component {
           <div className="col-md-12">
             <div className="row">
               <div className="col-md-12">
-                <p>Subtotal: ${subTotal}</p>
+                {/* <p>Subtotal: ${subTotal}</p> */}
               </div>
             </div>
             <div className="row">
@@ -155,6 +189,7 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('in Cart mapState state', state)
   return {
     cart: state.cart,
     loggedIn: !!state.user.id,

@@ -44,9 +44,10 @@ export const _addItemToCart = (product, userId) => {
   return async (dispatch) => {
     try {
       const {data} = await axios.post(`/api/cart/${userId}`, product)
-      console.log('hello', 'in addItem thunk', 'product', product)
+      console.log('hello', 'in addItem thunk', 'product', product, 'data', data)
       dispatch(addItemToCart(data))
-      history.push('/cart')
+
+      // history.push('/cart')
     } catch (err) {
       console.error(err)
     }

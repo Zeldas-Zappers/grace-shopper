@@ -9,7 +9,7 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showCollapsedMenu: false
+      showCollapsedMenu: false,
       //cart: !this.props.isLoggedIn ? JSON.parse(localStorage.getItem('cart')) || [] : this.props.cart || []
     }
     this.toggleMenu = this.toggleMenu.bind(this)
@@ -17,7 +17,7 @@ class Navbar extends React.Component {
 
   toggleMenu() {
     this.setState({
-      showCollapsedMenu: !this.state.showCollapsedMenu
+      showCollapsedMenu: !this.state.showCollapsedMenu,
     })
   }
   render() {
@@ -147,19 +147,19 @@ class Navbar extends React.Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
     user: state.user,
-    cart: state.cart
+    cart: state.cart,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+    },
     //getUser: () => dispatch(me()),
   }
 }
@@ -171,5 +171,5 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 }

@@ -51,8 +51,8 @@ export class SingleProduct extends React.Component {
           cart.push(this.props.product)
         }
       }
+      localStorage.setItem('cart', JSON.stringify(cart))
     }
-    localStorage.setItem('cart', JSON.stringify(cart))
   }
 
   render() {
