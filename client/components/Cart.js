@@ -97,22 +97,22 @@ class Cart extends React.Component {
     if (cartToRender.length === 0) {
       return <div>Loading</div>
     }
-    // // define the subtotal for guests
-    // let subTotal
-    // if (!this.props.loggedIn) {
-    //   subTotal = this.state.cart
-    //     .map((product) => product.count * product.price)
-    //     .reduce((a, b) => a + b, 0)
-    // }
+    // define the subtotal for guests
+    let subTotal
+    if (!this.props.loggedIn) {
+      subTotal = this.state.cart
+        .map((product) => product.count * product.price)
+        .reduce((a, b) => a + b, 0)
+    }
 
-    // // define subtotal for users
+    // define subtotal for users
 
-    // if (this.props.loggedIn) {
-    //   subTotal = this.state.cart
-    //     .map((product) => product.cartItem.quantity * product.cartItem.price)
-    //     .reduce((a, b) => a + b, 0)
-    //   console.log('logged in', subTotal)
-    // }
+    if (this.props.loggedIn) {
+      subTotal = this.state.cart
+        .map((product) => product.cartItem.quantity * product.cartItem.price)
+        .reduce((a, b) => a + b, 0)
+      console.log('logged in', subTotal)
+    }
 
     return (
       <div className="container">
@@ -145,7 +145,12 @@ class Cart extends React.Component {
                       <ul>
                         <li className="list-item">{product.name}</li>
                         <li className="list-item">${product.price}</li>
-                        <li className="list-item">Quantity: {product.count}</li>
+                        <li className="list-item">
+                          Quantity:{' '}
+                          {!this.props.loggedIn
+                            ? product.count
+                            : product.cartItem.quantity}
+                        </li>
                         <li className="list-item">{product.description}</li>
                         <li className="list-item">{product.lighting}</li>
                         <li className="list-item">{product.watering}</li>
