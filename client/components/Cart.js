@@ -17,7 +17,7 @@ class Cart extends React.Component {
 
     // local state to manage guest carts only
     this.state = {
-      cart: JSON.parse(localStorage.getItem('cart')),
+      cart: JSON.parse(localStorage.getItem('cart'))
     }
     console.log('in Cart constructor state', this.state)
     console.log('in Cart constructor props', this.props)
@@ -25,7 +25,7 @@ class Cart extends React.Component {
 
   componentDidMount() {
     this.props.getUser()
-    if (this.props.user) {
+    if (this.props.user.id) {
       console.log(
         'in Cart componentDidMount before getCartItems thunk,this.props.user.id',
         this.props.user.id
@@ -96,7 +96,7 @@ class Cart extends React.Component {
 
     return (
       <div className="container">
-        {cartToRender.map((product) => {
+        {cartToRender.map(product => {
           return (
             <div key={product.id}>
               <div className="row mt-4">
@@ -192,19 +192,19 @@ class Cart extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   console.log('in Cart mapState Redux state', state)
   return {
     cart: state.cart,
     loggedIn: !!state.user.id,
-    user: state.user,
+    user: state.user
   }
 }
 
-const mapDispatchToCart = (dispatch) => {
+const mapDispatchToCart = dispatch => {
   return {
-    getCartItems: (userId) => dispatch(_setCartItems(userId)),
-    getUser: () => dispatch(me()),
+    getCartItems: userId => dispatch(_setCartItems(userId)),
+    getUser: () => dispatch(me())
   }
 }
 
