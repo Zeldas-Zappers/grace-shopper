@@ -24,12 +24,16 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    console.log(
-      'in Cart componentDidMount before getCartItems thunk,this.props.user.id',
-      this.props.user.id
-    )
-    const userId = this.props.user.id
-    this.props.getCartItems(userId)
+    this.props.getUser()
+    if (this.props.user) {
+      console.log(
+        'in Cart componentDidMount before getCartItems thunk,this.props.user.id',
+        this.props.user.id
+      )
+
+      const userId = this.props.user.id
+      this.props.getCartItems(userId)
+    }
     console.log('in Cart componentDidMount state', this.state)
     console.log('in Cart componentDidMount props', this.props)
   }
@@ -189,7 +193,7 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('in Cart mapState state', state)
+  console.log('in Cart mapState Redux state', state)
   return {
     cart: state.cart,
     loggedIn: !!state.user.id,

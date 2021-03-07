@@ -34,6 +34,7 @@ export const _setCartItems = (userId) => {
     try {
       const {data} = await axios.get(`/api/cart/${userId}`)
       dispatch(fetchCartItems(data))
+      console.log('in _setCartItems thunk data', data)
     } catch (err) {
       console.error(err)
     }
