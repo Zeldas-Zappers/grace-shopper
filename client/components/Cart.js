@@ -25,7 +25,8 @@ class Cart extends React.Component {
 
   componentDidMount() {
     this.props.getUser()
-
+    // now we should have a user, go get the cart
+    // run the thunk to get the cart
     console.log('in Cart componentDidMount state', this.state)
     console.log('in Cart componentDidMount props', this.props)
   }
@@ -37,10 +38,18 @@ class Cart extends React.Component {
       'this.props.cart',
       this.props.cart
     )
+    if (prevProps.cart.length === 0) {
+      console.log('cart is empty!!')
+      return
+    }
+
     if (
-      prevProps.cart.length === 0 ||
+      // prevProps.cart.length === 0 ||
       prevProps.cart.length !== this.props.cart.length
     ) {
+      // this.state = {
+      // did you check if the cart is empty? : false
+      // }
       if (this.props.user.id) {
         // console.log(
         //   'in Cart componentDidMount before getCartItems thunk,this.props.user.id',
@@ -55,6 +64,7 @@ class Cart extends React.Component {
         //   'about to run getCartItems'
         // )
         this.props.getCartItems(userId)
+        // if cart is still empty, set flag to true
       }
     }
   }
@@ -95,7 +105,7 @@ class Cart extends React.Component {
       */
 
     if (cartToRender.length === 0) {
-      return <div>Loading</div>
+      return <div>Your cart is empty!!!</div>
     }
     // define the subtotal for guests
     let subTotal
@@ -113,7 +123,7 @@ class Cart extends React.Component {
         .reduce((a, b) => a + b, 0)
       console.log('logged in', subTotal)
     }
-
+    // if the cart is empty, display an empty cart message
     return (
       <div className="container">
         {cartToRender.map((product) => {
