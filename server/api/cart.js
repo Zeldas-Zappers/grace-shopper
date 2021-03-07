@@ -38,25 +38,10 @@ const {ensureAdmin, ensureLogin} = require('./middleware')
 //   }
 // })
 
-// get cart for guest
-router.get('/:cartId', async (req, res, next) => {
-  try {
-    let cart = Cart.findOne({
-      where: {
-        id: req.params.cartId
-      },
-      include: [{model: Product}]
-    })
-    res.json(cart)
-
-    //below comments are just another way to grab products from a cart - not sure if this will work but want to keep it as a note:
-    // const cart = await Cart.findByPk(req.params.cartId)
-    // const products = await cart.getProducts();
-    // res.json(products)
-  } catch (err) {
-    next(err)
-  }
-})
+//below comments are just another way to grab products from a cart - not sure if this will work but want to keep it as a note:
+// const cart = await Cart.findByPk(req.params.cartId)
+// const products = await cart.getProducts();
+// res.json(products)
 
 // // get cart for guest
 // router.get('/:cartId', async (req, res, next) => {
@@ -74,33 +59,19 @@ router.get('/:cartId', async (req, res, next) => {
 // })
 
 // get cart for user
-router.get('/user/:userId', ensureLogin, async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
   try {
     let cart = await Cart.findOne({
       where: {
-        userId: req.params.userId
+        userId: req.params.userId,
       },
-      include: [{model: Product}]
+      include: [{model: Product}],
     })
     if (cart) {
       res.json(cart)
     } else {
       res.sendStatus(401)
     }
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.get('/:cartId', ensureLogin, async (req, res, next) => {
-  try {
-    const cart = await Cart.findOne({
-      where: {
-        id: req.params.cartId
-      },
-      include: [{model: CartItem}, {model: Product}],
-    })
-    res.json(cart)
   } catch (err) {
     next(err)
   }
@@ -123,21 +94,18 @@ router.get('/:cartId', ensureLogin, async (req, res, next) => {
 // })
 
 //updating quantity in cart
-router.put('/:cartId/:productId', async (req, res, next) => {
+router.put('/:cartId/product/:productId', async (req, res, next) => {
   try {
-    const updated = await CartItem.update(req.body, {
+    //might delete product eager load
+    const cart = await CartItem.findOne({
       where: {
         cartId: req.params.cartId,
         productId: req.params.productId,
       },
+      include: [{model: Cart, include: [{model: Product}]}],
     })
-    const updatedItem = await CartItem.findOne({
-      where: {
-        productId: req.params.cartItemId,
-        cartId: req.params.cartId
-      }
-    })
-    res.json(updatedItem)
+
+    res.json(await cart.update(req.body))
   } catch (err) {
     next(err)
   }
