@@ -4,34 +4,14 @@ import {Redirect} from 'react-router-dom'
 import {_setCartItems, updateProductQuantity} from '../store/cart'
 import {me} from '../store/user'
 
-// const products = [
-//   {
-//     id: 1,
-//     name: 'A lovely fern',
-//     price: 448,
-//     description:
-//       'This fern will make it seem like life is worth living sometimes. You should buy it!',
-//     lighting: 'This plant does well in bright light',
-//     watering: 'This plant needs to be watered every 30 minutes or it will DIE!',
-//     imageUrl:
-//       'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-pet-friendly-bundle_variant_growpot_none_360x.jpg?v=1613171147',
-//   },
-//   {
-//     id: 2,
-//     name: 'A lonely pine cone',
-//     price: 12,
-//     description:
-//       'This pine cone is the last of its species. Cuddle with it so it can feel less lonely!',
-//     lighting: 'This plant does well in low light.',
-//     watering: 'This plant needs more cuddles than water',
-//     imageUrl:
-//       'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_coffee-plant_variant_small_grant_mint_360x.jpg?v=1613663664',
-//   },
-// ]
 class Cart extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    this.removefromCart = this.removefromCart.bind(this)
     this.state = {
+      cart: !this.props.loggedIn
+        ? JSON.parse(localStorage.getItem('cart')) || []
+        : this.props.cart || [],
       quantity: 1,
       checkout: false,
     }
@@ -39,38 +19,56 @@ class Cart extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
   componentDidMount() {
-    this.props.getCartitems()
+    const userId = this.props.user.id
+    this.props.getCartItems(userId)
   }
   handleClick() {
     this.setState({checkout: true})
   }
   handleChange(evt) {
     this.setState({quantity: evt.target.value})
+    console.log('change in quantity ->', this.state)
   }
-  handleSubmit(evt) {
+  handleSubmit(evt, productId) {
     evt.preventDefault()
-    console.log('evt.target ->', this.evt.target)
-    // let cart;
-    // if (this.props.loggedIn) {
-    //   cart = this.props.cart || []
-    // } else {
-    //   cart = JSON.parse(localStorage.getItem('cart')) || []
-    // }
-    // this.props.updateQuantity(cart.id, productId, this.state.quantity)
+    if (this.props.loggedIn) {
+      let cart = this.props.cart || []
+      console.log('PROPS CART', this.props.cart)
+      // this.props.updateQuantity(cart.id, productId, this.state.quantity)
+    } else {
+      const newCart = [...this.state.cart]
+      const productToUpdate = newCart.find(
+        (product) => product.id === productId
+      )
+      productToUpdate.count = this.state.quantity
+      const idx = newCart.indexOf(productToUpdate)
+      newCart.splice(idx, 1, productToUpdate)
+      console.log('NEW CART ->', newCart)
+      localStorage.setItem('cart', JSON.stringify(newCart))
+      this.setState({cart: newCart})
+    }
   }
+  removefromCart(id) {
+    if (this.props.loggedIn) {
+      this.props.addItemToCart(this.props.product)
+    }
+
+    const cart = this.state.cart.filter((item) => item.id !== id)
+    localStorage.setItem('cart', JSON.stringify(cart))
+    this.setState({
+      cart: cart,
+    })
+  }
+
   render() {
-    //if user is not logged in then cart will equal what is currently in local storage, else cart will equal the user's cart in the database
-    console.log('props from render ->', this.props)
-    console.log('THIS.STATE ->', this.state)
-    const cart = !this.props.loggedIn
-      ? JSON.parse(localStorage.getItem('cart')) || []
-      : this.props.cart || []
-    const subTotal = cart
+    const subTotal = this.state.cart
       .map((product) => product.count * product.price)
       .reduce((a, b) => a + b, 0)
+    console.log('props from render ->', this.props)
+    console.log('THIS.STATE ->', this.state)
     return (
       <div className="container">
-        {cart.map((product) => {
+        {this.state.cart.map((product) => {
           return (
             <div key={product.id}>
               <div className="row mt-4">
@@ -82,7 +80,11 @@ class Cart extends React.Component {
                   </div>
                   <div className="row">
                     <div className="col-md-12 mt-4">
-                      <button type="button" className="btn btn-warning">
+                      <button
+                        onClick={() => this.removefromCart(product.id)}
+                        type="button"
+                        className="btn btn-warning"
+                      >
                         Remove from cart
                       </button>
                     </div>
@@ -103,7 +105,10 @@ class Cart extends React.Component {
                   </div>
                   <div className="row">
                     <div className="col-md-12">
-                      <form className="main-form" onSubmit={this.handleSubmit}>
+                      <form
+                        className="main-form"
+                        onSubmit={(evt) => this.handleSubmit(evt, product.id)}
+                      >
                         <div className="form-group">
                           <label htmlFor="quantity">Quantity:</label>
                           <input
@@ -157,6 +162,7 @@ const mapStateToProps = (state) => {
     product: state.product,
     cart: state.cart,
     loggedIn: !!state.user.id,
+    user: state.user,
   }
 }
 

@@ -22,7 +22,8 @@ async function seed() {
     cartArray.push({
       shippingAddress: faker.address.streetAddress(),
 
-      // all orders are not fulfilled!
+      // all orders are not processing (open carts)!
+      //  we can change this later if necessary
       orderStatus: 'Processing',
       total: faker.random.number({
         min: 1,
@@ -179,8 +180,27 @@ async function seed() {
       phone,
       adminStatus,
     })
-    //console.log(usersArray)
+    console.log(usersArray)
   }
+
+  const testUsers = await Promise.all([
+    User.create({
+      firstName: 'Cody',
+      lastName: 'Something',
+      address: '123 main st',
+      phone: '555-555-5555',
+      email: 'cody@email.com',
+      password: '123',
+    }),
+    User.create({
+      firstName: 'Murph',
+      lastName: 'lsdkj',
+      address: 'sdklfsjf',
+      phone: '333-333-3333',
+      email: 'murphy@email.com',
+      password: '123',
+    }),
+  ])
 
   const users = await Promise.all(
     usersArray.map((user) => {
@@ -207,9 +227,11 @@ async function seed() {
     })
   )
 
-  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${testUsers.length} test users with passwords`)
+  console.log(`seeded ${users.length} other users with salted passwords`)
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${carts.length} carts`)
+
   console.log(`seeded successfully`)
 }
 

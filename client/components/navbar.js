@@ -3,111 +3,164 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {me} from '../store/user'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          Plant Store
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-        <div
-          className="collapse navbar-collapse justify-content-end m-0"
-          id="navbarNav"
-        >
-          {isLoggedIn ? (
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link to="/" className="nav-link active" aria-current="page">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/products" className="nav-link">
-                  Shop
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/logout" className="nav-link" onClick={handleClick}>
-                  Logout
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/cart"
-                  className="nav-link"
-                  tabIndex="-1"
-                  aria-disabled="true"
-                >
-                  Cart
-                </Link>
-              </li>
-            </ul>
-          ) : (
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link to="/" className="nav-link active" aria-current="page">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/products" className="nav-link">
-                  Shop
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/login" className="nav-link">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/signup" className="nav-link">
-                  Signup
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/cart"
-                  className="nav-link"
-                  tabIndex="-1"
-                  aria-disabled="true"
-                >
-                  Cart
-                </Link>
-              </li>
-            </ul>
-          )}
-        </div>
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showCollapsedMenu: false,
+      //cart: !this.props.isLoggedIn ? JSON.parse(localStorage.getItem('cart')) || [] : this.props.cart || []
+    }
+    this.toggleMenu = this.toggleMenu.bind(this)
+  }
+
+  toggleMenu() {
+    this.setState({
+      showCollapsedMenu: !this.state.showCollapsedMenu,
+    })
+  }
+  render() {
+    const adminStatus = this.props.user.adminStatus
+    const show = this.state.showCollapsedMenu ? 'show' : ''
+    const cart = !this.props.isLoggedIn
+      ? JSON.parse(localStorage.getItem('cart')) || []
+      : this.props.cart || []
+
+    return (
+      <div>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <div className="container-fluid">
+            <a className="navbar-brand" href="#">
+              Plant Store
+            </a>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              onClick={this.toggleMenu}
+            >
+              <span className="navbar-toggler-icon" />
+            </button>
+            <div
+              className={
+                'collapse navbar-collapse justify-content-end m-0 ' + show
+              }
+              id="navbarNav"
+            >
+              {this.props.isLoggedIn ? (
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <Link
+                      to="/"
+                      className="nav-link active"
+                      aria-current="page"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/products" className="nav-link">
+                      All Products
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      to="/admin"
+                      className="nav-link"
+                      tabIndex="-1"
+                      aria-disabled="true"
+                    >
+                      Admin
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      to="/logout"
+                      className="nav-link"
+                      onClick={this.props.handleClick}
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      to="/cart"
+                      className="nav-link"
+                      tabIndex="-1"
+                      aria-disabled="true"
+                    >
+                      Cart({cart.length})
+                    </Link>
+                  </li>
+                </ul>
+              ) : (
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <Link
+                      to="/"
+                      className="nav-link active"
+                      aria-current="page"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/products" className="nav-link">
+                      All Products
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/login" className="nav-link">
+                      Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/signup" className="nav-link">
+                      Signup
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      to="/cart"
+                      className="nav-link"
+                      tabIndex="-1"
+                      aria-disabled="true"
+                    >
+                      Cart({cart.length})
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </div>
+          </div>
+        </nav>
       </div>
-    </nav>
-  </div>
-)
+    )
+  }
+}
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user,
+    cart: state.cart,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+    },
+    //getUser: () => dispatch(me()),
   }
 }
 
@@ -118,5 +171,5 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 }

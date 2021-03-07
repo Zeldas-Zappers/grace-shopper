@@ -9,7 +9,7 @@ export class AllProducts extends React.Component {
   }
 
   render() {
-    const {products} = this.props
+    const {products} = this.props || []
     return (
       <div className="container">
         <div className="row">
@@ -109,7 +109,6 @@ export class AllProducts extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

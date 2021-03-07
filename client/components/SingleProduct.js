@@ -1,8 +1,10 @@
+/* eslint-disable no-warning-comments */
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/product'
 import {_addItemToCart} from '../store/cart'
 import {me} from '../store/user'
+import ProductForm from './ProductForm'
 
 export class SingleProduct extends React.Component {
   constructor() {
@@ -13,14 +15,21 @@ export class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.getSingleProduct(this.props.match.params.productId)
     this.props.getUser()
-    console.log('USER IN SINGLE PRODUCT', this.props.user)
-    console.log('PROPS IN SINGLE PRODUCT', this.props)
   }
 
   addToCart() {
     //dispatch thunk if user (or loggedIn is true)
     if (this.props.loggedIn) {
-      this.props.addItemToCart(this.props.product)
+      // check the redux state to see if item is already in cart
+      // if it is, then dispatch PUT with increment quantity
+      // grab the quantity from state, add 1, and pass it to the PUT
+      // TODO: will update here once Rachel finishes connecting the PUT route
+
+      // if not, then dispatch POST
+
+      console.log('hello', 'in SingleProduct addToCart props', this.props)
+      console.log('user.id', 'expect 2', this.props.user.id)
+      this.props.addItemToCart(this.props.product, this.props.user.id)
     }
     //if !loggedIn then add to local storage!!!
     let cart
@@ -31,7 +40,7 @@ export class SingleProduct extends React.Component {
       } else {
         cart = JSON.parse(localStorage.getItem('cart'))
         let existingCartItem = cart.find(
-          product => product.id === this.props.product.id
+          (product) => product.id === this.props.product.id
         )
 
         if (existingCartItem) {
@@ -49,11 +58,11 @@ export class SingleProduct extends React.Component {
     let product = this.props.product
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-md-5">
+        <div className="row mt-4">
+          <div className="col-lg-5 col-md-6">
             <img src={product.imageUrl} />
           </div>
-          <div className="col-md-7">
+          <div className="col-lg-7 col-md-6">
             <h3>{product.name}</h3>
             <p>
               <strong>$ {product.price}</strong>
@@ -111,29 +120,46 @@ export class SingleProduct extends React.Component {
                 >
                   Add to Cart
                 </button>
+                {/* {user.isAdmin && buttons below} */}
+                <button
+                  onClick={this.addToCart}
+                  type="button"
+                  className="btn btn-success"
+                >
+                  Add Product
+                </button>
+                <button
+                  onClick={this.addToCart}
+                  type="button"
+                  className="btn btn-success"
+                >
+                  Edit Product
+                </button>
               </div>
             </div>
           </div>
+          <ProductForm />
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => {
-  console.log('STATE', state)
+const mapStateToProps = (state) => {
   return {
     product: state.product,
     loggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getSingleProduct: productId => dispatch(fetchProduct(productId)),
-    addItemToCart: product => dispatch(_addItemToCart(product)),
-    getUser: () => dispatch(me())
+    getSingleProduct: (productId) => dispatch(fetchProduct(productId)),
+    addItemToCart: (product, userId) =>
+      dispatch(_addItemToCart(product, userId)),
+
+    getUser: () => dispatch(me()),
   }
 }
 
