@@ -97,6 +97,18 @@ class Navbar extends React.Component {
                       </Link>
                     </li>
                   )}
+                  {adminStatus && (
+                    <li className="nav-item">
+                      <Link
+                        to="/users"
+                        className="nav-link"
+                        tabIndex="-1"
+                        aria-disabled="true"
+                      >
+                        All Users
+                      </Link>
+                    </li>
+                  )}
                   <li className="nav-item">
                     <Link
                       to="/logout"
