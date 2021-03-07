@@ -11,11 +11,27 @@ class Navbar extends React.Component {
     super(props)
     this.state = {
       showCollapsedMenu: false,
+      cart: JSON.parse(localStorage.getItem('cart'))
       //cart: !this.props.isLoggedIn ? JSON.parse(localStorage.getItem('cart')) || [] : this.props.cart || []
     }
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
+  // componentDidMount() {
+  //   this.setState({
+  //     cart: JSON.parse(localStorage.getItem('cart')),
+  //   })
+  // }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log("prevProps", prevProps)
+  //   console.log("didUpda", this.state)
+  //   if (prevProps.cart.length === 0 || prevProps.cart.length !== this.state.cart.length) {
+  //     this.setState({
+  //       cart: JSON.parse(localStorage.getItem('cart')),
+  //     })
+  //   }
+  // }
   // TODO: we will have to udpate this with componentDidMount and componentDidUpdate to get the cart counter to work properly. Will probably need to use logic similar to what is found in Cart.js. Also will have to use this.setState in componentDidUpdate in order for the counter to work for guests
 
   toggleMenu() {
@@ -23,11 +39,12 @@ class Navbar extends React.Component {
       showCollapsedMenu: !this.state.showCollapsedMenu,
     })
   }
+
   render() {
-    const adminStatus = this.props.user.adminStatus
+    const {adminStatus} = this.props.user || ''
     const show = this.state.showCollapsedMenu ? 'show' : ''
     const cart = !this.props.isLoggedIn
-      ? JSON.parse(localStorage.getItem('cart')) || []
+      ? this.state.cart || []
       : this.props.cart || []
 
     return (
@@ -71,16 +88,18 @@ class Navbar extends React.Component {
                       All Products
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link
-                      to="/admin"
-                      className="nav-link"
-                      tabIndex="-1"
-                      aria-disabled="true"
-                    >
-                      Admin
-                    </Link>
-                  </li>
+                  {adminStatus && (
+                    <li className="nav-item">
+                      <Link
+                        to="/admin"
+                        className="nav-link"
+                        tabIndex="-1"
+                        aria-disabled="true"
+                      >
+                        Admin
+                      </Link>
+                    </li>
+                  )}
                   <li className="nav-item">
                     <Link
                       to="/logout"
@@ -163,7 +182,8 @@ const mapDispatch = (dispatch) => {
     handleClick() {
       dispatch(logout())
     },
-    //getUser: () => dispatch(me()),
+    getUser: () => dispatch(me())
+
   }
 }
 

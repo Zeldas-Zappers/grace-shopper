@@ -6,29 +6,32 @@ import {me} from '../store/user'
 class Cart extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      cart: JSON.parse(localStorage.getItem('cart'))
+    }
     this.removefromCart = this.removefromCart.bind(this)
 
-    // this block is obsolete
-    // this.state = {
-    //   cart: !this.props.loggedIn
-    //     ? JSON.parse(localStorage.getItem('cart')) || []
-    //     : this.props.cart || [],
-    // }
-
-    // local state to manage guest carts only
-    this.state = {
-      cart: JSON.parse(localStorage.getItem('cart')),
-    }
-    console.log('in Cart constructor state', this.state)
-    console.log('in Cart constructor props', this.props)
   }
 
   componentDidMount() {
     this.props.getUser()
-    // now we should have a user, go get the cart
-    // run the thunk to get the cart
-    console.log('in Cart componentDidMount state', this.state)
-    console.log('in Cart componentDidMount props', this.props)
+   
+  }
+
+  removefromCart(id) {
+    // TODO: not sure why this is here -- Jae
+    // if (this.props.loggedIn) {
+    //   this.props.addItemToCart(this.props.product)
+    // }
+
+    // if not logged in, then
+    if (!this.props.loggedIn) {
+      const updatedCart = this.state.cart.filter(item => item.id !== id)
+      localStorage.setItem('cart', JSON.stringify(updatedCart))
+      this.setState({
+        cart: updatedCart
+      })
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -68,27 +71,10 @@ class Cart extends React.Component {
       }
     }
   }
-  removefromCart(id) {
-    // TODO: not sure why this is here -- Jae
-    // if (this.props.loggedIn) {
-    //   this.props.addItemToCart(this.props.product)
-    // }
 
-    // if not logged in, then
-
-    if (!this.props.loggedIn) {
-      // const cart = this.state.cart.filter((item) => item.id !== id)
-      // localStorage.setItem('cart', JSON.stringify(cart))
-      // this.setState({
-      //   cart: cart,
-      // })
-      // get from localStorage
-      // splice it out
-      // put back into localStorage
-    }
-  }
 
   render() {
+
     console.log('in Cart render', 'props', this.props)
     console.log('in Cart render', 'state', this.state)
 
@@ -96,13 +82,6 @@ class Cart extends React.Component {
       ? this.state.cart || []
       : this.props.cart || []
 
-    /*
-
-      this.state = {
-        cart : JSON.parse(localStorage.getItem('cart'))
-      }
-
-      */
 
     if (cartToRender.length === 0) {
       return <div>Your cart is empty!!!</div>
@@ -126,8 +105,8 @@ class Cart extends React.Component {
     // if the cart is empty, display an empty cart message
     return (
       <div className="container">
-        {cartToRender.map((product) => {
-          // console.log('in cartToRender, product', product)
+        {cartToRender.map(product => {
+
           return (
             <div key={product.id}>
               <div className="row mt-4">
@@ -211,15 +190,19 @@ class Cart extends React.Component {
           <div className="col-md-12">
             <div className="row">
               <div className="col-md-12">
-                <p>Subtotal: ${subTotal}</p>
+                {/* <p>Subtotal: ${subTotal}</p> */}
               </div>
             </div>
             <div className="row">
-              <div className="col-md-12">
-                <button type="button" className="btn btn-success">
-                  Proceed to checkout
-                </button>
-              </div>
+              {cartToRender.length ? (
+                <div className="col-md-12">
+                  <button type="button" className="btn btn-success">
+                    Proceed to checkout
+                  </button>
+                </div>
+              ) : (
+                'Your cart is empty'
+              )}
             </div>
           </div>
         </div>
@@ -227,6 +210,7 @@ class Cart extends React.Component {
     )
   }
 }
+
 
 const mapStateToProps = (state) => {
   console.log('in Cart mapState Redux state', state)
@@ -237,7 +221,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToCart = (dispatch) => {
+const mapDispatchToCart = dispatch => {
   return {
     getCartItems: (userId) => dispatch(_setCartItems(userId)),
     getUser: () => dispatch(me()),

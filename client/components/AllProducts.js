@@ -2,6 +2,8 @@ import React from 'react'
 import {fetchProducts} from '../store/products'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import AddProductForm from './AddProductForm'
+import {removeProduct} from '../store/products'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
@@ -10,10 +12,11 @@ export class AllProducts extends React.Component {
 
   render() {
     const {products} = this.props || []
+    const {adminStatus} = this.props || ''
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-6">
             <div className="dropdown mb-4 mt-4">
               <button
                 className="btn btn-primary dropdown-toggle"
@@ -40,6 +43,11 @@ export class AllProducts extends React.Component {
             </div>
           </div>
         </div>
+        {adminStatus && (
+          <div className="row mb-4">
+            <AddProductForm />
+          </div>
+        )}
         <div className="row">
           {products.map(product => {
             return (
@@ -47,8 +55,8 @@ export class AllProducts extends React.Component {
                 key={product.id}
                 className="col-lg-3 col-md-6 col-sm-12 mb-4"
               >
-                <Link to={`/products/${product.id}`}>
-                  <div className="card">
+                <div className="card">
+                  <Link to={`/products/${product.id}`}>
                     <img src={product.imageUrl} className="card-img-top" />
                     <div className="card-body row ">
                       <h5 className="card-text col-8">{product.name}</h5>
@@ -56,8 +64,16 @@ export class AllProducts extends React.Component {
                         ${product.price}
                       </p>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                  {adminStatus && (
+                    <button
+                      onClick={() => this.props.deleteProduct(product)}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </button>
+                  )}
+                </div>
               </div>
             )
           })}
@@ -112,13 +128,15 @@ export class AllProducts extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    products: state.products
+    products: state.products,
+    user: state.user
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, {history}) => {
   return {
-    getProducts: () => dispatch(fetchProducts())
+    getProducts: () => dispatch(fetchProducts()),
+    deleteProduct: product => dispatch(removeProduct(product, history))
   }
 }
 
