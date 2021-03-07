@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {_editProduct} from '../store/products'
+import {withRouter} from 'react-router-dom'
 
 const initState = {
   name: '',
@@ -23,17 +24,35 @@ class EditProductForm extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      name: this.props.product.name,
-      price: this.props.product.price,
-      description: this.props.product.price,
-      imageUrl: this.props.product.imageUrl,
-      category: this.props.product.category,
-      lighting: this.props.product.lighting,
-      watering: this.props.product.watering,
-      inventory: this.props.product.inventory,
-      count: this.props.product.count
-    })
+    if (this.props.product.id) {
+      this.setState({
+        name: this.props.product.name,
+        price: this.props.product.price,
+        description: this.props.product.price,
+        imageUrl: this.props.product.imageUrl,
+        category: this.props.product.category,
+        lighting: this.props.product.lighting,
+        watering: this.props.product.watering,
+        inventory: this.props.product.inventory,
+        count: this.props.product.count
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.product.id && this.props.product.id) {
+      this.setState({
+        name: this.props.product.name,
+        price: this.props.product.price,
+        description: this.props.product.price,
+        imageUrl: this.props.product.imageUrl,
+        category: this.props.product.category,
+        lighting: this.props.product.lighting,
+        watering: this.props.product.watering,
+        inventory: this.props.product.inventory,
+        count: this.props.product.count
+      })
+    }
   }
 
   handleChange(e) {
@@ -175,10 +194,16 @@ class EditProductForm extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log('STATE', state)
+const mapStateToProps = (state, {match}) => {
+  let product
+  if (state.products.length) {
+    product = state.products.find(p => p.id === match.params.productId * 1)
+  } else {
+    product = state.product
+  }
+  product = product || {}
   return {
-    product: state.product
+    product
   }
 }
 
@@ -189,4 +214,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditProductForm)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(EditProductForm)
+)

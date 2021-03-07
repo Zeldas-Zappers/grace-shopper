@@ -64,7 +64,6 @@ export const addNewProduct = newProduct => {
 
 // edit single product
 export const _editProduct = (product, productId) => {
-  console.log('THUNK', productId)
   return async dispatch => {
     try {
       const {data} = await axios.put(`/api/products/${productId}`, product)

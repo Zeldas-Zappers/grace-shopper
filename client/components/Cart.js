@@ -6,39 +6,64 @@ import {me} from '../store/user'
 class Cart extends React.Component {
   constructor(props) {
     super(props)
-    this.removefromCart = this.removefromCart.bind(this)
     this.state = {
-      cart: !this.props.loggedIn
-        ? JSON.parse(localStorage.getItem('cart')) || []
-        : this.props.cart || [],
+      cart: JSON.parse(localStorage.getItem('cart'))
     }
+    this.removefromCart = this.removefromCart.bind(this)
   }
 
   componentDidMount() {
-    const userId = this.props.user.id
-    this.props.getCartItems(userId)
+    this.props.getUser()
+    if (this.props.user.id) {
+      const userId = this.props.user.id
+      this.props.getCartItems(userId)
+    }
   }
 
   removefromCart(id) {
-    if (this.props.loggedIn) {
-      this.props.addItemToCart(this.props.product)
-    }
+    // TODO: not sure why this is here -- Jae
+    // if (this.props.loggedIn) {
+    //   this.props.addItemToCart(this.props.product)
+    // }
 
-    const cart = this.state.cart.filter((item) => item.id !== id)
-    localStorage.setItem('cart', JSON.stringify(cart))
-    this.setState({
-      cart: cart,
-    })
+    // if not logged in, then
+    if (!this.props.loggedIn) {
+      const updatedCart = this.state.cart.filter(item => item.id !== id)
+      localStorage.setItem('cart', JSON.stringify(updatedCart))
+      this.setState({
+        cart: updatedCart
+      })
+      // get from localStorage
+      // splice it out
+      // put back into localStorage
+    }
   }
 
   render() {
-    const subTotal = this.state.cart
-      .map((product) => product.count * product.price)
-      .reduce((a, b) => a + b, 0)
+    const cartToRender = !this.props.loggedIn
+      ? this.state.cart || []
+      : this.props.cart || []
+
+    // // define the subtotal for guests
+    // let subTotal
+    // if (!this.props.loggedIn) {
+    //   subTotal = this.state.cart
+    //     .map((product) => product.count * product.price)
+    //     .reduce((a, b) => a + b, 0)
+    // }
+
+    // // define subtotal for users
+
+    // if (this.props.loggedIn) {
+    //   subTotal = this.state.cart
+    //     .map((product) => product.cartItem.quantity * product.cartItem.price)
+    //     .reduce((a, b) => a + b, 0)
+    //   console.log('logged in', subTotal)
+    // }
 
     return (
       <div className="container">
-        {this.state.cart.map((product) => {
+        {cartToRender.map(product => {
           return (
             <div key={product.id}>
               <div className="row mt-4">
@@ -117,15 +142,19 @@ class Cart extends React.Component {
           <div className="col-md-12">
             <div className="row">
               <div className="col-md-12">
-                <p>Subtotal: ${subTotal}</p>
+                {/* <p>Subtotal: ${subTotal}</p> */}
               </div>
             </div>
             <div className="row">
-              <div className="col-md-12">
-                <button type="button" className="btn btn-success">
-                  Proceed to checkout
-                </button>
-              </div>
+              {cartToRender.length ? (
+                <div className="col-md-12">
+                  <button type="button" className="btn btn-success">
+                    Proceed to checkout
+                  </button>
+                </div>
+              ) : (
+                'Your cart is empty'
+              )}
             </div>
           </div>
         </div>
@@ -134,7 +163,8 @@ class Cart extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
+  console.log('in Cart mapState Redux state', state)
   return {
     cart: state.cart,
     loggedIn: !!state.user.id,
@@ -142,7 +172,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToCart = (dispatch) => {
+const mapDispatchToCart = dispatch => {
   return {
     getCartItems: userId => dispatch(_setCartItems(userId)),
     getUser: () => dispatch(me())

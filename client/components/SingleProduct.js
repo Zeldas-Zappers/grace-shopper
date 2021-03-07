@@ -40,12 +40,13 @@ export class SingleProduct extends React.Component {
           cart.push(this.props.product)
         }
       }
+      localStorage.setItem('cart', JSON.stringify(cart))
     }
-    localStorage.setItem('cart', JSON.stringify(cart))
   }
 
   render() {
-    let product = this.props.product
+    const {product} = this.props || {}
+    const {adminStatus} = this.props || ''
     return (
       <div className="container">
         <div className="row mt-4">
@@ -110,19 +111,20 @@ export class SingleProduct extends React.Component {
                   Add to Cart
                 </button>
               </div>
-              {/* {user.isAdmin && buttons below} */}
-              <div className="col-md-6">
-                <EditProductForm />
-              </div>
             </div>
           </div>
+          {adminStatus && (
+            <div className="col mt-4">
+              <EditProductForm />
+            </div>
+          )}
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, {match}) => {
   return {
     product: state.product,
     loggedIn: !!state.user.id,
