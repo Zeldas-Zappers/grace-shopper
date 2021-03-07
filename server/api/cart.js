@@ -6,12 +6,6 @@ const Product = require('../db/models/product')
 const {ensureAdmin, ensureLogin} = require('./middleware')
 
 router.post('/:userId', ensureLogin, async (req, res, next) => {
-  // if the user is logged in,
-  // if there is no cart open at all, create one
-  // if there is a cart but it's 'Fulfilled', create one
-  // if there is a cart with status 'Processing', check if product already exists
-  // if product exists, update quantity
-  // otherwise, if cart doesn't exist, create the cart and add the product
   console.log('hello', 'in POST route to add cart item', 'req.body', req.body)
   try {
     // need to destructure newCart because it's returned as an array
@@ -80,6 +74,22 @@ router.put('/:cartId/product/:productId', async (req, res, next) => {
       include: [{model: Cart, include: [{model: Product}]}],
     })
     res.json(await cart.update(req.body))
+  } catch (err) {
+    next(err)
+  }
+})
+
+// delete an item from the cart
+router.delete('/:cartId/:productId', ensureLogin, async (req, res, next) => {
+  try {
+    const cartItem = await CartItem.findOne({
+      where: {
+        cartId: req.params.cartId,
+        productId: req.params.productId,
+      },
+    })
+    await cartItem.destroy()
+    res.json(cartItem)
   } catch (err) {
     next(err)
   }

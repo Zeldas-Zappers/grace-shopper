@@ -163,40 +163,40 @@ async function seed() {
   // console.log('hello', productArray)
   const usersArray = []
   for (let i = 0; i <= 100; i++) {
-    const firstName = faker.name.firstName()
-    const lastName = faker.name.lastName()
     const email = faker.internet.email()
     const password = faker.internet.password()
-    const address = faker.address.streetAddress()
-    const phone = faker.phone.phoneNumber()
     const adminStatus = faker.random.boolean()
+    // const firstName = faker.name.firstName()
+    // const lastName = faker.name.lastName()
+    // const address = faker.address.streetAddress()
+    // const phone = faker.phone.phoneNumber()
 
     usersArray.push({
-      firstName,
-      lastName,
       email,
       password,
-      address,
-      phone,
       adminStatus,
+      // firstName,
+      // lastName,
+      // address,
+      // phone,
     })
-    console.log(usersArray)
+    // console.log(usersArray)
   }
 
   const testUsers = await Promise.all([
     User.create({
-      firstName: 'Cody',
-      lastName: 'Something',
-      address: '123 main st',
-      phone: '555-555-5555',
+      // firstName: 'Cody',
+      // lastName: 'Something',
+      // address: '123 main st',
+      // phone: '555-555-5555',
       email: 'cody@email.com',
       password: '123',
     }),
     User.create({
-      firstName: 'Murph',
-      lastName: 'lsdkj',
-      address: 'sdklfsjf',
-      phone: '333-333-3333',
+      // firstName: 'Murph',
+      // lastName: 'lsdkj',
+      // address: 'sdklfsjf',
+      // phone: '333-333-3333',
       email: 'murphy@email.com',
       password: '123',
     }),

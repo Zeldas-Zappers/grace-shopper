@@ -10,6 +10,7 @@ import Home from './components/Home'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
 import Admin from './components/Admin'
+import AllUsers from './components/AllUsers'
 
 /**
  * COMPONENT
@@ -21,28 +22,34 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
+    const adminStatus = this.props.adminStatus || ''
 
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
+      // had to remove the Switch to get the welcome message to load correctly. Also had to change component={Home} to exact path -- JC
+      // <Switch>
+      // {/* Routes placed here are available to all visitors */}
+      <div>
+        {isLoggedIn && (
+          // <Switch>
+          // {/* Routes placed here are only available after logging in */}
+          <Route path="/" component={UserHome} />
+          // {/* </Switch> */}
+        )}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
-        <Route path="/" component={Home} />
-        <Route exact path="/admin" component={Admin} />
 
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-          </Switch>
-        )}
+        <Route exact path="/admin" component={Admin} />
+        <Route exact path="/users" component={AllUsers} />
+        <Route exact path="/" component={Home} />
+
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
-      </Switch>
+        {/* <Route component={Login} /> */}
+        {/* // </Switch> */}
+      </div>
     )
   }
 }
@@ -55,6 +62,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
+    adminStatus: state.user.adminStatus,
   }
 }
 

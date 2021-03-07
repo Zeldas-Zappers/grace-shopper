@@ -7,28 +7,29 @@ import {me} from '../store/user'
 class Cart extends React.Component {
   constructor(props) {
     super(props)
-    this.removefromCart = this.removefromCart.bind(this)
     this.state = {
-      cart: !this.props.loggedIn
-        ? JSON.parse(localStorage.getItem('cart')) || []
-        : this.props.cart || [],
+      cart: JSON.parse(localStorage.getItem('cart')),
       quantity: 1,
       checkout: false,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.removefromCart = this.removefromCart.bind(this)
   }
+
   componentDidMount() {
-    const userId = this.props.user.id
-    this.props.getCartItems(userId)
+    this.props.getUser()
   }
+
   handleClick() {
     this.setState({checkout: true})
   }
+
   handleChange(evt) {
     this.setState({quantity: evt.target.value})
     console.log('change in quantity ->', this.state)
   }
+
   handleSubmit(evt, productId) {
     evt.preventDefault()
     if (this.props.loggedIn) {
@@ -49,26 +50,83 @@ class Cart extends React.Component {
     }
   }
   removefromCart(id) {
-    if (this.props.loggedIn) {
-      this.props.addItemToCart(this.props.product)
+    if (!this.props.loggedIn) {
+      const updatedCart = this.state.cart.filter((item) => item.id !== id)
+      localStorage.setItem('cart', JSON.stringify(updatedCart))
+      this.setState({
+        cart: updatedCart,
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(
+      'in componentDidUpdate, prevProps',
+      prevProps,
+      'this.props.cart',
+      this.props.cart
+    )
+    if (prevProps.cart.length === 0) {
+      console.log('cart is empty!!')
+      return
     }
 
-    const cart = this.state.cart.filter((item) => item.id !== id)
-    localStorage.setItem('cart', JSON.stringify(cart))
-    this.setState({
-      cart: cart,
-    })
+    if (
+      // prevProps.cart.length === 0 ||
+      prevProps.cart.length !== this.props.cart.length
+    ) {
+      // this.state = {
+      // did you check if the cart is empty? : false
+      // }
+      if (this.props.user.id) {
+        // console.log(
+        //   'in Cart componentDidMount before getCartItems thunk,this.props.user.id',
+        //   this.props.user.id
+        // )
+
+        const userId = this.props.user.id
+        // console.log(
+        //   'in Cart componentDidMount',
+        //   'userId',
+        //   userId,
+        //   'about to run getCartItems'
+        // )
+        this.props.getCartItems(userId)
+        // if cart is still empty, set flag to true
+      }
+    }
   }
 
   render() {
-    const subTotal = this.state.cart
-      .map((product) => product.count * product.price)
-      .reduce((a, b) => a + b, 0)
-    console.log('props from render ->', this.props)
-    console.log('THIS.STATE ->', this.state)
+    console.log('in Cart render', 'props', this.props)
+    console.log('in Cart render', 'state', this.state)
+
+    const cartToRender = !this.props.loggedIn
+      ? this.state.cart || []
+      : this.props.cart || []
+
+    if (cartToRender.length === 0) {
+      return <div>Your cart is empty!!!</div>
+    }
+    // define the subtotal for guests
+    let subTotal
+    if (!this.props.loggedIn) {
+      subTotal = cartToRender
+        .map((product) => product.count * product.price)
+        .reduce((a, b) => a + b, 0)
+    }
+
+    // define subtotal for users
+    if (this.props.loggedIn) {
+      subTotal = cartToRender
+        .map((product) => product.cartItem.quantity * product.cartItem.price)
+        .reduce((a, b) => a + b, 0)
+      console.log('logged in', subTotal)
+    }
+    // if the cart is empty, display an empty cart message
     return (
       <div className="container">
-        {this.state.cart.map((product) => {
+        {cartToRender.map((product) => {
           return (
             <div key={product.id}>
               <div className="row mt-4">
@@ -96,7 +154,12 @@ class Cart extends React.Component {
                       <ul>
                         <li className="list-item">{product.name}</li>
                         <li className="list-item">${product.price}</li>
-                        <li className="list-item">Quantity: {product.count}</li>
+                        <li className="list-item">
+                          Quantity:{' '}
+                          {!this.props.loggedIn
+                            ? product.count
+                            : product.cartItem.quantity}
+                        </li>
                         <li className="list-item">{product.description}</li>
                         <li className="list-item">{product.lighting}</li>
                         <li className="list-item">{product.watering}</li>
@@ -135,20 +198,24 @@ class Cart extends React.Component {
           <div className="col-md-12">
             <div className="row">
               <div className="col-md-12">
-                <p>Subtotal: ${subTotal}</p>
+                {/* <p>Subtotal: ${subTotal}</p> */}
               </div>
             </div>
             <div className="row">
-              <div className="col-md-12">
-                <button
-                  type="button"
-                  className="btn btn-success"
-                  onClick={() => this.handleClick()}
-                >
-                  Proceed to checkout
-                </button>
-                {this.state.checkout && <Redirect to="/checkout" />}
-              </div>
+              {cartToRender.length ? (
+                <div className="col-md-12">
+                  <button
+                    type="button"
+                    className="btn btn-success"
+                    onClick={() => this.handleClick()}
+                  >
+                    Proceed to checkout
+                  </button>
+                  {this.state.checkout && <Redirect to="/checkout" />}
+                </div>
+              ) : (
+                'Your cart is empty'
+              )}
             </div>
           </div>
         </div>
@@ -158,6 +225,7 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('in Cart mapState Redux state', state)
   return {
     product: state.product,
     cart: state.cart,
@@ -168,11 +236,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToCart = (dispatch) => {
   return {
-    getCartItems: () => dispatch(_setCartItems()),
+    getCartItems: (userId) => dispatch(_setCartItems(userId)),
     getUser: () => dispatch(me()),
     updateQuantity: (cartId, productId, updatedProduct) =>
       dispatch(updateProductQuantity(cartId, productId, updatedProduct)),
   }
 }
 
+// later refactor: rename to mapDispatchToProps
 export default connect(mapStateToProps, mapDispatchToCart)(Cart)

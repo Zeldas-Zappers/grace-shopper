@@ -42,6 +42,7 @@ export const _setCartItems = (userId) => {
     try {
       const {data} = await axios.get(`/api/cart/${userId}`)
       dispatch(fetchCartItems(data))
+      console.log('in _setCartItems thunk data', data)
     } catch (err) {
       console.error(err)
     }
@@ -52,8 +53,10 @@ export const _addItemToCart = (product, userId) => {
   return async (dispatch) => {
     try {
       const {data} = await axios.post(`/api/cart/${userId}`, product)
-      console.log('hello', 'in addItem thunk', 'product', product)
+      console.log('hello', 'in addItem thunk', 'product', product, 'data', data)
       dispatch(addItemToCart(data))
+
+      // history.push('/cart')
     } catch (err) {
       console.error(err)
     }
@@ -116,7 +119,8 @@ export default function cartReducer(state = initialState, action) {
     //   }
     // }
     case ADD_ITEM_TO_CART:
-      return [...state, action.product]
+      // this has to be action.product and not [...state, action.product] because of the way the route is configured to get all the products in the cart and because the backend route returns the entire array of products, not just the new product. Not sure if this is best practice
+      return action.product
     case REMOVE_ITEM_FROM_CART:
       return state.filter((product) => product.id !== action.product.id)
     case EDIT_PRODUCT_QUANTITY:

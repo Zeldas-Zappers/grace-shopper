@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {fetchProduct} from '../store/product'
 import {_addItemToCart} from '../store/cart'
 import {me} from '../store/user'
-import ProductForm from './ProductForm'
+import EditProductForm from './EditProductForm'
 
 export class SingleProduct extends React.Component {
   constructor() {
@@ -17,7 +17,8 @@ export class SingleProduct extends React.Component {
     this.props.getUser()
   }
 
-  addToCart() {
+  addToCart(event) {
+    event.preventDefault()
     //dispatch thunk if user (or loggedIn is true)
     if (this.props.loggedIn) {
       // check the redux state to see if item is already in cart
@@ -50,12 +51,14 @@ export class SingleProduct extends React.Component {
           cart.push(this.props.product)
         }
       }
+      localStorage.setItem('cart', JSON.stringify(cart))
     }
-    localStorage.setItem('cart', JSON.stringify(cart))
   }
 
   render() {
-    let product = this.props.product
+    const {product} = this.props || {}
+    const adminStatus = this.props.adminStatus || ''
+
     return (
       <div className="container">
         <div className="row mt-4">
@@ -111,7 +114,6 @@ export class SingleProduct extends React.Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-6" />
               <div className="col-md-6">
                 <button
                   onClick={this.addToCart}
@@ -120,36 +122,26 @@ export class SingleProduct extends React.Component {
                 >
                   Add to Cart
                 </button>
-                {/* {user.isAdmin && buttons below} */}
-                <button
-                  onClick={this.addToCart}
-                  type="button"
-                  className="btn btn-success"
-                >
-                  Add Product
-                </button>
-                <button
-                  onClick={this.addToCart}
-                  type="button"
-                  className="btn btn-success"
-                >
-                  Edit Product
-                </button>
               </div>
             </div>
           </div>
-          <ProductForm />
+          {adminStatus && (
+            <div className="col mt-4">
+              <EditProductForm />
+            </div>
+          )}
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, {match}) => {
   return {
     product: state.product,
     loggedIn: !!state.user.id,
     user: state.user,
+    adminStatus: state.user.adminStatus,
   }
 }
 
