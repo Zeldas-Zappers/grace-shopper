@@ -13,11 +13,19 @@ class Checkout extends React.Component {
   }
 
   submitOrder() {
-    if (this.props.user.id) {
+    if (this.props.loggedIn) {
       const cartId = this.props.cart[0].cartItem.cartId
-      console.log('CART ID', cartId)
+      // const updatedCart = this.props.cart.map((product) => {
+      //   if(product.cartItem.orderStatus === "Processing") {
+      //     product.cartItem.orderStatus = "Fullfilled";
+      //   }
+      //   return product;
+      // })
+      //console.log('SUBMIT ORDER', updatedCart)
       this.props.clearCart(cartId)
-    } else {
+    }
+
+    if (!this.props.loggedIn) {
       this.setState({
         cart: localStorage.clear(),
       })

@@ -20,17 +20,17 @@ router.get('/:cartId', async (req, res, next) => {
 
 //update orderStatus for cart order
 router.put('/:cartId', async (req, res, next) => {
-  //find user's cart
+  console.log('REQ BODY', req.body)
   try {
     const cart = await Cart.findOne({
       where: {
         id: req.params.cartId,
       },
     })
-    cart.orderStatus = 'Fullfilled'
-    await Cart.update(cart)
-    console.log('CART', cart)
-    res.json(cart)
+
+    const updatedCart = await cart.update({orderStatus: 'Fulfilled'})
+    console.log('UPDATED CART', updatedCart)
+    res.json(updatedCart)
   } catch (err) {
     next(err)
   }
