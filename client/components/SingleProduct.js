@@ -1,8 +1,13 @@
+/* eslint-disable complexity */
 /* eslint-disable no-warning-comments */
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/product'
-import {_addItemToCart} from '../store/cart'
+import {
+  _addItemToCart,
+  _setCartItems,
+  updateProductQuantity,
+} from '../store/cart'
 import {me} from '../store/user'
 import EditProductForm from './EditProductForm'
 
@@ -15,6 +20,22 @@ export class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.getSingleProduct(this.props.match.params.productId)
     this.props.getUser()
+
+    // if user navigated elsewhere and returned to single product,
+    // user information already exists in props
+    if (this.props.user.id) {
+      const userId = this.props.user.id
+      this.props.getCartItems(userId)
+    }
+  }
+  componentDidUpdate(prevProps) {
+    // console.log('PREV PROPS', prevProps)
+    // console.log('DID UPDATE -->', this.props)
+    if (prevProps.user.id !== this.props.user.id) {
+      if (this.props.user.id) {
+        this.props.getCartItems(this.props.user.id)
+      }
+    }
   }
 
   addToCart(event) {
@@ -28,9 +49,33 @@ export class SingleProduct extends React.Component {
 
       // if not, then dispatch POST
 
-      console.log('hello', 'in SingleProduct addToCart props', this.props)
-      console.log('user.id', 'expect 2', this.props.user.id)
-      this.props.addItemToCart(this.props.product, this.props.user.id)
+      /*
+      if the product already exists in user's cart,
+      set a put request to increment quantity by 1
+      if the product does not already exist in user's cart,
+      send a post request
+      */
+
+      // console.log('hello', 'in SingleProduct addToCart props', this.props)
+      const cart = this.props.cart || []
+      // look through the cart and see if anything matches this product
+      //
+      let productExists = false
+      for (let i = 0; i < cart.length; i++) {
+        const productId = Number(this.props.match.params.productId)
+        console.log('PRODUCT ID', productId)
+        console.log('CART PRODUCT ID', cart[i].id)
+        if (cart[i].id === productId) {
+          productExists = true
+          console.log('INSIDE LOOP', productExists)
+          const quantity = {quantity: cart[i].cartItem.quantity + 1}
+          const cartId = cart[i].cartItem.cartId
+          this.props.updateQuantity(cartId, productId, quantity)
+        }
+      }
+      console.log('PRODUCT EXISTS -->', productExists)
+      if (!productExists)
+        this.props.addItemToCart(this.props.product, this.props.user.id)
     }
     //if !loggedIn then add to local storage!!!
     let cart
@@ -56,6 +101,7 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
+    console.log('THIS.PROPS', this.props)
     const {product} = this.props || {}
     const adminStatus = this.props.adminStatus || ''
 
@@ -142,6 +188,7 @@ const mapStateToProps = (state, {match}) => {
     loggedIn: !!state.user.id,
     user: state.user,
     adminStatus: state.user.adminStatus,
+    cart: state.cart,
   }
 }
 
@@ -152,6 +199,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(_addItemToCart(product, userId)),
 
     getUser: () => dispatch(me()),
+    getCartItems: (userId) => dispatch(_setCartItems(userId)),
+    updateQuantity: (cartId, productId, quantity) =>
+      dispatch(updateProductQuantity(cartId, productId, quantity)),
   }
 }
 
