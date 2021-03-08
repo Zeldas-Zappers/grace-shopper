@@ -21,10 +21,10 @@ export const addItemToCart = (product) => {
   }
 }
 
-export const removeItemFromCart = (product) => {
+export const removeItemFromCart = (id) => {
   return {
     type: REMOVE_ITEM_FROM_CART,
-    product,
+    id,
   }
 }
 
@@ -63,11 +63,12 @@ export const _addItemToCart = (product, userId) => {
   }
 }
 
-export const _removeItemFromCart = (product) => {
+export const _removeItemFromCart = (cartId, productId) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.delete(`/api/cart/${product.id}`)
+      const {data} = await axios.delete(`/api/cart/${cartId}/${productId}`)
       dispatch(removeItemFromCart(data))
+      console.log('response is@@@@@@@@@@@', data)
     } catch (err) {
       console.error(err)
     }
@@ -122,7 +123,12 @@ export default function cartReducer(state = initialState, action) {
       // this has to be action.product and not [...state, action.product] because of the way the route is configured to get all the products in the cart and because the backend route returns the entire array of products, not just the new product. Not sure if this is best practice
       return action.product
     case REMOVE_ITEM_FROM_CART:
-      return state.filter((product) => product.id !== action.product.id)
+      console.log('action.id', action.id)
+      state.filter((product) => product.productId !== action.id)
+      console.log('state is', state)
+      return state
+
+    //return state.filter((product) => product.id !== action.product.id)
     case EDIT_PRODUCT_QUANTITY:
       return state.map((product) =>
         product.id === action.product.id ? action.product : product
