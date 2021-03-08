@@ -180,7 +180,7 @@ async function seed() {
       // address,
       // phone,
     })
-    // console.log(usersArray)
+    console.log(usersArray)
   }
 
   const testUsers = await Promise.all([
