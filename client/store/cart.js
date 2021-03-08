@@ -80,10 +80,6 @@ export const updateProductQuantity = (cartId, productId, quantity) => {
       const updatedProduct = (
         await axios.put(`/api/cart/${cartId}/product/${productId}`, quantity)
       ).data
-      console.log('INSIDE THUNK--->', updatedProduct)
-      console.log('THUNK cartId', cartId)
-      console.log('THUNK productid', productId)
-      console.log('TYPEOF quantity', typeof quantity)
       dispatch(editProductQuantity(updatedProduct))
     } catch (err) {
       console.error(err)

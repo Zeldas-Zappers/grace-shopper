@@ -47,10 +47,8 @@ class Cart extends React.Component {
     if (this.props.loggedIn) {
       let cart = this.props.cart || []
       let cartId = cart[0].cartItem.cartId
+      // quantity variable is the req.body to send to put route
       let quantity = {quantity: this.state.quantity}
-      console.log('cart ID', cartId)
-      console.log('UPDATED QUANTITY', quantity)
-      console.log('PRODUCT ID', productId)
       this.props.updateQuantity(cartId, productId, quantity)
     } else {
       const newCart = [...this.state.cart]
@@ -80,16 +78,13 @@ class Cart extends React.Component {
     //   console.log('cart is empty!!')
     //   return
     // }
-    console.log('PREVPROPS CART --->', prevProps.cart)
-    console.log('CURR PART --->', this.props.cart)
+    // comparing previous subtotal to current subtotal for scenarios in which user updates quantity
     const prevSubtotal = prevProps.cart
       .map((product) => product.cartItem.quantity * product.cartItem.price)
       .reduce((a, b) => a + b, 0)
-    console.log('PREV -->', prevSubtotal)
     const currSubtotal = this.props.cart
       .map((product) => product.cartItem.quantity * product.cartItem.price)
       .reduce((a, b) => a + b, 0)
-    console.log('CURR -->', currSubtotal)
     if (
       prevProps.user.id !== this.props.user.id ||
       prevProps.cart.length !== this.props.cart.length ||
