@@ -1,8 +1,15 @@
 /* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
+
 import {Redirect, Route} from 'react-router-dom'
-import {_setCartItems, updateProductQuantity} from '../store/cart'
+
+import {
+  _setCartItems,
+  updateProductQuantity,
+  _removeItemFromCart,
+} from '../store/cart'
+
 import {me} from '../store/user'
 import Checkout from './Checkout'
 import {Link} from 'react-router-dom'
@@ -21,7 +28,15 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
+    // this should only get me new info if we refresh on the Cart component
     this.props.getUser()
+
+    // if user navigated to the cart from elsewhere, we already have user info
+    // so we can fetch the cart
+    if (this.props.user.id) {
+      const userId = this.props.user.id
+      this.props.getCartItems(userId)
+    }
   }
 
   handleClick() {
@@ -63,8 +78,8 @@ class Cart extends React.Component {
     console.log(
       'in componentDidUpdate, prevProps',
       prevProps,
-      'this.props.cart',
-      this.props.cart
+      'this.props',
+      this.props
     )
     // if (prevProps.cart.length === 0) {
     //   console.log('cart is empty!!')
@@ -72,7 +87,7 @@ class Cart extends React.Component {
     // }
 
     if (
-      // prevProps.cart.length === 0 ||
+      prevProps.user.id !== this.props.user.id ||
       prevProps.cart.length !== this.props.cart.length
     ) {
       // this.state = {
@@ -98,8 +113,11 @@ class Cart extends React.Component {
   }
 
   render() {
-    console.log('in Cart render', 'props', this.props)
-    console.log('in Cart render', 'state', this.state)
+    console.log('props are *************', 'props', this.props)
+    console.log('state is ***************', 'state', this.state)
+    console.log('cart props***************', this.props.cart)
+    console.log('product props*************', this.props.product)
+    console.log('user props****************', this.props.user)
 
     const cartToRender = !this.props.loggedIn
       ? this.state.cart || []
@@ -123,6 +141,7 @@ class Cart extends React.Component {
         .reduce((a, b) => a + b, 0)
     }
     // if the cart is empty, display an empty cart message
+
     return (
       <div className="container">
         {cartToRender.map((product) => {
@@ -138,7 +157,12 @@ class Cart extends React.Component {
                   <div className="row">
                     <div className="col-md-12 mt-4">
                       <button
-                        onClick={() => this.removefromCart(product.id)}
+                        onClick={() =>
+                          this.props.removeCartItem(
+                            product.cartItem.cartId,
+                            product.id
+                          )
+                        }
                         type="button"
                         className="btn btn-warning"
                       >
@@ -238,6 +262,8 @@ const mapDispatchToCart = (dispatch) => {
     getUser: () => dispatch(me()),
     updateQuantity: (cartId, productId, updatedProduct) =>
       dispatch(updateProductQuantity(cartId, productId, updatedProduct)),
+    removeCartItem: (cartId, productId) =>
+      dispatch(_removeItemFromCart(cartId, productId)),
   }
 }
 
