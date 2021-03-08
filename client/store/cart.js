@@ -5,6 +5,7 @@ const FETCH_CART_ITEMS = 'FETCH_CART_ITEMS'
 const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
 const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART'
 const EDIT_PRODUCT_QUANTITY = 'EDIT_PRODUCT_QUANTITY'
+const CHECKOUT = 'CHECKOUT'
 
 //Action creator
 export const fetchCartItems = (products) => {
@@ -32,6 +33,12 @@ export const editProductQuantity = (updatedProduct) => {
   return {
     type: EDIT_PRODUCT_QUANTITY,
     updatedProduct,
+  }
+}
+
+export const checkout = () => {
+  return {
+    type: CHECKOUT,
   }
 }
 
@@ -87,6 +94,19 @@ export const updateProductQuantity = (cartId, productId, quantity) => {
   }
 }
 
+//checkout/clear cart
+export const _checkout = (cartId) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`/api/orders/${cartId}`)
+      //not sending data because we ultimately want to delete items from cart in state
+      dispatch(checkout())
+    } catch (err) {
+      next(err)
+    }
+  }
+}
+
 //Sub-reducer
 const initialState = []
 export default function cartReducer(state = initialState, action) {
@@ -100,10 +120,10 @@ export default function cartReducer(state = initialState, action) {
       return action.products
     //return state.filter((product) => product.id !== action.product.id)
     case EDIT_PRODUCT_QUANTITY:
-      // return state.map((product) =>
-      //   product.id === action.product.id ? action.product : product
-      // )
       return action.updatedProduct
+    case CHECKOUT:
+      state = []
+      return state
     default:
       return state
   }

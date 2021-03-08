@@ -1,13 +1,18 @@
 /* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+
+import {Redirect, Route} from 'react-router-dom'
+
 import {
   _setCartItems,
   updateProductQuantity,
   _removeItemFromCart,
 } from '../store/cart'
+
 import {me} from '../store/user'
+import Checkout from './Checkout'
+import {Link} from 'react-router-dom'
 
 class Cart extends React.Component {
   constructor(props) {
@@ -58,7 +63,6 @@ class Cart extends React.Component {
       productToUpdate.count = this.state.quantity
       const idx = newCart.indexOf(productToUpdate)
       newCart.splice(idx, 1, productToUpdate)
-      console.log('NEW CART ->', newCart)
       localStorage.setItem('cart', JSON.stringify(newCart))
       this.setState({cart: newCart})
     }
@@ -134,7 +138,6 @@ class Cart extends React.Component {
       subTotal = cartToRender
         .map((product) => product.cartItem.quantity * product.cartItem.price)
         .reduce((a, b) => a + b, 0)
-      console.log('logged in', subTotal)
     }
     // if the cart is empty, display an empty cart message
 
@@ -244,7 +247,6 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('in Cart mapState Redux state', state)
   return {
     product: state.product,
     cart: state.cart,

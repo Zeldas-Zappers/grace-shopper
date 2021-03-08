@@ -6,7 +6,6 @@ const Product = require('../db/models/product')
 const {ensureAdmin, ensureLogin} = require('./middleware')
 
 router.post('/:userId', ensureLogin, async (req, res, next) => {
-  console.log('hello', 'in POST route to add cart item', 'req.body', req.body)
   try {
     // need to destructure newCart because it's returned as an array
     const [newCart] = await Cart.findOrCreate({
@@ -15,9 +14,10 @@ router.post('/:userId', ensureLogin, async (req, res, next) => {
     // console.log('hello', 'cart', newCart)
     // console.log('hello', req.params.userId)
     // find the product
+    const {id} = req.body
     const productToAdd = await Product.findOne({
       where: {
-        id: req.body.id,
+        id: id,
       },
     })
 
@@ -29,12 +29,9 @@ router.post('/:userId', ensureLogin, async (req, res, next) => {
       price: productToAdd.price,
     })
 
-    console.log('hello', newCartItem)
-
     //Send all products in that cart
     const getCart = await Cart.findByPk(newCart.id)
     const products = await getCart.getProducts()
-    console.log('hello', 'products', products)
 
     res.status(201).send(products)
     // res.send(newCart)
@@ -50,6 +47,7 @@ router.get('/:userId', async (req, res, next) => {
     const cart = await Cart.findOne({
       where: {
         userId: userId,
+        orderStatus: 'Processing',
       },
     })
     if (cart) {
@@ -68,7 +66,6 @@ router.put('/:cartId/product/:productId', async (req, res, next) => {
     const cart = await CartItem.findOne({
       where: {
         productId: req.params.productId,
-
         cartId: req.params.cartId,
       },
       include: [{model: Cart, include: [{model: Product}]}],
