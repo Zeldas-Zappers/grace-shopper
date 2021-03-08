@@ -3,6 +3,7 @@ import axios from 'axios'
 // want to rename this to 'get' instead of 'set'
 const SET_PRODUCT = 'SET_PRODUCT'
 const EDIT_PRODUCT = 'EDIT_PRODUCT'
+// const EDIT_PRODUCT_QUANTITY = 'EDIT_PRODUCT_QUANTITY'
 // const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART'
 
 //action creators
@@ -30,6 +31,13 @@ export const editProduct = (product) => {
     product,
   }
 }
+
+// export const editProductQuantity = (updatedProduct) => {
+//   return {
+//     type: EDIT_PRODUCT_QUANTITY,
+//     updatedProduct,
+//   }
+// }
 
 //thunks
 // get single product
@@ -69,6 +77,19 @@ export const updateProduct = (id, productUpdates) => {
   }
 }
 
+// export const updateProductQuantity = (cartId, productId, quantity) => {
+//   return async (dispatch) => {
+//     try {
+//       const updatedProduct = (
+//         await axios.put(`/api/cart/${cartId}/product/${productId}`, quantity)
+//       ).data
+//       dispatch(editProductQuantity(updatedProduct))
+//     } catch (err) {
+//       console.error(err)
+//     }
+//   }
+// }
+
 const initialState = {}
 
 export default function productReducer(state = initialState, action) {
@@ -80,6 +101,11 @@ export default function productReducer(state = initialState, action) {
     // not sure if we need to update state to include an array of products, since
     // case ADD_PRODUCT_TO_CART:
     //   return action.product
+    // case EDIT_PRODUCT_QUANTITY:
+    //   // return state.map((product) =>
+    //   //   product.id === action.product.id ? action.product : product
+    //   // )
+    //   return action.updatedProduct
     default:
       return state
   }

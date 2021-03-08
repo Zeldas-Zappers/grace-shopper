@@ -65,12 +65,18 @@ router.put('/:cartId/product/:productId', async (req, res, next) => {
     //might delete product eager load
     const cart = await CartItem.findOne({
       where: {
-        productId: req.params.cartItemId,
+        productId: req.params.productId,
         cartId: req.params.cartId,
       },
       include: [{model: Cart, include: [{model: Product}]}],
     })
-    res.json(await cart.update(req.body))
+
+    const updatedCart = await cart.update(req.body)
+    const getCart = await Cart.findByPk(updatedCart.cartId)
+    const products = await getCart.getProducts()
+
+    // const updatedProducts = updatedCart.cart.products
+    res.json(products)
   } catch (err) {
     next(err)
   }
