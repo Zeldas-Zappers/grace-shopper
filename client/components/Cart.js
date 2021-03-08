@@ -140,7 +140,6 @@ class Cart extends React.Component {
       console.log('logged in', subTotal)
     }
     // if the cart is empty, display an empty cart message
-    console.log('cart to render is##############', cartToRender)
 
     return (
       <div className="container">
