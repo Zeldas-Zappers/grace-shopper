@@ -20,8 +20,17 @@ export class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.getSingleProduct(this.props.match.params.productId)
     this.props.getUser()
+
+    // if user navigated elsewhere and returned to single product,
+    // user information already exists in props
+    if (this.props.user.id) {
+      const userId = this.props.user.id
+      this.props.getCartItems(userId)
+    }
   }
   componentDidUpdate(prevProps) {
+    // console.log('PREV PROPS', prevProps)
+    // console.log('DID UPDATE -->', this.props)
     if (prevProps.user.id !== this.props.user.id) {
       if (this.props.user.id) {
         this.props.getCartItems(this.props.user.id)
@@ -53,7 +62,9 @@ export class SingleProduct extends React.Component {
       //
       let productExists = false
       for (let i = 0; i < cart.length; i++) {
-        const productId = this.props.match.params.productId
+        const productId = Number(this.props.match.params.productId)
+        console.log('PRODUCT ID', productId)
+        console.log('CART PRODUCT ID', cart[i].id)
         if (cart[i].id === productId) {
           productExists = true
           console.log('INSIDE LOOP', productExists)
@@ -90,6 +101,7 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
+    console.log('THIS.PROPS', this.props)
     const {product} = this.props || {}
     const adminStatus = this.props.adminStatus || ''
 
