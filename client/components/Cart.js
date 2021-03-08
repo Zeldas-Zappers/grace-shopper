@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
@@ -18,7 +19,15 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
+    // this should only get me new info if we refresh on the Cart component
     this.props.getUser()
+
+    // if user navigated to the cart from elsewhere, we already have user info
+    // so we can fetch the cart
+    if (this.props.user.id) {
+      const userId = this.props.user.id
+      this.props.getCartItems(userId)
+    }
   }
 
   handleClick() {
@@ -63,16 +72,16 @@ class Cart extends React.Component {
     console.log(
       'in componentDidUpdate, prevProps',
       prevProps,
-      'this.props.cart',
-      this.props.cart
+      'this.props',
+      this.props
     )
-    if (prevProps.cart.length === 0) {
-      console.log('cart is empty!!')
-      return
-    }
+    // if (prevProps.cart.length === 0) {
+    //   console.log('cart is empty!!')
+    //   return
+    // }
 
     if (
-      // prevProps.cart.length === 0 ||
+      prevProps.user.id !== this.props.user.id ||
       prevProps.cart.length !== this.props.cart.length
     ) {
       // this.state = {
