@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable no-warning-comments */
 import React from 'react'
 import {connect} from 'react-redux'
@@ -20,6 +21,13 @@ export class SingleProduct extends React.Component {
     this.props.getSingleProduct(this.props.match.params.productId)
     this.props.getUser()
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.user.id !== this.props.user.id) {
+      if (this.props.user.id) {
+        this.props.getCartItems(this.props.user.id)
+      }
+    }
+  }
 
   addToCart(event) {
     event.preventDefault()
@@ -32,9 +40,31 @@ export class SingleProduct extends React.Component {
 
       // if not, then dispatch POST
 
-      console.log('hello', 'in SingleProduct addToCart props', this.props)
-      console.log('user.id', 'expect 2', this.props.user.id)
-      this.props.addItemToCart(this.props.product, this.props.user.id)
+      /*
+      if the product already exists in user's cart,
+      set a put request to increment quantity by 1
+      if the product does not already exist in user's cart,
+      send a post request
+      */
+
+      // console.log('hello', 'in SingleProduct addToCart props', this.props)
+      const cart = this.props.cart || []
+      // look through the cart and see if anything matches this product
+      //
+      let productExists = false
+      for (let i = 0; i < cart.length; i++) {
+        const productId = this.props.match.params.productId
+        if (cart[i].id === productId) {
+          productExists = true
+          console.log('INSIDE LOOP', productExists)
+          const quantity = {quantity: cart[i].cartItem.quantity + 1}
+          const cartId = cart[i].cartItem.cartId
+          this.props.updateQuantity(cartId, productId, quantity)
+        }
+      }
+      console.log('PRODUCT EXISTS -->', productExists)
+      if (!productExists)
+        this.props.addItemToCart(this.props.product, this.props.user.id)
     }
     //if !loggedIn then add to local storage!!!
     let cart
