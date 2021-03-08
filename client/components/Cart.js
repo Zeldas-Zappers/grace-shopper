@@ -162,7 +162,7 @@ class Cart extends React.Component {
                             product.cartItem.cartId,
                             product.id
                           )
-                        } // cartid, productid
+                        }
                         type="button"
                         className="btn btn-warning"
                       >
@@ -270,6 +270,3 @@ const mapDispatchToCart = (dispatch) => {
 
 // later refactor: rename to mapDispatchToProps
 export default connect(mapStateToProps, mapDispatchToCart)(Cart)
-
-///:cartId/:productId
-//cody@email.com 123
