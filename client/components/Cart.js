@@ -1,8 +1,11 @@
+/* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Route} from 'react-router-dom'
 import {_setCartItems, updateProductQuantity} from '../store/cart'
 import {me} from '../store/user'
+import Checkout from './Checkout'
+import {Link} from 'react-router-dom'
 
 class Cart extends React.Component {
   constructor(props) {
@@ -66,10 +69,10 @@ class Cart extends React.Component {
       'this.props.cart',
       this.props.cart
     )
-    if (prevProps.cart.length === 0) {
-      console.log('cart is empty!!')
-      return
-    }
+    // if (prevProps.cart.length === 0) {
+    //   console.log('cart is empty!!')
+    //   return
+    // }
 
     if (
       // prevProps.cart.length === 0 ||
@@ -225,7 +228,6 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('in Cart mapState Redux state', state)
   return {
     product: state.product,
     cart: state.cart,
