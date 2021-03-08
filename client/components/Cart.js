@@ -2,8 +2,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {_setCartItems, updateProductQuantity} from '../store/cart'
-// import {updateProductQuantity} from '../store/product'
+import {
+  _setCartItems,
+  updateProductQuantity,
+  _removeItemFromCart,
+} from '../store/cart'
 import {me} from '../store/user'
 
 class Cart extends React.Component {
@@ -20,7 +23,15 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
+    // this should only get me new info if we refresh on the Cart component
     this.props.getUser()
+
+    // if user navigated to the cart from elsewhere, we already have user info
+    // so we can fetch the cart
+    if (this.props.user.id) {
+      const userId = this.props.user.id
+      this.props.getCartItems(userId)
+    }
   }
 
   handleClick() {
@@ -36,7 +47,11 @@ class Cart extends React.Component {
     if (this.props.loggedIn) {
       let cart = this.props.cart || []
       let cartId = cart[0].cartItem.cartId
-      this.props.updateQuantity(cartId, productId, this.state.quantity)
+      let quantity = {quantity: this.state.quantity}
+      console.log('cart ID', cartId)
+      console.log('UPDATED QUANTITY', quantity)
+      console.log('PRODUCT ID', productId)
+      this.props.updateQuantity(cartId, productId, quantity)
     } else {
       const newCart = [...this.state.cart]
       const productToUpdate = newCart.find(
@@ -61,20 +76,24 @@ class Cart extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(
-      'in componentDidUpdate, prevProps',
-      prevProps,
-      'this.props.cart',
-      this.props.cart
-    )
-    if (prevProps.cart.length === 0) {
-      console.log('cart is empty!!')
-      return
-    }
-
+    // if (prevProps.cart.length === 0) {
+    //   console.log('cart is empty!!')
+    //   return
+    // }
+    console.log('PREVPROPS CART --->', prevProps.cart)
+    console.log('CURR PART --->', this.props.cart)
+    const prevSubtotal = prevProps.cart
+      .map((product) => product.cartItem.quantity * product.cartItem.price)
+      .reduce((a, b) => a + b, 0)
+    console.log('PREV -->', prevSubtotal)
+    const currSubtotal = this.props.cart
+      .map((product) => product.cartItem.quantity * product.cartItem.price)
+      .reduce((a, b) => a + b, 0)
+    console.log('CURR -->', currSubtotal)
     if (
-      // prevProps.cart.length === 0 ||
-      prevProps.cart.length !== this.props.cart.length
+      prevProps.user.id !== this.props.user.id ||
+      prevProps.cart.length !== this.props.cart.length ||
+      prevSubtotal !== currSubtotal
     ) {
       // this.state = {
       // did you check if the cart is empty? : false
@@ -99,10 +118,7 @@ class Cart extends React.Component {
   }
 
   render() {
-    console.log('MATCH PARAMS', this.props.match)
-    console.log('in Cart render', 'props', this.props)
-    console.log('in Cart render', 'state', this.state)
-
+    console.log('**********CART*********', this.props.cart)
     const cartToRender = !this.props.loggedIn
       ? this.state.cart || []
       : this.props.cart || []
@@ -126,6 +142,7 @@ class Cart extends React.Component {
       console.log('logged in', subTotal)
     }
     // if the cart is empty, display an empty cart message
+
     return (
       <div className="container">
         {cartToRender.map((product) => {
@@ -141,7 +158,12 @@ class Cart extends React.Component {
                   <div className="row">
                     <div className="col-md-12 mt-4">
                       <button
-                        onClick={() => this.removefromCart(product.id)}
+                        onClick={() =>
+                          this.props.removeCartItem(
+                            product.cartItem.cartId,
+                            product.id
+                          )
+                        }
                         type="button"
                         className="btn btn-warning"
                       >
@@ -200,7 +222,7 @@ class Cart extends React.Component {
           <div className="col-md-12">
             <div className="row">
               <div className="col-md-12">
-                {/* <p>Subtotal: ${subTotal}</p> */}
+                <p>Subtotal: ${subTotal}</p>
               </div>
             </div>
             <div className="row">
@@ -240,8 +262,10 @@ const mapDispatchToCart = (dispatch) => {
   return {
     getCartItems: (userId) => dispatch(_setCartItems(userId)),
     getUser: () => dispatch(me()),
-    updateQuantity: (cartId, productId, quantity) =>
-      dispatch(updateProductQuantity(cartId, productId, quantity)),
+    updateQuantity: (cartId, productId, updatedProduct) =>
+      dispatch(updateProductQuantity(cartId, productId, updatedProduct)),
+    removeCartItem: (cartId, productId) =>
+      dispatch(_removeItemFromCart(cartId, productId)),
   }
 }
 

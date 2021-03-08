@@ -21,10 +21,10 @@ export const addItemToCart = (product) => {
   }
 }
 
-export const removeItemFromCart = (product) => {
+export const removeItemFromCart = (products) => {
   return {
     type: REMOVE_ITEM_FROM_CART,
-    product,
+    products,
   }
 }
 
@@ -63,10 +63,10 @@ export const _addItemToCart = (product, userId) => {
   }
 }
 
-export const _removeItemFromCart = (product) => {
+export const _removeItemFromCart = (cartId, productId) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.delete(`/api/cart/${product.id}`)
+      const {data} = await axios.delete(`/api/cart/${cartId}/${productId}`)
       dispatch(removeItemFromCart(data))
     } catch (err) {
       console.error(err)
@@ -80,7 +80,10 @@ export const updateProductQuantity = (cartId, productId, quantity) => {
       const updatedProduct = (
         await axios.put(`/api/cart/${cartId}/product/${productId}`, quantity)
       ).data
-      console.log(updatedProduct)
+      console.log('INSIDE THUNK--->', updatedProduct)
+      console.log('THUNK cartId', cartId)
+      console.log('THUNK productid', productId)
+      console.log('TYPEOF quantity', typeof quantity)
       dispatch(editProductQuantity(updatedProduct))
     } catch (err) {
       console.error(err)
@@ -94,36 +97,12 @@ export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_CART_ITEMS:
       return action.products
-    // unnecessary b/c we will check state for the quantity
-    // case ADD_ITEM_TO_CART: {
-    //   // find out if the product is already in cart
-    //   let alreadyInCart = false
-    //   let quantityOfProductInCart
-    //   let idx
-    //   // loop through the cart and try to match the product id
-    //   for (let i = 0; i < state.length; i++) {
-    //     if (state[i].id === action.product.id) {
-    //       quantityOfProductInCart = action.product.cartItem.quantity
-    //       idx = i
-    //       alreadyInCart = true
-    //       break
-    //     }
-    //   }
-    //   if (alreadyInCart) {
-    //     var updatedProductQuantity
-    //     updatedProductQuantity = quantityOfProductInCart + 1
-    //     const result = [...state]
-    //     result[idx].cartItem.quantity = updatedProductQuantity
-    //     return result
-    //   } else {
-    //     return [...state, action.product]
-    //   }
-    // }
     case ADD_ITEM_TO_CART:
       // this has to be action.product and not [...state, action.product] because of the way the route is configured to get all the products in the cart and because the backend route returns the entire array of products, not just the new product. Not sure if this is best practice
       return action.product
     case REMOVE_ITEM_FROM_CART:
-      return state.filter((product) => product.id !== action.product.id)
+      return action.products
+    //return state.filter((product) => product.id !== action.product.id)
     case EDIT_PRODUCT_QUANTITY:
       // return state.map((product) =>
       //   product.id === action.product.id ? action.product : product
