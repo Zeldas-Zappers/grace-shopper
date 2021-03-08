@@ -2,7 +2,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/product'
-import {_addItemToCart} from '../store/cart'
+import {
+  _addItemToCart,
+  _setCartItems,
+  updateProductQuantity,
+} from '../store/cart'
 import {me} from '../store/user'
 import EditProductForm from './EditProductForm'
 
@@ -142,6 +146,7 @@ const mapStateToProps = (state, {match}) => {
     loggedIn: !!state.user.id,
     user: state.user,
     adminStatus: state.user.adminStatus,
+    cart: state.cart,
   }
 }
 
@@ -152,6 +157,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(_addItemToCart(product, userId)),
 
     getUser: () => dispatch(me()),
+    getCartItems: (userId) => dispatch(_setCartItems(userId)),
+    updateQuantity: (cartId, productId, quantity) =>
+      dispatch(updateProductQuantity(cartId, productId, quantity)),
   }
 }
 
