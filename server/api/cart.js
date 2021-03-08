@@ -89,7 +89,9 @@ router.delete('/:cartId/:productId', ensureLogin, async (req, res, next) => {
       },
     })
     await cartItem.destroy()
-    res.json(cartItem)
+    const cart = await Cart.findByPk(req.params.cartId)
+    const products = await cart.getProducts()
+    res.json(products)
   } catch (err) {
     next(err)
   }
