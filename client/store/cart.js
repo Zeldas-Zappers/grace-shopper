@@ -80,6 +80,7 @@ export const updateProductQuantity = (cartId, productId, quantity) => {
       const updatedProduct = (
         await axios.put(`/api/cart/${cartId}/product/${productId}`, quantity)
       ).data
+      console.log(updatedProduct)
       dispatch(editProductQuantity(updatedProduct))
     } catch (err) {
       console.error(err)
@@ -124,9 +125,10 @@ export default function cartReducer(state = initialState, action) {
     case REMOVE_ITEM_FROM_CART:
       return state.filter((product) => product.id !== action.product.id)
     case EDIT_PRODUCT_QUANTITY:
-      return state.map((product) =>
-        product.id === action.product.id ? action.product : product
-      )
+      // return state.map((product) =>
+      //   product.id === action.product.id ? action.product : product
+      // )
+      return action.updatedProduct
     default:
       return state
   }

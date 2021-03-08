@@ -1,7 +1,9 @@
+/* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {_setCartItems, updateProductQuantity} from '../store/cart'
+// import {updateProductQuantity} from '../store/product'
 import {me} from '../store/user'
 
 class Cart extends React.Component {
@@ -27,15 +29,14 @@ class Cart extends React.Component {
 
   handleChange(evt) {
     this.setState({quantity: evt.target.value})
-    console.log('change in quantity ->', this.state)
   }
 
   handleSubmit(evt, productId) {
     evt.preventDefault()
     if (this.props.loggedIn) {
       let cart = this.props.cart || []
-      console.log('PROPS CART', this.props.cart)
-      // this.props.updateQuantity(cart.id, productId, this.state.quantity)
+      let cartId = cart[0].cartItem.cartId
+      this.props.updateQuantity(cartId, productId, this.state.quantity)
     } else {
       const newCart = [...this.state.cart]
       const productToUpdate = newCart.find(
@@ -98,6 +99,7 @@ class Cart extends React.Component {
   }
 
   render() {
+    console.log('MATCH PARAMS', this.props.match)
     console.log('in Cart render', 'props', this.props)
     console.log('in Cart render', 'state', this.state)
 
@@ -238,8 +240,8 @@ const mapDispatchToCart = (dispatch) => {
   return {
     getCartItems: (userId) => dispatch(_setCartItems(userId)),
     getUser: () => dispatch(me()),
-    updateQuantity: (cartId, productId, updatedProduct) =>
-      dispatch(updateProductQuantity(cartId, productId, updatedProduct)),
+    updateQuantity: (cartId, productId, quantity) =>
+      dispatch(updateProductQuantity(cartId, productId, quantity)),
   }
 }
 
