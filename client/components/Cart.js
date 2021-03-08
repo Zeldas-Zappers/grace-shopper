@@ -64,9 +64,21 @@ class Cart extends React.Component {
       this.setState({cart: newCart})
     }
   }
-  removefromCart(id) {
+  // this.props.isLoggedIn ? () =>
+  //                         this.props.removeCartItem(
+  //                           product.cartItem.cartId,
+  //                           product.id
+  //                         ) : () => this.removefromCart(product.id)
+  removefromCart(productId) {
+    if (this.props.loggedIn) {
+      const cartId = this.props.cart[0].cartItem.cartId
+      this.props.removeCartItem(cartId, productId)
+    }
+    // console.log("REMOVE CART", this.props.cart[0].cartItem.cartId)
     if (!this.props.loggedIn) {
-      const updatedCart = this.state.cart.filter((item) => item.id !== id)
+      const updatedCart = this.state.cart.filter(
+        (item) => item.id !== productId
+      )
       localStorage.setItem('cart', JSON.stringify(updatedCart))
       this.setState({
         cart: updatedCart,
@@ -75,12 +87,12 @@ class Cart extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(
-      'in componentDidUpdate, prevProps',
-      prevProps,
-      'this.props',
-      this.props
-    )
+    // console.log(
+    //   'in componentDidUpdate, prevProps',
+    //   prevProps,
+    //   'this.props',
+    //   this.props
+    // )
     // if (prevProps.cart.length === 0) {
     //   console.log('cart is empty!!')
     //   return
@@ -113,11 +125,11 @@ class Cart extends React.Component {
   }
 
   render() {
-    console.log('props are *************', 'props', this.props)
-    console.log('state is ***************', 'state', this.state)
-    console.log('cart props***************', this.props.cart)
-    console.log('product props*************', this.props.product)
-    console.log('user props****************', this.props.user)
+    // console.log('props are *************', 'props', this.props)
+    // console.log('state is ***************', 'state', this.state)
+    // console.log('cart props***************', this.props.cart)
+    // console.log('product props*************', this.props.product)
+    // console.log('user props****************', this.props.user)
 
     const cartToRender = !this.props.loggedIn
       ? this.state.cart || []
@@ -157,12 +169,7 @@ class Cart extends React.Component {
                   <div className="row">
                     <div className="col-md-12 mt-4">
                       <button
-                        onClick={() =>
-                          this.props.removeCartItem(
-                            product.cartItem.cartId,
-                            product.id
-                          )
-                        }
+                        onClick={() => this.removefromCart(product.id)}
                         type="button"
                         className="btn btn-warning"
                       >
