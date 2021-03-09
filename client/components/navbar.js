@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {me} from '../store/user'
+import logo from './lightseedslogo.png'
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -18,38 +19,38 @@ class Navbar extends React.Component {
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
-  componentDidMount() {
-    //if logged in user
-    // if(this.props.isLoggedIn) {
+  // componentDidMount() {
+  //   //if logged in user
+  //   // if(this.props.isLoggedIn) {
 
-    // }
+  //   // }
 
-    //if guest
-    if (!this.props.isLoggedIn) {
-      if (localStorage.getItem('cart') === null) {
-        this.setState({
-          cart: [],
-        })
-      } else {
-        this.setState({
-          cart: JSON.parse(localStorage.getItem('cart')),
-        })
-      }
-    }
-  }
+  //   //if guest
+  //   if (!this.props.isLoggedIn) {
+  //     if (localStorage.getItem('cart') === null) {
+  //       this.setState({
+  //         cart: [],
+  //       })
+  //     } else {
+  //       this.setState({
+  //         cart: JSON.parse(localStorage.getItem('cart')),
+  //       })
+  //     }
+  //   }
+  // }
 
-  componentDidUpdate(prevProps, prevState) {
-    let test = JSON.parse(localStorage.getItem('cart')) //could be null
+  // componentDidUpdate(prevProps, prevState) {
+  //   let test = JSON.parse(localStorage.getItem('cart')) //could be null
 
-    console.log('STORAGE', test)
-    console.log('CART ON StATE', this.state.cart)
+  //   console.log('STORAGE', test)
+  //   console.log('CART ON StATE', this.state.cart)
 
-    if (test && this.state.cart.length !== test.length) {
-      this.setState({
-        cart: test,
-      })
-    }
-  }
+  //   if (test && this.state.cart.length !== test.length) {
+  //     this.setState({
+  //       cart: test,
+  //     })
+  //   }
+  // }
   // TODO: we will have to udpate this with componentDidMount and componentDidUpdate to get the cart counter to work properly. Will probably need to use logic similar to what is found in Cart.js. Also will have to use this.setState in componentDidUpdate in order for the counter to work for guests
 
   toggleMenu() {
@@ -63,15 +64,15 @@ class Navbar extends React.Component {
     const {adminStatus} = this.props.user || ''
     const show = this.state.showCollapsedMenu ? 'show' : ''
     const cart = !this.props.isLoggedIn
-      ? this.state.cart || []
+      ? JSON.parse(localStorage.getItem('cart')) || []
       : this.props.cart || []
 
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">
-              Plant Store
+            <a className="navbar-brand m-2" href="/home">
+              <img src={logo} />
             </a>
             <button
               className="navbar-toggler"
@@ -107,18 +108,6 @@ class Navbar extends React.Component {
                       All Products
                     </Link>
                   </li>
-                  {adminStatus && (
-                    <li className="nav-item">
-                      <Link
-                        to="/admin"
-                        className="nav-link"
-                        tabIndex="-1"
-                        aria-disabled="true"
-                      >
-                        Admin
-                      </Link>
-                    </li>
-                  )}
                   {adminStatus && (
                     <li className="nav-item">
                       <Link

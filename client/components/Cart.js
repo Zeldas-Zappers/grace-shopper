@@ -1,15 +1,12 @@
 /* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
-
 import {Redirect, Route} from 'react-router-dom'
-
 import {
   _setCartItems,
   updateProductQuantity,
   _removeItemFromCart,
 } from '../store/cart'
-
 import {me} from '../store/user'
 import Checkout from './Checkout'
 import {Link} from 'react-router-dom'
@@ -125,13 +122,11 @@ class Cart extends React.Component {
   }
 
   render() {
-
     // console.log('props are *************', 'props', this.props)
     // console.log('state is ***************', 'state', this.state)
     // console.log('cart props***************', this.props.cart)
     // console.log('product props*************', this.props.product)
     // console.log('user props****************', this.props.user)
-
 
     console.log('**********CART*********', this.props.cart)
 
