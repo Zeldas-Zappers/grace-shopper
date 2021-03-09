@@ -41,7 +41,7 @@ router.post('/:userId', ensureLogin, async (req, res, next) => {
 })
 
 // get cart for logged in user
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', ensureLogin, async (req, res, next) => {
   try {
     const {userId} = req.params
     const cart = await Cart.findOne({
@@ -60,27 +60,34 @@ router.get('/:userId', async (req, res, next) => {
 })
 
 //updating quantity in cart
-router.put('/:cartId/product/:productId', async (req, res, next) => {
-  try {
-    //might delete product eager load
-    const cart = await CartItem.findOne({
-      where: {
-        productId: req.params.productId,
-        cartId: req.params.cartId,
-      },
-      include: [{model: Cart, include: [{model: Product}]}],
-    })
+router.put(
+  '/:cartId/product/:productId',
+  ensureLogin,
+  async (req, res, next) => {
+    try {
+      //might delete product eager load
 
-    const updatedCart = await cart.update(req.body)
-    const getCart = await Cart.findByPk(updatedCart.cartId)
-    const products = await getCart.getProducts()
+      const {productId, cartId} = req.params
+      const cart = await CartItem.findOne({
+        where: {
+          productId,
+          cartId,
+        },
+        include: [{model: Cart, include: [{model: Product}]}],
+      })
 
-    // const updatedProducts = updatedCart.cart.products
-    res.json(products)
-  } catch (err) {
-    next(err)
+      const {quantity} = req.body
+      const updatedCart = await cart.update({quantity})
+      const getCart = await Cart.findByPk(updatedCart.cartId)
+      const products = await getCart.getProducts()
+
+      // const updatedProducts = updatedCart.cart.products
+      res.json(products)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
 
 // delete an item from the cart
 router.delete('/:cartId/:productId', ensureLogin, async (req, res, next) => {
