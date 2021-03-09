@@ -66,10 +66,12 @@ router.put(
   async (req, res, next) => {
     try {
       //might delete product eager load
+
+      const {productId, cartId} = req.params
       const cart = await CartItem.findOne({
         where: {
-          productId: req.params.productId,
-          cartId: req.params.cartId,
+          productId,
+          cartId,
         },
         include: [{model: Cart, include: [{model: Product}]}],
       })
