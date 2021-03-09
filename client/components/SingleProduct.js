@@ -107,68 +107,51 @@ export class SingleProduct extends React.Component {
 
     return (
       <div className="container">
-        <div className="row mt-4">
-          <div className="col-lg-5 col-md-6">
+        <div className="row mt-5">
+          <div className="col-lg-5 col-md-6 pr-0">
             <img src={product.imageUrl} />
           </div>
-          <div className="col-lg-7 col-md-6">
-            <h3>{product.name}</h3>
+          <div className="col-lg-7 col-md-6 mt-4 pl-0">
+            <h3 className="title">{product.name}</h3>
+            <p className="price">$ {product.price}</p>
+            <h6 className="mt-5">
+              <strong>
+                <em>DETAILS</em>
+              </strong>
+            </h6>
+            <p>{product.description}.</p>
+            <div className="mb-4">
+              <hr className="dotted" />
+            </div>
+            <h6 className="mt-3">
+              <strong>
+                <em>PLANT CARE</em>
+              </strong>
+            </h6>
             <p>
-              <strong>$ {product.price}</strong>
+              <em>Lighting: </em>
+              {product.lighting}
             </p>
-            <div className="row">
-              <div className="col-md-2">
-                <p>
-                  <strong>
-                    <em>Details</em>
-                  </strong>
-                </p>
-              </div>
-              <div className="col-md-10">
-                <dl>
-                  <dd>{product.description}.</dd>
-                </dl>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-2">
-                <p>
-                  <strong>
-                    <em>Plant Care</em>
-                  </strong>
-                </p>
-              </div>
-              <div className="col-md-10">
-                <dl>
-                  <p>
-                    <em>Lighting: </em>
-                    {product.lighting}
-                  </p>
-                </dl>
-                <dl>
-                  <p>
-                    <em>Watering: </em>
-                    {product.watering}
-                  </p>
-                </dl>
-                <dl>
-                  <p>
-                    <em>Category: </em>
-                    {product.category}
-                  </p>
-                </dl>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <button
-                  onClick={this.addToCart}
-                  type="button"
-                  className="btn btn-success"
-                >
-                  Add to Cart
-                </button>
-              </div>
+            <p>
+              <em>Watering: </em>
+              {product.watering}
+            </p>
+            <p>
+              <em>Category: </em>
+              {product.category}
+            </p>
+            <div className="row ">
+              {!adminStatus && (
+                <div className="col">
+                  <button
+                    onClick={this.addToCart}
+                    type="button"
+                    className="btn btn-lg home-button float-right"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           {adminStatus && (

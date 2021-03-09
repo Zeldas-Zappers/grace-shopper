@@ -2,12 +2,14 @@ import React from 'react'
 // import Cart from './cart'
 import {connect} from 'react-redux'
 import {_checkout} from '../store/cart'
+import {Redirect, Link} from 'react-router-dom'
 
 class Checkout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       cart: JSON.parse(localStorage.getItem('cart')),
+      orderSubmitted: false,
     }
     this.submitOrder = this.submitOrder.bind(this)
   }
@@ -23,11 +25,16 @@ class Checkout extends React.Component {
       // })
       //console.log('SUBMIT ORDER', updatedCart)
       this.props.clearCart(cartId)
+      this.setState({
+        ...this.state,
+        orderSubmitted: true,
+      })
     }
 
     if (!this.props.loggedIn) {
       this.setState({
         cart: localStorage.clear(),
+        orderSubmitted: true,
       })
     }
   }
@@ -55,17 +62,26 @@ class Checkout extends React.Component {
     console.log('CHECKOUT', this.props)
 
     return (
-      <div className="checkout container">
-        <h1>Order Summary</h1>
-        <button
-          onClick={this.submitOrder}
-          type="button"
-          className="btn btn-primary"
-          data-toggle="modal"
-          data-target="#exampleModal"
-        >
-          Submit Order
-        </button>
+      <div className="checkout container mt-5 justify-content-center">
+        <div className="d-flex justify-content-between">
+          <h3 className="title">
+            {this.state.orderSubmitted
+              ? "You're order has been submitted"
+              : 'Order Summary'}
+          </h3>
+          {!this.state.orderSubmitted && (
+            <button
+              onClick={this.submitOrder}
+              type="button"
+              className="btn home-button"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >
+              Submit Order
+            </button>
+          )}
+        </div>
+        <div className="subTotal">Total: ${subTotal}</div>
         <div
           className="modal fade"
           id="exampleModal"
@@ -82,7 +98,7 @@ class Checkout extends React.Component {
                 </h5>
                 <button
                   type="button"
-                  className="close"
+                  className="close btn btn-lg button-home"
                   data-dismiss="modal"
                   aria-label="Close"
                 >
@@ -93,7 +109,7 @@ class Checkout extends React.Component {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-lg button-home"
                   data-dismiss="modal"
                 >
                   Close
@@ -106,61 +122,35 @@ class Checkout extends React.Component {
         {cartToRender.map((product) => {
           return (
             <div
-              className="card mb-3"
-              style={{maxWidth: '800px'}}
+              className="card mb-3 mt-5"
+              style={{maxWidth: '500px'}}
               key={product.id}
             >
               <div className="row no-gutters">
                 <div className="col-md-4">
-                  <img src={product.imageUrl} className="card-img" />
+                  <img
+                    src={product.imageUrl}
+                    className="card-img checkout-img"
+                  />
                 </div>
-                <div className="col-md-8">
+                <div className="col-md-8 mt-4">
                   <div className="card-body">
-                    <h5 className="card-title">{product.name}</h5>
-                    <p className="card-text">${product.price}</p>
-                    <p className="list-item">
+                    <h5 className="card-title checkout-card-title">
+                      {product.name}
+                    </h5>
+                    <p className="card-text checkout-card-text">
+                      ${product.price}
+                    </p>
+                    <p className="card-text checkout-card-text">
                       Quantity:{' '}
                       {!this.props.loggedIn
                         ? product.count
                         : product.cartItem.quantity}
                     </p>
-                    <p className="card-text">{product.description}</p>
-                    <p className="list-item">{product.lighting}</p>
-                    <p className="list-item">{product.watering}</p>
                   </div>
                 </div>
               </div>
             </div>
-            // <div key={product.id}>
-            //   <div className="row mt-4">
-            //     <div className="col-lg-4 col-md-6">
-            //       <div className="row">
-            //         <div className="col-md-12">
-            //           <img alt="whatever alt we want" src={product.imageUrl} />
-            //         </div>
-            //       </div>
-            //     </div>
-            //     <div className="col-lg-8 col-md-6">
-            //       <div className="row">
-            //         <div className="col-md-12">
-            //           <ul>
-            //             <li className="list-item">{product.name}</li>
-            //             <li className="list-item">${product.price}</li>
-            //             <li className="list-item">
-            //               Quantity:{' '}
-            //               {!this.props.loggedIn
-            //                 ? product.count
-            //                 : product.cartItem.quantity}
-            //             </li>
-            //             <li className="list-item">{product.description}</li>
-            //             <li className="list-item">{product.lighting}</li>
-            //             <li className="list-item">{product.watering}</li>
-            //           </ul>
-            //         </div>
-            //       </div>
-            //     </div>
-            //   </div>
-            // </div>
           )
         })}
       </div>
