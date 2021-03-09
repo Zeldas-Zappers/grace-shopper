@@ -17,13 +17,6 @@ class Checkout extends React.Component {
   submitOrder() {
     if (this.props.loggedIn) {
       const cartId = this.props.cart[0].cartItem.cartId
-      // const updatedCart = this.props.cart.map((product) => {
-      //   if(product.cartItem.orderStatus === "Processing") {
-      //     product.cartItem.orderStatus = "Fullfilled";
-      //   }
-      //   return product;
-      // })
-      //console.log('SUBMIT ORDER', updatedCart)
       this.props.clearCart(cartId)
       this.setState({
         ...this.state,
@@ -34,7 +27,7 @@ class Checkout extends React.Component {
     if (!this.props.loggedIn) {
       this.setState({
         cart: localStorage.clear(),
-        orderSubmitted: true,
+        orderSubmitted: !this.state.orderSubmitted,
       })
     }
   }
@@ -66,14 +59,14 @@ class Checkout extends React.Component {
         <div className="d-flex justify-content-between">
           <h3 className="title">
             {this.state.orderSubmitted
-              ? "You're order has been submitted"
+              ? "Thank you! You're order has been submitted"
               : 'Order Summary'}
           </h3>
           {!this.state.orderSubmitted && (
             <button
               onClick={this.submitOrder}
               type="button"
-              className="btn home-button"
+              className="btn btn-lg home-button"
               data-toggle="modal"
               data-target="#exampleModal"
             >
@@ -81,7 +74,9 @@ class Checkout extends React.Component {
             </button>
           )}
         </div>
-        <div className="subTotal">Total: ${subTotal}</div>
+        {!this.state.orderSubmitted && (
+          <div className="subTotal">Total: ${subTotal}</div>
+        )}
         <div
           className="modal fade"
           id="exampleModal"

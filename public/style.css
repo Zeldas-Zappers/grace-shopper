@@ -68,6 +68,7 @@ hr.dotted {
 .btn.home-button {
   background-color: #e06b4a;
   color: #f8f8f6;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .card a:hover {
@@ -132,18 +133,53 @@ img.navbar-brand.m-2 {
   color: #f8f8f6 !important;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 20px;
-  margin: 5px;
 }
 
-.nav-item {
-  margin: 5px;
-  padding: 5px;
+a.nav-link {
+  margin: 0px;
+  padding: 0px;
+}
+
+li.nav-item {
+  margin: 0px;
+  padding: 0px;
 }
 
 .form-group p {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 20px;
   margin-bottom: 0;
+}
+
+.form-group label {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.form-control {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.form-title {
+  color: #4b6407;
+}
+
+.welcome-msg div {
+  padding-top: 30px;
+  margin-top: 20px;
+}
+
+.welcome-msg p {
+  font-size: 14px;
+  font-family: 'Source Sans Pro', sans-serif;
+  padding-right: 5px;
+  padding-top: 8px;
+}
+
+.light-color {
+  color: #f8f8f6;
+  margin-bottom: 0px;
 }
 
 /* .checkout-img {

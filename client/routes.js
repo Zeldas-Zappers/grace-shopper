@@ -27,13 +27,14 @@ class Routes extends Component {
       // had to remove the Switch to get the welcome message to load correctly. Also had to change component={Home} to exact path -- JC
       // <Switch>
       // {/* Routes placed here are available to all visitors */}
+      // <div>
+      //   {isLoggedIn && (
+      // <Switch>
+      // {/* Routes placed here are only available after logging in */}
+      // <Route path="/" component={UserHome} />
+      // {/* </Switch> */}
+      // )}
       <div>
-        {isLoggedIn && (
-          // <Switch>
-          // {/* Routes placed here are only available after logging in */}
-          <Route path="/" component={UserHome} />
-          // {/* </Switch> */}
-        )}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />

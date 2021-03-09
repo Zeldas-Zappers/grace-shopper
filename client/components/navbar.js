@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {me} from '../store/user'
 import logo from './lightseedslogo.png'
+import UserHome from './user-home'
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -60,8 +61,8 @@ class Navbar extends React.Component {
   }
 
   render() {
-    console.log('CART STATE', this.state.cart)
     const {adminStatus} = this.props.user || ''
+    console.log('CART STATE', adminStatus)
     const show = this.state.showCollapsedMenu ? 'show' : ''
     const cart = !this.props.isLoggedIn
       ? JSON.parse(localStorage.getItem('cart')) || []
@@ -93,53 +94,58 @@ class Navbar extends React.Component {
               id="navbarNav"
             >
               {this.props.isLoggedIn ? (
-                <ul className="navbar-nav">
-                  <li className="nav-item">
-                    <Link
-                      to="/"
-                      className="nav-link active"
-                      aria-current="page"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/products" className="nav-link">
-                      All Products
-                    </Link>
-                  </li>
-                  {adminStatus && (
+                <div>
+                  <ul className="navbar-nav">
                     <li className="nav-item">
                       <Link
-                        to="/users"
-                        className="nav-link"
-                        tabIndex="-1"
-                        aria-disabled="true"
+                        to="/"
+                        className="nav-link active"
+                        aria-current="page"
                       >
-                        All Users
+                        Home
                       </Link>
                     </li>
-                  )}
-                  <li className="nav-item">
-                    <Link
-                      to="/logout"
-                      className="nav-link"
-                      onClick={this.props.handleClick}
-                    >
-                      Logout
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      to="/cart"
-                      className="nav-link"
-                      tabIndex="-1"
-                      aria-disabled="true"
-                    >
-                      Cart({cart.length})
-                    </Link>
-                  </li>
-                </ul>
+                    <li className="nav-item">
+                      <Link to="/products" className="nav-link">
+                        All Products
+                      </Link>
+                    </li>
+                    {adminStatus && (
+                      <li className="nav-item">
+                        <Link
+                          to="/users"
+                          className="nav-link"
+                          tabIndex="-1"
+                          aria-disabled="true"
+                        >
+                          All Users
+                        </Link>
+                      </li>
+                    )}
+                    <li className="nav-item">
+                      <Link
+                        to="/logout"
+                        className="nav-link"
+                        onClick={this.props.handleClick}
+                      >
+                        Logout
+                      </Link>
+                    </li>
+                    {!adminStatus && (
+                      <li className="nav-item">
+                        <Link
+                          to="/cart"
+                          className="nav-link"
+                          tabIndex="-1"
+                          aria-disabled="true"
+                        >
+                          Cart
+                        </Link>
+                      </li>
+                    )}
+                  </ul>
+                  <UserHome />
+                </div>
               ) : (
                 <ul className="navbar-nav">
                   <li className="nav-item">
@@ -173,7 +179,7 @@ class Navbar extends React.Component {
                       tabIndex="-1"
                       aria-disabled="true"
                     >
-                      Cart({cart.length})
+                      Cart
                     </Link>
                   </li>
                 </ul>
