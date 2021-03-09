@@ -2,58 +2,13 @@
 /* eslint-disable max-statements */
 // 'use strict'
 const db = require('../server/db')
-const {User, Product, Cart, CartItem} = require('../server/db/models')
+const {User, Product} = require('../server/db/models')
 // const {Product} = require('../server/db/models')
 const faker = require('faker')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
-
-  const userId = []
-  for (let i = 1; i <= 50; i++) {
-    userId.push(i)
-  }
-  const randomUserId = faker.helpers.shuffle(userId)
-  console.log('hello', userId, randomUserId)
-
-  const cartArray = []
-  for (let i = 0; i < 50; i++) {
-    cartArray.push({
-      shippingAddress: faker.address.streetAddress(),
-
-      // all orders are not processing (open carts)!
-      //  we can change this later if necessary
-      orderStatus: 'Processing',
-      total: faker.random.number({
-        min: 1,
-        max: 500,
-      }),
-      userId: randomUserId[i],
-    })
-  }
-
-  const cartItemsArray = []
-  for (let i = 0; i < 49; i++) {
-    cartItemsArray.push({
-      cartId: faker.random.number({
-        min: 1,
-        max: 50,
-      }),
-      productId: faker.random.number({
-        min: 1,
-        max: 50,
-      }),
-      quantity: faker.random.number({
-        min: 1,
-        max: 12,
-      }),
-      price: faker.random.number({
-        min: 1,
-        max: 499,
-      }),
-    })
-  }
 
   const lightingArray = [
     'This plant does well in low light.',
@@ -132,18 +87,65 @@ async function seed() {
     'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-gift-bundle_gallery_all_04_360x.jpg?v=1613398524',
   ]
 
+  const productNameArray = [
+    'Coffee Plant',
+    'Pet-Friendly Bundle',
+    'Magical Willow',
+    'Carnivorous Roses',
+    'Poisonous Mushrooms',
+    'Vertical Space Bundle',
+    'String of Pearls',
+    'Fern Bundle',
+    'Shrivelfig',
+    'Bubotuber',
+    `Devil's Snare`,
+    `Gillyweed`,
+    `Leaping Toadstools`,
+    `Venemous Tentacula`,
+    `Mandrake`,
+    `Mimbulus Mimbletonia`,
+    `Wolfsbane`,
+    `Wiggentree`,
+    `Alihotsy`,
+    `Asphodel`,
+    `Bouncing Bulb`,
+    `Dittany`,
+    `Fanged Geranium`,
+    `Flitterbloom`,
+    `Flutterby Bush`,
+    `Sopophorous Plant`,
+    `Sneezewort`,
+    `Snargaluff`,
+    `Umbrella Flower`,
+    `Valerian`,
+    `Whomping Willow`,
+    `Wormwood`,
+    `Puffapod`,
+    `Self-fertilising shrub`,
+    `Fluxweed`,
+    `Honking daffodil`,
+    `Knotgrass`,
+    `Screechsnap`,
+    `Agapanthus`,
+    `Angel's Trumpet`,
+    `Arnica`,
+    `Borage`,
+    `Cowbane`,
+    `Elder Tree`,
+  ]
+
   const productArray = []
-  for (let i = 1; i <= 50; i++) {
-    const name = faker.commerce.productName()
+  for (let i = 0; i < productNameArray.length; i++) {
+    const name = productNameArray[i]
     const description = faker.commerce.productDescription()
     const price = faker.random.number({
-      min: 99,
-      max: 1000,
+      min: 10,
+      max: 999,
     })
     const category = faker.helpers.shuffle(categoriesArray)[0]
     const lighting = faker.helpers.shuffle(lightingArray)[0]
     const watering = faker.helpers.shuffle(wateringArray)[0]
-    const imageUrl = faker.helpers.shuffle(imageUrlArray)[0]
+    const imageUrl = imageUrlArray[i]
     const inventory = faker.random.number({
       min: 0,
       max: 100,
@@ -160,47 +162,24 @@ async function seed() {
     })
   }
 
-  // console.log('hello', productArray)
   const usersArray = []
-  for (let i = 0; i <= 100; i++) {
+  for (let i = 0; i < 40; i++) {
     const email = faker.internet.email()
     const password = faker.internet.password()
-    const adminStatus = faker.random.boolean()
-    // const firstName = faker.name.firstName()
-    // const lastName = faker.name.lastName()
-    // const address = faker.address.streetAddress()
-    // const phone = faker.phone.phoneNumber()
+    const firstName = faker.name.firstName()
+    const lastName = faker.name.lastName()
+    const address = faker.address.streetAddress()
+    const phone = faker.phone.phoneNumber()
 
     usersArray.push({
       email,
       password,
-      adminStatus,
-      // firstName,
-      // lastName,
-      // address,
-      // phone,
+      firstName,
+      lastName,
+      address,
+      phone,
     })
-    console.log(usersArray)
   }
-
-  const testUsers = await Promise.all([
-    User.create({
-      // firstName: 'Cody',
-      // lastName: 'Something',
-      // address: '123 main st',
-      // phone: '555-555-5555',
-      email: 'cody@email.com',
-      password: '123',
-    }),
-    User.create({
-      // firstName: 'Murph',
-      // lastName: 'lsdkj',
-      // address: 'sdklfsjf',
-      // phone: '333-333-3333',
-      email: 'murphy@email.com',
-      password: '123',
-    }),
-  ])
 
   const users = await Promise.all(
     usersArray.map((user) => {
@@ -214,24 +193,8 @@ async function seed() {
     })
   )
 
-  const carts = await Promise.all(
-    cartArray.map((cart) => {
-      return Cart.create(cart)
-    })
-  )
-
-  const cartItems = await Promise.all(
-    cartItemsArray.map((items) => {
-      // TODO: need to modify this so that if the cart already exists with that particular product, it updates rather than trying to create the same thing (because that would create an error in the CartItems table, which uses the cartId and productId to make a composite primary key)
-      return CartItem.create(items)
-    })
-  )
-
-  console.log(`seeded ${testUsers.length} test users with passwords`)
-  console.log(`seeded ${users.length} other users with salted passwords`)
+  console.log(`seeded ${users.length} users with salted passwords`)
   console.log(`seeded ${products.length} products`)
-  console.log(`seeded ${carts.length} carts`)
-
   console.log(`seeded successfully`)
 }
 
