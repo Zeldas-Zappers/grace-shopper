@@ -1,18 +1,16 @@
 /* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
-
 import {Redirect, Route} from 'react-router-dom'
-
 import {
   _setCartItems,
   updateProductQuantity,
   _removeItemFromCart,
 } from '../store/cart'
-
 import {me} from '../store/user'
 import Checkout from './Checkout'
 import {Link} from 'react-router-dom'
+import EmptyCartMessage from './EmptyCartMessage'
 
 class Cart extends React.Component {
   constructor(props) {
@@ -125,13 +123,11 @@ class Cart extends React.Component {
   }
 
   render() {
-
     // console.log('props are *************', 'props', this.props)
     // console.log('state is ***************', 'state', this.state)
     // console.log('cart props***************', this.props.cart)
     // console.log('product props*************', this.props.product)
     // console.log('user props****************', this.props.user)
-
 
     console.log('**********CART*********', this.props.cart)
 
@@ -139,9 +135,9 @@ class Cart extends React.Component {
       ? this.state.cart || []
       : this.props.cart || []
 
-    if (cartToRender.length === 0) {
-      return <div>Your cart is empty!!!</div>
-    }
+    // if (cartToRender.length === 0) {
+    //   return <div>Your cart is empty!!!</div>
+    // }
     // define the subtotal for guests
     let subTotal
     if (!this.props.loggedIn) {
@@ -159,8 +155,92 @@ class Cart extends React.Component {
     // if the cart is empty, display an empty cart message
 
     return (
-      <div className="container">
+      <div className="container container mt-5">
+        {cartToRender.length ? (
+          <div>
+            <div className="d-flex justify-content-between">
+              <h3 className="title">Items currently in your cart</h3>
+              <Link to="/checkout">
+                <button
+                  type="button"
+                  className="btn home-button btn-lg"
+                  onClick={() => this.handleClick()}
+                >
+                  Proceed to checkout
+                </button>
+              </Link>
+              {/* // {this.state.checkout && <Redirect to="/checkout" />} */}
+            </div>
+            <p className="subTotal">Total: ${subTotal}</p>
+          </div>
+        ) : (
+          <EmptyCartMessage />
+        )}
         {cartToRender.map((product) => {
+          return (
+            <div
+              className="card mb-3 mt-5"
+              style={{maxWidth: '700px'}}
+              key={product.id}
+            >
+              <div className="row no-gutters">
+                <div className="col-md-4">
+                  <img
+                    src={product.imageUrl}
+                    className="card-img checkout-img"
+                  />
+                </div>
+                <div className="col-md-8 mt-4">
+                  <div className="card-body">
+                    <h5 className="card-title checkout-card-title">
+                      {product.name}
+                    </h5>
+                    <p className="card-text checkout-card-text">
+                      ${product.price}
+                    </p>
+                    <p className="card-text checkout-card-text">
+                      Quantity:{' '}
+                      {!this.props.loggedIn
+                        ? product.count
+                        : product.cartItem.quantity}
+                    </p>
+                  </div>
+                  <form
+                    className="main-form"
+                    onSubmit={(evt) => this.handleSubmit(evt, product.id)}
+                  >
+                    <div className="form-group">
+                      <label htmlFor="quantity">Quantity:</label>
+                      <input
+                        type="number"
+                        min="1"
+                        name="quantity"
+                        value={this.state.quantity}
+                        onChange={this.handleChange}
+                        className="form-control"
+                      />
+                    </div>
+                    <button
+                      className="btn home-button btn-sm mr-2"
+                      type="submit"
+                    >
+                      Update Quantity
+                    </button>
+
+                    <button
+                      onClick={() => this.removefromCart(product.id)}
+                      type="button"
+                      className="btn home-button btn-sm"
+                    >
+                      Remove from cart
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+        {/* {cartToRender.map((product) => {
           return (
             <div key={product.id}>
               <div className="row mt-4">
@@ -227,8 +307,8 @@ class Cart extends React.Component {
               </div>
             </div>
           )
-        })}
-        <div className="row">
+        })} */}
+        {/* <div className="row">
           <div className="col-md-12">
             <div className="row">
               <div className="col-md-12">
@@ -252,7 +332,7 @@ class Cart extends React.Component {
               )}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     )
   }

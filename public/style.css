@@ -1,5 +1,18 @@
+/* font-family: 'Playfair Display', serif; */
+/* font-family: 'Source Sans Pro', sans-serif; */
+
+html {
+  background-color: #f8f8f6;
+}
+
 body {
-  font-family: sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #2b2d2f;
+  margin: 0 auto;
+}
+
+#app {
+  background-color: #f8f8f6;
 }
 
 a {
@@ -24,6 +37,151 @@ section {
   height: 100vh;
 }
 
+.title {
+  color: #4b6407;
+  font-family: 'Playfair Display', serif;
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.col-lg-7.col-md-6.mt-4 p {
+  color: #2b2d2f;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.col-lg-7.col-md-6.mt-4 h6 {
+  color: #2b2d2f;
+  font-size: 22px;
+  color: #4b6407;
+}
+
+.price p {
+  color: #2b2d2f;
+  font-size: 40px;
+}
+
+hr.dotted {
+  border-top: 2px dotted #000;
+}
+
+.btn.home-button {
+  background-color: #e06b4a;
+  color: #f8f8f6;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 .card a:hover {
   text-decoration: none;
 }
+
+.card-body {
+  font-family: 'Playfair Display', serif;
+}
+
+.card-body h5,
+p {
+  color: #4b6407;
+}
+
+h5.card-text {
+  font-size: 22px;
+  padding-right: 0;
+}
+
+h5.card-title.checkout-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+}
+
+p.card-text.checkout-card-text {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 22px;
+  margin-bottom: 0;
+}
+
+.subTotal {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 25px;
+}
+
+p.card-text {
+  font-size: 18px;
+  color: #2b2d2f;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.navbar-brand {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+a.navbar-brand.m-2 {
+  margin: 0px;
+}
+
+.navbar.navbar-expand-lg.navbar-light {
+  background-color: #4b6407;
+}
+
+img.navbar-brand.m-2 {
+  width: 100px;
+  height: 100px;
+}
+
+.nav-link {
+  color: #f8f8f6 !important;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
+}
+
+a.nav-link {
+  margin: 0px;
+  padding: 0px;
+}
+
+li.nav-item {
+  margin: 0px;
+  padding: 0px;
+}
+
+.form-group p {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.form-group label {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.form-control {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.form-title {
+  color: #4b6407;
+}
+
+.welcome-msg div {
+  padding-top: 30px;
+  margin-top: 20px;
+}
+
+.welcome-msg p {
+  font-size: 14px;
+  font-family: 'Source Sans Pro', sans-serif;
+  padding-right: 5px;
+  padding-top: 8px;
+}
+
+.light-color {
+  color: #f8f8f6;
+  margin-bottom: 0px;
+}
+/* .checkout-img {
+  height: auto;
+  width: 60px;
+} */

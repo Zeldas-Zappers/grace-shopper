@@ -6,6 +6,8 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {me} from '../store/user'
+import logo from './lightseedslogo.png'
+import UserHome from './user-home'
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -18,38 +20,39 @@ class Navbar extends React.Component {
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
-  componentDidMount() {
-    //if logged in user
-    // if(this.props.isLoggedIn) {
+  // componentDidMount() {
+  //   //if logged in user
+  //   // if(this.props.isLoggedIn) {
 
-    // }
+  //   // }
 
-    //if guest
-    if (!this.props.isLoggedIn) {
-      if (localStorage.getItem('cart') === null) {
-        this.setState({
-          cart: [],
-        })
-      } else {
-        this.setState({
-          cart: JSON.parse(localStorage.getItem('cart')),
-        })
-      }
-    }
-  }
+  //   //if guest
+  //   if (!this.props.isLoggedIn) {
+  //     if (localStorage.getItem('cart') === null) {
+  //       this.setState({
+  //         cart: [],
+  //       })
+  //     } else {
+  //       this.setState({
+  //         cart: JSON.parse(localStorage.getItem('cart')),
+  //       })
+  //     }
+  //   }
+  // }
 
-  componentDidUpdate(prevProps, prevState) {
-    let test = JSON.parse(localStorage.getItem('cart')) //could be null
+  // componentDidUpdate(prevProps, prevState) {
+  //   let test = JSON.parse(localStorage.getItem('cart')) //could be null
 
-    // console.log('STORAGE', test)
-    // console.log('CART ON StATE', this.state.cart)
 
-    if (test && this.state.cart.length !== test.length) {
-      this.setState({
-        cart: test,
-      })
-    }
-  }
+  //   console.log('STORAGE', test)
+  //   console.log('CART ON StATE', this.state.cart)
+
+  //   if (test && this.state.cart.length !== test.length) {
+  //     this.setState({
+  //       cart: test,
+  //     })
+  //   }
+  // }
   // TODO: we will have to udpate this with componentDidMount and componentDidUpdate to get the cart counter to work properly. Will probably need to use logic similar to what is found in Cart.js. Also will have to use this.setState in componentDidUpdate in order for the counter to work for guests
 
   toggleMenu() {
@@ -59,19 +62,20 @@ class Navbar extends React.Component {
   }
 
   render() {
-    // console.log('CART STATE', this.state.cart)
+
     const {adminStatus} = this.props.user || ''
+    console.log('CART STATE', adminStatus)
     const show = this.state.showCollapsedMenu ? 'show' : ''
     const cart = !this.props.isLoggedIn
-      ? this.state.cart || []
+      ? JSON.parse(localStorage.getItem('cart')) || []
       : this.props.cart || []
 
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">
-              Plant Store
+            <a className="navbar-brand m-2" href="/home">
+              <img src={logo} />
             </a>
             <button
               className="navbar-toggler"
@@ -92,65 +96,58 @@ class Navbar extends React.Component {
               id="navbarNav"
             >
               {this.props.isLoggedIn ? (
-                <ul className="navbar-nav">
-                  <li className="nav-item">
-                    <Link
-                      to="/"
-                      className="nav-link active"
-                      aria-current="page"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/products" className="nav-link">
-                      All Products
-                    </Link>
-                  </li>
-                  {adminStatus && (
+                <div>
+                  <ul className="navbar-nav">
                     <li className="nav-item">
                       <Link
-                        to="/admin"
-                        className="nav-link"
-                        tabIndex="-1"
-                        aria-disabled="true"
+                        to="/"
+                        className="nav-link active"
+                        aria-current="page"
                       >
-                        Admin
+                        Home
                       </Link>
                     </li>
-                  )}
-                  {adminStatus && (
+                    <li className="nav-item">
+                      <Link to="/products" className="nav-link">
+                        All Products
+                      </Link>
+                    </li>
+                    {adminStatus && (
+                      <li className="nav-item">
+                        <Link
+                          to="/users"
+                          className="nav-link"
+                          tabIndex="-1"
+                          aria-disabled="true"
+                        >
+                          All Users
+                        </Link>
+                      </li>
+                    )}
                     <li className="nav-item">
                       <Link
-                        to="/users"
+                        to="/logout"
                         className="nav-link"
-                        tabIndex="-1"
-                        aria-disabled="true"
+                        onClick={this.props.handleClick}
                       >
-                        All Users
+                        Logout
                       </Link>
                     </li>
-                  )}
-                  <li className="nav-item">
-                    <Link
-                      to="/logout"
-                      className="nav-link"
-                      onClick={this.props.handleClick}
-                    >
-                      Logout
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      to="/cart"
-                      className="nav-link"
-                      tabIndex="-1"
-                      aria-disabled="true"
-                    >
-                      Cart({cart.length})
-                    </Link>
-                  </li>
-                </ul>
+                    {!adminStatus && (
+                      <li className="nav-item">
+                        <Link
+                          to="/cart"
+                          className="nav-link"
+                          tabIndex="-1"
+                          aria-disabled="true"
+                        >
+                          Cart
+                        </Link>
+                      </li>
+                    )}
+                  </ul>
+                  <UserHome />
+                </div>
               ) : (
                 <ul className="navbar-nav">
                   <li className="nav-item">
@@ -184,7 +181,7 @@ class Navbar extends React.Component {
                       tabIndex="-1"
                       aria-disabled="true"
                     >
-                      Cart({cart.length})
+                      Cart
                     </Link>
                   </li>
                 </ul>

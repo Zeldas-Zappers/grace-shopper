@@ -72,9 +72,9 @@ class EditProductForm extends React.Component {
   render() {
     return (
       <div className="container">
-        <p>
+        {/* <p>
           <button
-            className="btn btn-primary"
+            className="btn btn-lg home-button float-right"
             type="button"
             data-toggle="collapse"
             data-target="#collapseExample"
@@ -83,8 +83,8 @@ class EditProductForm extends React.Component {
           >
             Edit Product
           </button>
-        </p>
-        <div className="collapse" id="collapseExample">
+        </p> */}
+        <div className="collapse mt-4" id="collapseExample">
           <div className="card card-body">
             <div className="form-title">
               <h3>Edit this product below</h3>
@@ -183,7 +183,7 @@ class EditProductForm extends React.Component {
                   className="form-control"
                 />
               </div>
-              <button type="submit" className="btn btn-info ac-btn">
+              <button type="submit" className="btn home-button btn-lg">
                 Submit
               </button>
             </form>

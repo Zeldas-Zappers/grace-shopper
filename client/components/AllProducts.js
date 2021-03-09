@@ -16,40 +16,12 @@ export class AllProducts extends React.Component {
 
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-6">
-            <div className="dropdown mb-4 mt-4">
-              <button
-                className="btn btn-primary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-              >
-                Action
-              </button>
-              <div
-                className="dropdown-menu"
-                aria-labelledby="dropdownMenuButton"
-              >
-                <a className="dropdown-item disabled" href="#">
-                  Action
-                </a>{' '}
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>{' '}
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
         {adminStatus && (
           <div className="row mb-4">
             <AddProductForm />
           </div>
         )}
-        <div className="row">
+        <div className="row mt-2">
           {products.map((product) => {
             return (
               <div
@@ -69,7 +41,7 @@ export class AllProducts extends React.Component {
                   {adminStatus && (
                     <button
                       onClick={() => this.props.deleteProduct(product)}
-                      className="btn btn-danger"
+                      className="btn home-button"
                     >
                       Delete
                     </button>
@@ -78,49 +50,6 @@ export class AllProducts extends React.Component {
               </div>
             )
           })}
-        </div>
-        <div className="row">
-          <div className="col-md-12 d-flex justify-content-center">
-            <nav>
-              <ul className="pagination">
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    Previous
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    1
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    2
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    3
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    4
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    5
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    Next
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
         </div>
       </div>
     )

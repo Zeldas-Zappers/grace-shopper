@@ -9,7 +9,6 @@ import SingleProduct from './components/SingleProduct'
 import Home from './components/Home'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
-import Admin from './components/Admin'
 import AllUsers from './components/AllUsers'
 
 /**
@@ -28,21 +27,20 @@ class Routes extends Component {
       // had to remove the Switch to get the welcome message to load correctly. Also had to change component={Home} to exact path -- JC
       // <Switch>
       // {/* Routes placed here are available to all visitors */}
+      // <div>
+      //   {isLoggedIn && (
+      // <Switch>
+      // {/* Routes placed here are only available after logging in */}
+      // <Route path="/" component={UserHome} />
+      // {/* </Switch> */}
+      // )}
       <div>
-        {isLoggedIn && (
-          // <Switch>
-          // {/* Routes placed here are only available after logging in */}
-          <Route path="/" component={UserHome} />
-          // {/* </Switch> */}
-        )}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
-
-        <Route exact path="/admin" component={Admin} />
         <Route exact path="/users" component={AllUsers} />
         <Route exact path="/" component={Home} />
 

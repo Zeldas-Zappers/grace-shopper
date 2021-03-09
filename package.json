@@ -1,7 +1,7 @@
 {
-  "name": "grace-shopper",
+  "name": "Seeds",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Ecommerce shop for plants!",
   "engines": {
     "node": "~12.11.1"
   },
@@ -50,6 +50,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.1",
     "faker": "^5.4.0",
+    "file-loader": "^6.2.0",
     "history": "^4.9.0",
     "jquery": "^3.6.0",
     "morgan": "^1.9.1",
@@ -68,7 +69,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.3.1",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
