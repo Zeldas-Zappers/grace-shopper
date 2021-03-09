@@ -3,9 +3,10 @@ const Cart = require('../db/models/cart')
 const CartItem = require('../db/models/cartItem')
 const User = require('../db/models/user')
 const Product = require('../db/models/product')
+const ensureLogin = require('./middleware')
 
 //get cart order
-router.get('/:cartId', async (req, res, next) => {
+router.get('/:cartId', ensureLogin, async (req, res, next) => {
   try {
     const cart = await Cart.findOne({
       where: {
@@ -19,7 +20,7 @@ router.get('/:cartId', async (req, res, next) => {
 })
 
 //update orderStatus for cart order
-router.put('/:cartId', async (req, res, next) => {
+router.put('/:cartId', ensureLogin, async (req, res, next) => {
   console.log('REQ BODY', req.body)
   try {
     const cart = await Cart.findOne({

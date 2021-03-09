@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Product = require('../db/models/product')
+const ensureAdmin = require('./middleware')
 
 // already mounted on /api/products
 router.get('/', async (req, res, next) => {
@@ -37,7 +38,7 @@ router.get('/:id', async (req, res, next) => {
 
 //Update single product details
 //PUT /api/products/:id
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', ensureAdmin, async (req, res, next) => {
   try {
     const id = req.params.id
     const product = await Product.findByPk(id)
@@ -55,7 +56,7 @@ router.put('/:id', async (req, res, next) => {
 
 //Create a new single product
 //POST /api/products/
-router.post('/', async (req, res, next) => {
+router.post('/', ensureAdmin, async (req, res, next) => {
   try {
     console.log('BODY', req.body)
     const newProduct = await Product.create(req.body)
@@ -67,7 +68,7 @@ router.post('/', async (req, res, next) => {
 
 //Delete a single product
 // DELETE /api/products/:id
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', ensureAdmin, async (req, res, next) => {
   try {
     const id = req.params.id
     if (isNaN(Number(id))) {
