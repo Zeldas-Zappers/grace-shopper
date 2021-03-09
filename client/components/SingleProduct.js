@@ -10,11 +10,15 @@ import {
 } from '../store/cart'
 import {me} from '../store/user'
 import EditProductForm from './EditProductForm'
+// import {ToastContainer, toast} from 'react-toastify'
+// import 'react-toastify/dist/ReactToastify.css'
 
+// toast.configure()
 export class SingleProduct extends React.Component {
   constructor() {
     super()
     this.addToCart = this.addToCart.bind(this)
+    // this.notifyAddToCart = this.notifyAddToCart.bind(this)
   }
 
   componentDidMount() {
@@ -98,6 +102,7 @@ export class SingleProduct extends React.Component {
       }
       localStorage.setItem('cart', JSON.stringify(cart))
     }
+    toast('Added to cart!')
   }
 
   render() {
@@ -107,6 +112,7 @@ export class SingleProduct extends React.Component {
 
     return (
       <div className="container">
+        <ToastContainer />
         <div className="row mt-5">
           <div className="col-lg-5 col-md-6 pr-0">
             <img src={product.imageUrl} />
