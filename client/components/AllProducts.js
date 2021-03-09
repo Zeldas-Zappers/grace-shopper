@@ -15,7 +15,7 @@ export class AllProducts extends React.Component {
     const adminStatus = this.props.adminStatus || ''
 
     return (
-      <div className="container">
+      <div className="container mt-4">
         {adminStatus && (
           <div className="row mb-4">
             <AddProductForm />
