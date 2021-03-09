@@ -43,7 +43,6 @@ class Navbar extends React.Component {
   // componentDidUpdate(prevProps, prevState) {
   //   let test = JSON.parse(localStorage.getItem('cart')) //could be null
 
-
   //   console.log('STORAGE', test)
   //   console.log('CART ON StATE', this.state.cart)
 
@@ -62,7 +61,6 @@ class Navbar extends React.Component {
   }
 
   render() {
-
     const {adminStatus} = this.props.user || ''
     console.log('CART STATE', adminStatus)
     const show = this.state.showCollapsedMenu ? 'show' : ''

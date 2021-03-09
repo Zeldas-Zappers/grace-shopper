@@ -59,7 +59,7 @@ class Checkout extends React.Component {
         <div className="d-flex justify-content-between">
           <h3 className="title">
             {this.state.orderSubmitted
-              ? "Thank you! Your order has been submitted"
+              ? 'Thank you! Your order has been submitted'
               : 'Order Summary'}
           </h3>
           {!this.state.orderSubmitted && (
