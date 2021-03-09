@@ -87,9 +87,56 @@ async function seed() {
     'https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_the-gift-bundle_gallery_all_04_360x.jpg?v=1613398524',
   ]
 
+  const productNameArray = [
+    'Coffee Plant',
+    'Pet-Friendly Bundle',
+    'Magical Willow',
+    'Carnivorous Roses',
+    'Poisonous Mushrooms',
+    'Vertical Space Bundle',
+    'String of Pearls',
+    'Fern Bundle',
+    'Shrivelfig',
+    'Bubotuber',
+    `Devil's Snare`,
+    `Gillyweed`,
+    `Leaping Toadstools`,
+    `Venemous Tentacula`,
+    `Mandrake`,
+    `Mimbulus Mimbletonia`,
+    `Wolfsbane`,
+    `Wiggentree`,
+    `Alihotsy`,
+    `Asphodel`,
+    `Bouncing Bulb`,
+    `Dittany`,
+    `Fanged Geranium`,
+    `Flitterbloom`,
+    `Flutterby Bush`,
+    `Sopophorous Plant`,
+    `Sneezewort`,
+    `Snargaluff`,
+    `Umbrella Flower`,
+    `Valerian`,
+    `Whomping Willow`,
+    `Wormwood`,
+    `Puffapod`,
+    `Self-fertilising shrub`,
+    `Fluxweed`,
+    `Honking daffodil`,
+    `Knotgrass`,
+    `Screechsnap`,
+    `Agapanthus`,
+    `Angel's Trumpet`,
+    `Arnica`,
+    `Borage`,
+    `Cowbane`,
+    `Elder Tree`,
+  ]
+
   const productArray = []
-  for (let i = 1; i <= imageUrlArray.length; i++) {
-    const name = faker.commerce.productName()
+  for (let i = 0; i < productNameArray.length; i++) {
+    const name = productNameArray[i]
     const description = faker.commerce.productDescription()
     const price = faker.random.number({
       min: 10,
@@ -132,7 +179,6 @@ async function seed() {
       address,
       phone,
     })
-    console.log(usersArray)
   }
 
   const users = await Promise.all(
