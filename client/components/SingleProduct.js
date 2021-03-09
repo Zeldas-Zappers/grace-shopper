@@ -61,11 +61,11 @@ export class SingleProduct extends React.Component {
 
     return (
       <div className="container">
-        <div className="row mt-4">
-          <div className="col-lg-5 col-md-6">
+        <div className="row mt-5">
+          <div className="col-lg-5 col-md-6 pr-0">
             <img src={product.imageUrl} />
           </div>
-          <div className="col-lg-7 col-md-6 mt-4">
+          <div className="col-lg-7 col-md-6 mt-4 pl-0">
             <h3 className="title">{product.name}</h3>
             <p className="price">$ {product.price}</p>
             <h6 className="mt-5">
@@ -74,7 +74,10 @@ export class SingleProduct extends React.Component {
               </strong>
             </h6>
             <p>{product.description}.</p>
-            <h6 className="mt-5">
+            <div className="mb-4">
+              <hr className="dotted" />
+            </div>
+            <h6 className="mt-3">
               <strong>
                 <em>PLANT CARE</em>
               </strong>
@@ -91,24 +94,26 @@ export class SingleProduct extends React.Component {
               <em>Category: </em>
               {product.category}
             </p>
-          </div>
-          <div className="row">
-            <div className="col">
-              <button
-                onClick={this.addToCart}
-                type="button"
-                className="btn btn-success"
-              >
-                Add to Cart
-              </button>
+            <div className="row ">
+              {!adminStatus && (
+                <div className="col">
+                  <button
+                    onClick={this.addToCart}
+                    type="button"
+                    className="btn btn-lg home-button float-right"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              )}
             </div>
           </div>
+          {adminStatus && (
+            <div className="col mt-4">
+              <EditProductForm />
+            </div>
+          )}
         </div>
-        {adminStatus && (
-          <div className="col mt-4">
-            <EditProductForm />
-          </div>
-        )}
       </div>
     )
   }

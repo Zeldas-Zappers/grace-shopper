@@ -1,15 +1,12 @@
 /* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
-
 import {Redirect, Route} from 'react-router-dom'
-
 import {
   _setCartItems,
   updateProductQuantity,
   _removeItemFromCart,
 } from '../store/cart'
-
 import {me} from '../store/user'
 import Checkout from './Checkout'
 import {Link} from 'react-router-dom'
@@ -224,7 +221,7 @@ class Cart extends React.Component {
           <div className="col-md-12">
             <div className="row">
               <div className="col-md-12">
-                {/* <p>Subtotal: ${subTotal}</p> */}
+                <p>Subtotal: ${subTotal}</p>
               </div>
             </div>
             <div className="row">
