@@ -74,6 +74,8 @@ router.put(
         include: [{model: Cart, include: [{model: Product}]}],
       })
 
+      console.log('in put route!!!!!!!!!!', 'req.body', req.body)
+
       const updatedCart = await cart.update(req.body)
       const getCart = await Cart.findByPk(updatedCart.cartId)
       const products = await getCart.getProducts()
