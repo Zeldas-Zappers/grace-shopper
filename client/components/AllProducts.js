@@ -15,13 +15,13 @@ export class AllProducts extends React.Component {
     const adminStatus = this.props.adminStatus || ''
 
     return (
-      <div className="container">
+      <div className="container mt-4">
         {adminStatus && (
           <div className="row mb-4">
             <AddProductForm />
           </div>
         )}
-        <div className="row mt-5">
+        <div className="row mt-2">
           {products.map((product) => {
             return (
               <div
@@ -41,7 +41,7 @@ export class AllProducts extends React.Component {
                   {adminStatus && (
                     <button
                       onClick={() => this.props.deleteProduct(product)}
-                      className="btn btn-danger"
+                      className="btn home-button"
                     >
                       Delete
                     </button>

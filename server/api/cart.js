@@ -67,6 +67,7 @@ router.put(
     try {
       //might delete product eager load
 
+      // see if we can make this block more DRY, repeating from PUT, etc.
       const {productId, cartId} = req.params
       const cart = await CartItem.findOne({
         where: {
@@ -90,21 +91,25 @@ router.put(
 )
 
 // delete an item from the cart
-router.delete('/:cartId/:productId', ensureLogin, async (req, res, next) => {
-  try {
-    const cartItem = await CartItem.findOne({
-      where: {
-        cartId: req.params.cartId,
-        productId: req.params.productId,
-      },
-    })
-    await cartItem.destroy()
-    const cart = await Cart.findByPk(req.params.cartId)
-    const products = await cart.getProducts()
-    res.json(products)
-  } catch (err) {
-    next(err)
+router.delete(
+  '/:cartId/product/:productId',
+  ensureLogin,
+  async (req, res, next) => {
+    try {
+      const cartItem = await CartItem.findOne({
+        where: {
+          cartId: req.params.cartId,
+          productId: req.params.productId,
+        },
+      })
+      await cartItem.destroy()
+      const cart = await Cart.findByPk(req.params.cartId)
+      const products = await cart.getProducts()
+      res.json(products)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
 
 module.exports = router

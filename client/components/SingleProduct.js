@@ -176,13 +176,25 @@ export class SingleProduct extends React.Component {
                   />
                 </div>
               )}
+              {adminStatus && (
+                <div className="col">
+                  <p>
+                    <button
+                      className="btn btn-lg home-button float-right"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#collapseExample"
+                      aria-expanded="false"
+                      aria-controls="collapseExample"
+                    >
+                      Edit Product
+                    </button>
+                  </p>
+                </div>
+              )}
             </div>
           </div>
-          {adminStatus && (
-            <div className="col mt-4">
-              <EditProductForm />
-            </div>
-          )}
+          <EditProductForm />
         </div>
       </div>
     )

@@ -40,7 +40,7 @@ class AddProductForm extends React.Component {
       <div className="container">
         <p>
           <button
-            className="btn btn-primary"
+            className="btn btn-lg home-button"
             type="button"
             data-toggle="collapse"
             data-target="#collapseExample"
@@ -149,7 +149,7 @@ class AddProductForm extends React.Component {
                   className="form-control"
                 />
               </div>
-              <button type="submit" className="btn btn-info ac-btn">
+              <button type="submit" className="btn btn-lg home-button">
                 Submit
               </button>
             </form>
