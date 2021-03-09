@@ -202,7 +202,7 @@ var AddProductForm = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary",
+        className: "btn btn-lg home-button",
         type: "button",
         "data-toggle": "collapse",
         "data-target": "#collapseExample",
@@ -313,7 +313,7 @@ var AddProductForm = /*#__PURE__*/function (_React$Component) {
         className: "form-control"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
-        className: "btn btn-info ac-btn"
+        className: "btn btn-lg home-button"
       }, "Submit")))));
     }
   }]);
@@ -403,11 +403,11 @@ var AllProducts = /*#__PURE__*/function (_React$Component) {
 
       var adminStatus = this.props.adminStatus || '';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
+        className: "container mt-4"
       }, adminStatus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row mb-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddProductForm__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row mt-5"
+        className: "row mt-2"
       }, products.map(function (product) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: product.id,
@@ -429,7 +429,7 @@ var AllProducts = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             return _this.props.deleteProduct(product);
           },
-          className: "btn btn-danger"
+          className: "btn home-button"
         }, "Delete")));
       })));
     }
@@ -652,6 +652,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
 /* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/user */ "./client/store/user.js");
 /* harmony import */ var _Checkout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Checkout */ "./client/components/Checkout.js");
+/* harmony import */ var _EmptyCartMessage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./EmptyCartMessage */ "./client/components/EmptyCartMessage.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -687,6 +688,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 /* eslint-disable complexity */
+
 
 
 
@@ -840,12 +842,10 @@ var Cart = /*#__PURE__*/function (_React$Component) {
       // console.log('product props*************', this.props.product)
       // console.log('user props****************', this.props.user)
       console.log('**********CART*********', this.props.cart);
-      var cartToRender = !this.props.loggedIn ? this.state.cart || [] : this.props.cart || [];
-
-      if (cartToRender.length === 0) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Your cart is empty!!!");
-      } // define the subtotal for guests
-
+      var cartToRender = !this.props.loggedIn ? this.state.cart || [] : this.props.cart || []; // if (cartToRender.length === 0) {
+      //   return <div>Your cart is empty!!!</div>
+      // }
+      // define the subtotal for guests
 
       var subTotal;
 
@@ -868,54 +868,46 @@ var Cart = /*#__PURE__*/function (_React$Component) {
 
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
-      }, cartToRender.map(function (product) {
+        className: "container container mt-5"
+      }, cartToRender.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-flex justify-content-between"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "title"
+      }, "Items currently in your cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/checkout"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn home-button btn-lg",
+        onClick: function onClick() {
+          return _this2.handleClick();
+        }
+      }, "Proceed to checkout"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "subTotal"
+      }, "Total: $", subTotal)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EmptyCartMessage__WEBPACK_IMPORTED_MODULE_6__["default"], null), cartToRender.map(function (product) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card mb-3 mt-5",
+          style: {
+            maxWidth: '700px'
+          },
           key: product.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row mt-4"
+          className: "row no-gutters"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-lg-4 col-md-6"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-12"
+          className: "col-md-4"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          alt: "whatever alt we want",
-          src: product.imageUrl
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
+          src: product.imageUrl,
+          className: "card-img checkout-img"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-md-8 mt-4"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-12 mt-4"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick() {
-            return _this2.removefromCart(product.id);
-          },
-          type: "button",
-          className: "btn btn-warning"
-        }, "Remove from cart")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-lg-8 col-md-6"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-12"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, "$", product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, "Quantity:", ' ', !_this2.props.loggedIn ? product.count : product.cartItem.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, product.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, product.lighting), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, product.watering)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-12"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          className: "card-body"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+          className: "card-title checkout-card-title"
+        }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "card-text checkout-card-text"
+        }, "$", product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "card-text checkout-card-text"
+        }, "Quantity:", ' ', !_this2.props.loggedIn ? product.count : product.cartItem.quantity)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
           className: "main-form",
           onSubmit: function onSubmit(evt) {
             return _this2.handleSubmit(evt, product.id);
@@ -932,30 +924,16 @@ var Cart = /*#__PURE__*/function (_React$Component) {
           onChange: _this2.handleChange,
           className: "form-control"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "btn btn-info",
+          className: "btn home-button btn-sm mr-2",
           type: "submit"
-        }, "Update Quantity")))))));
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Subtotal: $", subTotal))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, cartToRender.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-success",
-        onClick: function onClick() {
-          return _this2.handleClick();
-        }
-      }, "Proceed to checkout"), this.state.checkout && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
-        to: "/checkout"
-      })) : 'Your cart is empty'))));
+        }, "Update Quantity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this2.removefromCart(product.id);
+          },
+          type: "button",
+          className: "btn home-button btn-sm"
+        }, "Remove from cart")))));
+      }));
     }
   }]);
 
@@ -1064,14 +1042,7 @@ var Checkout = /*#__PURE__*/function (_React$Component) {
     key: "submitOrder",
     value: function submitOrder() {
       if (this.props.loggedIn) {
-        var cartId = this.props.cart[0].cartItem.cartId; // const updatedCart = this.props.cart.map((product) => {
-        //   if(product.cartItem.orderStatus === "Processing") {
-        //     product.cartItem.orderStatus = "Fullfilled";
-        //   }
-        //   return product;
-        // })
-        //console.log('SUBMIT ORDER', updatedCart)
-
+        var cartId = this.props.cart[0].cartItem.cartId;
         this.props.clearCart(cartId);
         this.setState(_objectSpread(_objectSpread({}, this.state), {}, {
           orderSubmitted: true
@@ -1081,7 +1052,7 @@ var Checkout = /*#__PURE__*/function (_React$Component) {
       if (!this.props.loggedIn) {
         this.setState({
           cart: localStorage.clear(),
-          orderSubmitted: true
+          orderSubmitted: !this.state.orderSubmitted
         });
       }
     }
@@ -1118,13 +1089,13 @@ var Checkout = /*#__PURE__*/function (_React$Component) {
         className: "d-flex justify-content-between"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "title"
-      }, this.state.orderSubmitted ? "You're order has been submitted" : 'Order Summary'), !this.state.orderSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, this.state.orderSubmitted ? "Thank you! Your order has been submitted" : 'Order Summary'), !this.state.orderSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.submitOrder,
         type: "button",
-        className: "btn home-button",
+        className: "btn btn-lg home-button",
         "data-toggle": "modal",
         "data-target": "#exampleModal"
-      }, "Submit Order")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Submit Order")), !this.state.orderSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "subTotal"
       }, "Total: $", subTotal), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal fade",
@@ -1337,15 +1308,8 @@ var EditProductForm = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary",
-        type: "button",
-        "data-toggle": "collapse",
-        "data-target": "#collapseExample",
-        "aria-expanded": "false",
-        "aria-controls": "collapseExample"
-      }, "Edit Product")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "collapse",
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "collapse mt-4",
         id: "collapseExample"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card card-body"
@@ -1449,7 +1413,7 @@ var EditProductForm = /*#__PURE__*/function (_React$Component) {
         className: "form-control"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
-        className: "btn btn-info ac-btn"
+        className: "btn home-button btn-lg"
       }, "Submit")))));
     }
   }]);
@@ -1484,6 +1448,33 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(EditProductForm)));
+
+/***/ }),
+
+/***/ "./client/components/EmptyCartMessage.js":
+/*!***********************************************!*\
+  !*** ./client/components/EmptyCartMessage.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var EmptyCartMessage = function EmptyCartMessage(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container container mt-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "title"
+  }, "Your cart is currently empty.")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (EmptyCartMessage);
 
 /***/ }),
 
@@ -1718,9 +1709,16 @@ var SingleProduct = /*#__PURE__*/function (_React$Component) {
         onClick: this.addToCart,
         type: "button",
         className: "btn btn-lg home-button float-right"
-      }, "Add to Cart")))), adminStatus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col mt-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EditProductForm__WEBPACK_IMPORTED_MODULE_5__["default"], null))));
+      }, "Add to Cart")), adminStatus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-lg home-button float-right",
+        type: "button",
+        "data-toggle": "collapse",
+        "data-target": "#collapseExample",
+        "aria-expanded": "false",
+        "aria-controls": "collapseExample"
+      }, "Edit Product"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EditProductForm__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
     }
   }]);
 
@@ -1933,6 +1931,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store */ "./client/store/index.js");
 /* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/user */ "./client/store/user.js");
 /* harmony import */ var _lightseedslogo_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lightseedslogo.png */ "./client/components/lightseedslogo.png");
+/* harmony import */ var _user_home__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./user-home */ "./client/components/user-home.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1958,6 +1957,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 /* eslint-disable complexity */
 
 /* eslint-disable no-warning-comments */
+
 
 
 
@@ -2024,11 +2024,10 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log('CART STATE', this.state.cart);
-
       var _ref = this.props.user || '',
           adminStatus = _ref.adminStatus;
 
+      console.log('CART STATE', adminStatus);
       var show = this.state.showCollapsedMenu ? 'show' : '';
       var cart = !this.props.isLoggedIn ? JSON.parse(localStorage.getItem('cart')) || [] : this.props.cart || [];
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
@@ -2054,7 +2053,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: 'collapse navbar-collapse justify-content-end m-0 ' + show,
         id: "navbarNav"
-      }, this.props.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, this.props.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "navbar-nav"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item"
@@ -2080,14 +2079,14 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
         to: "/logout",
         className: "nav-link",
         onClick: this.props.handleClick
-      }, "Logout")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      }, "Logout")), !adminStatus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
         to: "/cart",
         className: "nav-link",
         tabIndex: "-1",
         "aria-disabled": "true"
-      }, "Cart(", cart.length, ")"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, "Cart"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_home__WEBPACK_IMPORTED_MODULE_7__["default"], null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "navbar-nav"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item"
@@ -2117,7 +2116,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
         className: "nav-link",
         tabIndex: "-1",
         "aria-disabled": "true"
-      }, "Cart(", cart.length, ")")))))));
+      }, "Cart")))))));
     }
   }]);
 
@@ -2183,7 +2182,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var UserHome = function UserHome(props) {
   var email = props.email;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Welcome, ", email));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "welcome-msg"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "light-color text-right"
+  }, "Welcome, ", email));
 };
 /**
  * CONTAINER
@@ -2349,15 +2352,14 @@ var Routes = /*#__PURE__*/function (_Component) {
         // had to remove the Switch to get the welcome message to load correctly. Also had to change component={Home} to exact path -- JC
         // <Switch>
         // {/* Routes placed here are available to all visitors */}
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, isLoggedIn &&
-        /*#__PURE__*/
+        // <div>
+        //   {isLoggedIn && (
         // <Switch>
         // {/* Routes placed here are only available after logging in */}
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-          path: "/",
-          component: _components__WEBPACK_IMPORTED_MODULE_4__["UserHome"]
-        }) // {/* </Switch> */}
-        , /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        // <Route path="/" component={UserHome} />
+        // {/* </Switch> */}
+        // )}
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
           exact: true,
           path: "/login",
           component: _components__WEBPACK_IMPORTED_MODULE_4__["Login"]
