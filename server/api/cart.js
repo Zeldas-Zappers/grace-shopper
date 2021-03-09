@@ -67,6 +67,7 @@ router.put(
     try {
       //might delete product eager load
 
+      // see if we can make this block more DRY, repeating from PUT, etc.
       const {productId, cartId} = req.params
       const cart = await CartItem.findOne({
         where: {
