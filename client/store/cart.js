@@ -120,9 +120,7 @@ export default function cartReducer(state = initialState, action) {
       return action.products
     //return state.filter((product) => product.id !== action.product.id)
     case EDIT_PRODUCT_QUANTITY:
-      return state.map((product) =>
-        product.id === action.product.id ? action.product : product
-      )
+      return action.updatedProduct
     case CHECKOUT:
       state = []
       return state
