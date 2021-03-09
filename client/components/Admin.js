@@ -7,7 +7,7 @@ const Admin = (props) => {
     <div className="container">
       <div className="row">
         <div className="col-md-12">
-          <h3>Welcome, insert user email</h3>
+          <h3>Welcome, {props.email}</h3>
         </div>
       </div>
     </div>
