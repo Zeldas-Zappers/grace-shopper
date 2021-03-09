@@ -116,8 +116,7 @@ p.card-text {
 }
 
 a.navbar-brand.m-2 {
-  font-size: 25px;
-  color: #f8f8f6;
+  margin: 0px;
 }
 
 .navbar.navbar-expand-lg.navbar-light {
