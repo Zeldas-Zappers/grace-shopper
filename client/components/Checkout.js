@@ -12,6 +12,7 @@ class Checkout extends React.Component {
       orderSubmitted: false,
     }
     this.submitOrder = this.submitOrder.bind(this)
+    this.redirect = this.redirect.bind(this)
   }
 
   submitOrder() {
@@ -30,6 +31,14 @@ class Checkout extends React.Component {
         orderSubmitted: !this.state.orderSubmitted,
       })
     }
+
+    this.redirect()
+  }
+
+  redirect() {
+    setTimeout(() => {
+      this.props.history.push('/products')
+    }, 3000)
   }
 
   render() {
@@ -59,7 +68,7 @@ class Checkout extends React.Component {
         <div className="d-flex justify-content-between">
           <h3 className="title">
             {this.state.orderSubmitted
-              ? "Thank you! Your order has been submitted"
+              ? 'Thank you! Your order has been submitted'
               : 'Order Summary'}
           </h3>
           {!this.state.orderSubmitted && (
@@ -77,15 +86,15 @@ class Checkout extends React.Component {
         {!this.state.orderSubmitted && (
           <div className="subTotal">Total: ${subTotal}</div>
         )}
-        <div
+        {/* <div
           className="modal fade"
           id="exampleModal"
           tabIndex="-1"
           role="dialog"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
-        >
-          <div className="modal-dialog" role="document">
+        > */}
+        {/* <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">
@@ -112,8 +121,8 @@ class Checkout extends React.Component {
               </div>
             </div>
           </div>
-        </div>
-
+        </div> */}
+        {/* </div> */}
         {cartToRender.map((product) => {
           return (
             <div
