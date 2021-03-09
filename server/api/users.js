@@ -5,7 +5,7 @@ const {ensureAdmin, ensureLogin} = require('./middleware')
 module.exports = router
 
 // get all users (only for admin)
-router.get('/', async (req, res, next) => {
+router.get('/', ensureAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
