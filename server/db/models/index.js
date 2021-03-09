@@ -22,14 +22,19 @@ Cart.belongsToMany(Product, {through: CartItem})
 
 //UserCart through table will just have UserIds and CartIds
 // these two are potentially deletable
-User.belongsToMany(Cart, {through: 'UserCart'})
-Cart.belongsToMany(User, {through: 'UserCart'})
+// compare to bill-splitting
+// User.belongsToMany(Cart, {through: 'UserCart'})
+// Cart.belongsToMany(User, {through: 'UserCart'})
 
-User.hasMany(Cart)
-Cart.belongsTo(User)
+User.hasMany(Cart) // this puts userId on Cart
+Cart.belongsTo(User) // whatever is being belonged To gets the foreign key
 
 Cart.hasMany(CartItem)
 CartItem.belongsTo(Cart)
+Product.hasMany(CartItem)
+CartItem.belongsTo(Product)
+
+// many to many == TWO one-to-many relationships
 
 module.exports = {
   User,
