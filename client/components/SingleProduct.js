@@ -10,10 +10,10 @@ import {
 } from '../store/cart'
 import {me} from '../store/user'
 import EditProductForm from './EditProductForm'
-// import {ToastContainer, toast} from 'react-toastify'
-// import 'react-toastify/dist/ReactToastify.css'
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-// toast.configure()
+toast.configure()
 export class SingleProduct extends React.Component {
   constructor() {
     super()
@@ -102,7 +102,15 @@ export class SingleProduct extends React.Component {
       }
       localStorage.setItem('cart', JSON.stringify(cart))
     }
-    toast('Added to cart!')
+    toast.success('🍁Added to cart!', {
+      position: 'bottom-right',
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    })
   }
 
   render() {
@@ -112,7 +120,6 @@ export class SingleProduct extends React.Component {
 
     return (
       <div className="container">
-        <ToastContainer />
         <div className="row mt-5">
           <div className="col-lg-5 col-md-6 pr-0">
             <img src={product.imageUrl} />
@@ -156,6 +163,17 @@ export class SingleProduct extends React.Component {
                   >
                     Add to Cart
                   </button>
+                  <ToastContainer
+                    position="bottom-right"
+                    autoClose={2500}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover={false}
+                  />
                 </div>
               )}
             </div>
