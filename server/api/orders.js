@@ -8,9 +8,10 @@ const {ensureLogin, ensureAdmin} = require('./middleware')
 //get cart order
 router.get('/:cartId', ensureLogin, async (req, res, next) => {
   try {
+    const {cartId} = req.params
     const cart = await Cart.findOne({
       where: {
-        id: req.params.cartId,
+        id: cartId,
       },
     })
     res.json(cart)
@@ -23,9 +24,10 @@ router.get('/:cartId', ensureLogin, async (req, res, next) => {
 router.put('/:cartId', ensureLogin, async (req, res, next) => {
   console.log('REQ BODY', req.body)
   try {
+    const {cartId} = req.params
     const cart = await Cart.findOne({
       where: {
-        id: req.params.cartId,
+        id: cartId,
       },
     })
 
