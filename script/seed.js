@@ -2,7 +2,7 @@
 /* eslint-disable max-statements */
 // 'use strict'
 const db = require('../server/db')
-const {User, Product, Cart, CartItem} = require('../server/db/models')
+const {User, Product} = require('../server/db/models')
 // const {Product} = require('../server/db/models')
 const faker = require('faker')
 
@@ -115,7 +115,6 @@ async function seed() {
     })
   }
 
-  // console.log('hello', productArray)
   const usersArray = []
   for (let i = 0; i < 40; i++) {
     const email = faker.internet.email()
