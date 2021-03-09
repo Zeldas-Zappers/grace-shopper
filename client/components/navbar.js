@@ -41,8 +41,8 @@ class Navbar extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     let test = JSON.parse(localStorage.getItem('cart')) //could be null
 
-    console.log('STORAGE', test)
-    console.log('CART ON StATE', this.state.cart)
+    // console.log('STORAGE', test)
+    // console.log('CART ON StATE', this.state.cart)
 
     if (test && this.state.cart.length !== test.length) {
       this.setState({
@@ -59,7 +59,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    console.log('CART STATE', this.state.cart)
+    // console.log('CART STATE', this.state.cart)
     const {adminStatus} = this.props.user || ''
     const show = this.state.showCollapsedMenu ? 'show' : ''
     const cart = !this.props.isLoggedIn
