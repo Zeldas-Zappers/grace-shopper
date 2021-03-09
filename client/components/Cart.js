@@ -48,7 +48,10 @@ class Cart extends React.Component {
     evt.preventDefault()
     if (this.props.loggedIn) {
       let cart = this.props.cart || []
-      // this.props.updateQuantity(cart.id, productId, this.state.quantity)
+      let cartId = cart[0].cartItem.cartId
+      // quantity variable is the req.body to send to put route
+      let quantity = {quantity: this.state.quantity}
+      this.props.updateQuantity(cartId, productId, quantity)
     } else {
       const newCart = [...this.state.cart]
       const productToUpdate = newCart.find(
@@ -80,20 +83,21 @@ class Cart extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log(
-    //   'in componentDidUpdate, prevProps',
-    //   prevProps,
-    //   'this.props',
-    //   this.props
-    // )
     // if (prevProps.cart.length === 0) {
     //   console.log('cart is empty!!')
     //   return
     // }
-
+    // comparing previous subtotal to current subtotal for scenarios in which user updates quantity
+    const prevSubtotal = prevProps.cart
+      .map((product) => product.cartItem.quantity * product.cartItem.price)
+      .reduce((a, b) => a + b, 0)
+    const currSubtotal = this.props.cart
+      .map((product) => product.cartItem.quantity * product.cartItem.price)
+      .reduce((a, b) => a + b, 0)
     if (
       prevProps.user.id !== this.props.user.id ||
-      prevProps.cart.length !== this.props.cart.length
+      prevProps.cart.length !== this.props.cart.length ||
+      prevSubtotal !== currSubtotal
     ) {
       // this.state = {
       // did you check if the cart is empty? : false
@@ -123,6 +127,8 @@ class Cart extends React.Component {
     // console.log('cart props***************', this.props.cart)
     // console.log('product props*************', this.props.product)
     // console.log('user props****************', this.props.user)
+
+    console.log('**********CART*********', this.props.cart)
 
     const cartToRender = !this.props.loggedIn
       ? this.state.cart || []
