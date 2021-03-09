@@ -64,11 +64,7 @@ class Cart extends React.Component {
       this.setState({cart: newCart})
     }
   }
-  // this.props.isLoggedIn ? () =>
-  //                         this.props.removeCartItem(
-  //                           product.cartItem.cartId,
-  //                           product.id
-  //                         ) : () => this.removefromCart(product.id)
+
   removefromCart(productId) {
     if (this.props.loggedIn) {
       const cartId = this.props.cart[0].cartItem.cartId

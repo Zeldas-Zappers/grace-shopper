@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {me} from '../store/user'
+import logo from './lightseedslogo.png'
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -68,10 +69,10 @@ class Navbar extends React.Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">
-              Plant Store
+            <a className="navbar-brand m-2" href="#">
+              <img src={logo} /> Seeds
             </a>
             <button
               className="navbar-toggler"

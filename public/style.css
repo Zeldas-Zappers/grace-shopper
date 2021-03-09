@@ -1,5 +1,13 @@
+/* font-family: 'Playfair Display', serif; */
+/* font-family: 'Source Sans Pro', sans-serif; */
+
 body {
-  font-family: sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #2b2d2f;
+}
+
+#app {
+  background-color: #f8f8f6;
 }
 
 a {
@@ -24,6 +32,79 @@ section {
   height: 100vh;
 }
 
+.title {
+  color: #4b6407;
+  font-family: 'Playfair Display', serif;
+  font-size: 35px;
+  font-weight: 700;
+}
+
+dd {
+  color: #2b2d2f;
+  font-size: 18px;
+}
+
+.price {
+  color: #2b2d2f;
+  font-size: 25px;
+}
+
+.btn.home-button {
+  background-color: #e06b4a;
+  size: 40px;
+}
+
 .card a:hover {
   text-decoration: none;
+}
+
+.card-body {
+  font-family: 'Playfair Display', serif;
+}
+
+.card-body h5,
+p {
+  color: #4b6407;
+}
+
+h5.card-text {
+  font-size: 22px;
+  padding-right: 0;
+}
+
+p.card-text {
+  font-size: 18px;
+  color: #2b2d2f;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.navbar-brand {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+a.navbar-brand.m-2 {
+  font-size: 25px;
+  color: #f8f8f6;
+}
+
+.navbar.navbar-expand-lg.navbar-light {
+  background-color: #4b6407;
+}
+
+img.navbar-brand.m-2 {
+  width: 100px;
+  height: 100px;
+}
+
+.nav-link {
+  color: #f8f8f6 !important;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
+  margin: 5px;
+}
+
+.nav-item {
+  margin: 5px;
+  padding: 5px;
 }
