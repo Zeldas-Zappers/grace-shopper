@@ -3,13 +3,15 @@ const Cart = require('../db/models/cart')
 const CartItem = require('../db/models/cartItem')
 const User = require('../db/models/user')
 const Product = require('../db/models/product')
+const {ensureLogin, ensureAdmin} = require('./middleware')
 
 //get cart order
-router.get('/:cartId', async (req, res, next) => {
+router.get('/:cartId', ensureLogin, async (req, res, next) => {
   try {
+    const {cartId} = req.params
     const cart = await Cart.findOne({
       where: {
-        id: req.params.cartId,
+        id: cartId,
       },
     })
     res.json(cart)
@@ -19,12 +21,13 @@ router.get('/:cartId', async (req, res, next) => {
 })
 
 //update orderStatus for cart order
-router.put('/:cartId', async (req, res, next) => {
+router.put('/:cartId', ensureLogin, async (req, res, next) => {
   console.log('REQ BODY', req.body)
   try {
+    const {cartId} = req.params
     const cart = await Cart.findOne({
       where: {
-        id: req.params.cartId,
+        id: cartId,
       },
     })
 

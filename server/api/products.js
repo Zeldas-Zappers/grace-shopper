@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Product = require('../db/models/product')
+const {ensureLogin, ensureAdmin} = require('./middleware')
 
 // already mounted on /api/products
 router.get('/', async (req, res, next) => {
@@ -15,7 +16,7 @@ router.get('/', async (req, res, next) => {
 //GET /api/products/:id
 router.get('/:id', async (req, res, next) => {
   try {
-    const id = req.params.id
+    const {id} = req.params
 
     if (isNaN(Number(id))) {
       res.sendStatus(400)
@@ -37,15 +38,15 @@ router.get('/:id', async (req, res, next) => {
 
 //Update single product details
 //PUT /api/products/:id
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', ensureAdmin, async (req, res, next) => {
   try {
-    const id = req.params.id
+    const {id} = req.params
     const product = await Product.findByPk(id)
     if (!product) {
       res.sendStatus(404)
       return
     }
-
+    console.log('in product PUT for admins req.body', req.body)
     const updatedProduct = await product.update(req.body)
     res.send(updatedProduct)
   } catch (error) {
@@ -55,7 +56,7 @@ router.put('/:id', async (req, res, next) => {
 
 //Create a new single product
 //POST /api/products/
-router.post('/', async (req, res, next) => {
+router.post('/', ensureAdmin, async (req, res, next) => {
   try {
     console.log('BODY', req.body)
     const newProduct = await Product.create(req.body)
@@ -67,7 +68,7 @@ router.post('/', async (req, res, next) => {
 
 //Delete a single product
 // DELETE /api/products/:id
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', ensureAdmin, async (req, res, next) => {
   try {
     const id = req.params.id
     if (isNaN(Number(id))) {

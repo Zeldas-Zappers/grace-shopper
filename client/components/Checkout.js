@@ -1,5 +1,5 @@
 import React from 'react'
-import Cart from './cart'
+// import Cart from './cart'
 import {connect} from 'react-redux'
 import {_checkout} from '../store/cart'
 
