@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
 //GET /api/products/:id
 router.get('/:id', async (req, res, next) => {
   try {
-    const id = req.params.id
+    const {id} = req.params
 
     if (isNaN(Number(id))) {
       res.sendStatus(400)
@@ -40,13 +40,13 @@ router.get('/:id', async (req, res, next) => {
 //PUT /api/products/:id
 router.put('/:id', ensureAdmin, async (req, res, next) => {
   try {
-    const id = req.params.id
+    const {id} = req.params
     const product = await Product.findByPk(id)
     if (!product) {
       res.sendStatus(404)
       return
     }
-
+    console.log('in product PUT for admins req.body', req.body)
     const updatedProduct = await product.update(req.body)
     res.send(updatedProduct)
   } catch (error) {
