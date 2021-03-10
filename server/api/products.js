@@ -47,7 +47,28 @@ router.put('/:id', ensureAdmin, async (req, res, next) => {
       return
     }
     console.log('in product PUT for admins req.body', req.body)
-    const updatedProduct = await product.update(req.body)
+    const {
+      name,
+      price,
+      description,
+      imageUrl,
+      category,
+      lighting,
+      watering,
+      inventory,
+      count,
+    } = req.body
+    const updatedProduct = await product.update({
+      name,
+      price,
+      description,
+      imageUrl,
+      category,
+      lighting,
+      watering,
+      inventory,
+      count,
+    })
     res.send(updatedProduct)
   } catch (error) {
     next(error)
@@ -59,7 +80,28 @@ router.put('/:id', ensureAdmin, async (req, res, next) => {
 router.post('/', ensureAdmin, async (req, res, next) => {
   try {
     console.log('BODY', req.body)
-    const newProduct = await Product.create(req.body)
+    const {
+      name,
+      price,
+      description,
+      imageUrl,
+      category,
+      lighting,
+      watering,
+      inventory,
+      count,
+    } = req.body
+    const newProduct = await Product.create({
+      name,
+      price,
+      description,
+      imageUrl,
+      category,
+      lighting,
+      watering,
+      inventory,
+      count,
+    })
     res.status(201).send(newProduct)
   } catch (error) {
     next(error)
@@ -70,7 +112,7 @@ router.post('/', ensureAdmin, async (req, res, next) => {
 // DELETE /api/products/:id
 router.delete('/:id', ensureAdmin, async (req, res, next) => {
   try {
-    const id = req.params.id
+    const {id} = req.params
     if (isNaN(Number(id))) {
       res.sendStatus(400)
       return
