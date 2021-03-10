@@ -974,6 +974,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Checkout = /*#__PURE__*/function (_React$Component) {
   _inherits(Checkout, _React$Component);
 
@@ -995,6 +996,16 @@ var Checkout = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Checkout, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevProps.user.id !== this.props.user.id || prevProps.cart.length !== this.props.cart.length) {
+        if (this.props.user.id) {
+          var userId = this.props.user.id;
+          this.props.getCartItems(userId);
+        }
+      }
+    }
+  }, {
     key: "submitOrder",
     value: function submitOrder() {
       if (this.props.loggedIn) {
@@ -1056,7 +1067,7 @@ var Checkout = /*#__PURE__*/function (_React$Component) {
         className: "d-flex justify-content-between"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "title"
-      }, this.state.orderSubmitted ? "Thank you! Your order has been submitted" : 'Order Summary'), !this.state.orderSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, this.state.orderSubmitted ? 'Thank you! Your order has been submitted' : 'Order Summary'), !this.state.orderSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.submitOrder,
         type: "button",
         className: "btn btn-lg home-button",
@@ -1108,6 +1119,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     clearCart: function clearCart(cartId) {
       return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_2__["_checkout"])(cartId));
+    },
+    getCartItems: function getCartItems(userId) {
+      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_2__["_setCartItems"])(userId));
     }
   };
 };
