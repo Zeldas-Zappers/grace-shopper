@@ -10,6 +10,8 @@ import {
 import {me} from '../store/user'
 import Checkout from './Checkout'
 import {Link} from 'react-router-dom'
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import EmptyCartMessage from './EmptyCartMessage'
 
 class Cart extends React.Component {
@@ -47,6 +49,15 @@ class Cart extends React.Component {
 
   handleSubmit(evt, productId) {
     evt.preventDefault()
+    toast.success('Quantity updated!', {
+      position: 'bottom-right',
+      autoClose: 5001,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    })
     if (this.props.loggedIn) {
       let cart = this.props.cart || []
       let cartId = cart[0].cartItem.cartId
@@ -81,6 +92,15 @@ class Cart extends React.Component {
         cart: updatedCart,
       })
     }
+    toast.warn('Item removed', {
+      position: 'bottom-right',
+      autoClose: 5001,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -239,6 +259,100 @@ class Cart extends React.Component {
             </div>
           )
         })}
+        {/* {cartToRender.map((product) => {
+          return (
+            <div key={product.id}>
+              <div className="row mt-4">
+                <div className="col-lg-4 col-md-6">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <img alt="whatever alt we want" src={product.imageUrl} />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-12 mt-4">
+                      <button
+                        onClick={() => this.removefromCart(product.id)}
+                        type="button"
+                        className="btn btn-warning"
+                      >
+                        Remove from cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-8 col-md-6">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <ul>
+                        <li className="list-item">{product.name}</li>
+                        <li className="list-item">${product.price}</li>
+                        <li className="list-item">
+                          Quantity:{' '}
+                          {!this.props.loggedIn
+                            ? product.count
+                            : product.cartItem.quantity}
+                        </li>
+                        <li className="list-item">{product.description}</li>
+                        <li className="list-item">{product.lighting}</li>
+                        <li className="list-item">{product.watering}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-12">
+                      <form
+                        className="main-form"
+                        onSubmit={(evt) => this.handleSubmit(evt, product.id)}
+                      >
+                        <div className="form-group">
+                          <label htmlFor="quantity">Quantity:</label>
+                          <input
+                            type="number"
+                            min="1"
+                            name="quantity"
+                            value={this.state.quantity}
+                            onChange={this.handleChange}
+                            className="form-control"
+                          />
+                        </div>
+                        <button className="btn btn-info" type="submit">
+                          Update Quantity
+                        </button>
+                        {console.log('TOAST')}
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })} */}
+        {/* <div className="row">
+          <div className="col-md-12">
+            <div className="row">
+              <div className="col-md-12">
+                <p>Subtotal: ${subTotal}</p>
+              </div>
+            </div>
+            <div className="row">
+              {cartToRender.length ? (
+                <div className="col-md-12">
+                  <button
+                    type="button"
+                    className="btn btn-success"
+                    onClick={() => this.handleClick()}
+                  >
+                    Proceed to checkout
+                  </button>
+                  {this.state.checkout && <Redirect to="/checkout" />}
+                </div>
+              ) : (
+                'Your cart is empty'
+              )}
+            </div>
+          </div>
+        </div> */}
       </div>
     )
   }
