@@ -1,3 +1,5 @@
+const User = require('../db/models/user')
+
 function ensureAdmin(req, res, next) {
   if (req.user && req.user.adminStatus) {
     return next()
@@ -7,8 +9,13 @@ function ensureAdmin(req, res, next) {
 }
 
 function ensureLogin(req, res, next) {
-  if (req.user) {
-    return next()
+  const id = req.user.id
+  const passportId = req.session.passport.user
+  //console.log("HELLLOOOOOO", req.session)
+  if (id) {
+    if (id === passportId) {
+      next()
+    }
   } else {
     res.sendStatus(401) // unauthorised
   }

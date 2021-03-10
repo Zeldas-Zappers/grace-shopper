@@ -10,6 +10,8 @@ import {
 import {me} from '../store/user'
 import Checkout from './Checkout'
 import {Link} from 'react-router-dom'
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import EmptyCartMessage from './EmptyCartMessage'
 
 class Cart extends React.Component {
@@ -47,6 +49,15 @@ class Cart extends React.Component {
 
   handleSubmit(evt, productId) {
     evt.preventDefault()
+    toast.success('Quantity updated!', {
+      position: 'bottom-right',
+      autoClose: 5001,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    })
     if (this.props.loggedIn) {
       let cart = this.props.cart || []
       let cartId = cart[0].cartItem.cartId
@@ -81,6 +92,15 @@ class Cart extends React.Component {
         cart: updatedCart,
       })
     }
+    toast.warn('Item removed', {
+      position: 'bottom-right',
+      autoClose: 5001,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -169,7 +189,6 @@ class Cart extends React.Component {
                   Proceed to checkout
                 </button>
               </Link>
-              {/* // {this.state.checkout && <Redirect to="/checkout" />} */}
             </div>
             <p className="subTotal">Total: ${subTotal}</p>
           </div>
@@ -300,6 +319,7 @@ class Cart extends React.Component {
                         <button className="btn btn-info" type="submit">
                           Update Quantity
                         </button>
+                        {console.log('TOAST')}
                       </form>
                     </div>
                   </div>

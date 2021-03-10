@@ -3,6 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {_checkout} from '../store/cart'
 import {Redirect, Link} from 'react-router-dom'
+import {_setCartItems} from '../store/cart'
 
 class Checkout extends React.Component {
   constructor(props) {
@@ -12,6 +13,19 @@ class Checkout extends React.Component {
       orderSubmitted: false,
     }
     this.submitOrder = this.submitOrder.bind(this)
+    this.redirect = this.redirect.bind(this)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevProps.user.id !== this.props.user.id ||
+      prevProps.cart.length !== this.props.cart.length
+    ) {
+      if (this.props.user.id) {
+        const userId = this.props.user.id
+        this.props.getCartItems(userId)
+      }
+    }
   }
 
   submitOrder() {
@@ -30,6 +44,14 @@ class Checkout extends React.Component {
         orderSubmitted: !this.state.orderSubmitted,
       })
     }
+
+    this.redirect()
+  }
+
+  redirect() {
+    setTimeout(() => {
+      this.props.history.push('/products')
+    }, 3000)
   }
 
   render() {
@@ -59,7 +81,7 @@ class Checkout extends React.Component {
         <div className="d-flex justify-content-between">
           <h3 className="title">
             {this.state.orderSubmitted
-              ? "Thank you! Your order has been submitted"
+              ? 'Thank you! Your order has been submitted'
               : 'Order Summary'}
           </h3>
           {!this.state.orderSubmitted && (
@@ -77,43 +99,6 @@ class Checkout extends React.Component {
         {!this.state.orderSubmitted && (
           <div className="subTotal">Total: ${subTotal}</div>
         )}
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Order Submitted
-                </h5>
-                <button
-                  type="button"
-                  className="close btn btn-lg button-home"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">Thank you for shopping with us!</div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-lg button-home"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {cartToRender.map((product) => {
           return (
             <div
@@ -164,6 +149,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     clearCart: (cartId) => dispatch(_checkout(cartId)),
+    getCartItems: (userId) => dispatch(_setCartItems(userId)),
   }
 }
 

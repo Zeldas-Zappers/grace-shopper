@@ -69,6 +69,7 @@ router.put('/:id', ensureAdmin, async (req, res, next) => {
       inventory,
       count,
     })
+
     res.send(updatedProduct)
   } catch (error) {
     next(error)
@@ -102,6 +103,7 @@ router.post('/', ensureAdmin, async (req, res, next) => {
       inventory,
       count,
     })
+
     res.status(201).send(newProduct)
   } catch (error) {
     next(error)
