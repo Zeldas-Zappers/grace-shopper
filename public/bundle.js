@@ -1985,7 +1985,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
         className: "container-fluid"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "navbar-brand m-2",
-        href: "/home"
+        href: "/"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: _lightseedslogo_png__WEBPACK_IMPORTED_MODULE_6__["default"]
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
