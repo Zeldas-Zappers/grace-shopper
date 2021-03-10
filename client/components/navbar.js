@@ -72,7 +72,7 @@ class Navbar extends React.Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container-fluid">
-            <a className="navbar-brand m-2" href="/home">
+            <a className="navbar-brand m-2" href="/">
               <img src={logo} />
             </a>
             <button

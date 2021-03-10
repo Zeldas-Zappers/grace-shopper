@@ -46,7 +46,7 @@ router.put('/:id', ensureAdmin, async (req, res, next) => {
       res.sendStatus(404)
       return
     }
-    console.log('in product PUT for admins req.body', req.body)
+    //console.log('in product PUT for admins req.body', req.body)
     const updatedProduct = await product.update(req.body)
     res.send(updatedProduct)
   } catch (error) {
@@ -58,7 +58,7 @@ router.put('/:id', ensureAdmin, async (req, res, next) => {
 //POST /api/products/
 router.post('/', ensureAdmin, async (req, res, next) => {
   try {
-    console.log('BODY', req.body)
+    //console.log('BODY', req.body)
     const newProduct = await Product.create(req.body)
     res.status(201).send(newProduct)
   } catch (error) {

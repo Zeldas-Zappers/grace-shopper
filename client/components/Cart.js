@@ -189,7 +189,6 @@ class Cart extends React.Component {
                   Proceed to checkout
                 </button>
               </Link>
-              {/* // {this.state.checkout && <Redirect to="/checkout" />} */}
             </div>
             <p className="subTotal">Total: ${subTotal}</p>
           </div>

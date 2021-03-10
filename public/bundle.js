@@ -99,21 +99,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components */ "./client/components/index.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes */ "./client/routes.js");
-<<<<<<< HEAD
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'react-toastify'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
-=======
->>>>>>> master
 
 
 
 
 var App = function App() {
-<<<<<<< HEAD
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Navbar"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_routes__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_3__["ToastContainer"], null));
-=======
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Navbar"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_routes__WEBPACK_IMPORTED_MODULE_2__["default"], null));
->>>>>>> master
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Navbar"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_routes__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module 'react-toastify'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -211,11 +204,7 @@ var AddProductForm = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-<<<<<<< HEAD
-        className: "btn btn-primary",
-=======
         className: "btn btn-lg home-button",
->>>>>>> master
         type: "button",
         "data-toggle": "collapse",
         "data-target": "#collapseExample",
@@ -326,11 +315,7 @@ var AddProductForm = /*#__PURE__*/function (_React$Component) {
         className: "form-control"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
-<<<<<<< HEAD
-        className: "btn btn-info ac-btn"
-=======
         className: "btn btn-lg home-button"
->>>>>>> master
       }, "Submit")))));
     }
   }]);
@@ -420,19 +405,11 @@ var AllProducts = /*#__PURE__*/function (_React$Component) {
 
       var adminStatus = this.props.adminStatus || '';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-<<<<<<< HEAD
-        className: "container"
-      }, adminStatus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row mb-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddProductForm__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row mt-5"
-=======
         className: "container mt-4"
       }, adminStatus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row mb-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddProductForm__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row mt-2"
->>>>>>> master
       }, products.map(function (product) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: product.id,
@@ -454,11 +431,7 @@ var AllProducts = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             return _this.props.deleteProduct(product);
           },
-<<<<<<< HEAD
-          className: "btn btn-danger"
-=======
           className: "btn home-button"
->>>>>>> master
         }, "Delete")));
       })));
     }
@@ -504,6 +477,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/users */ "./client/store/users.js");
+/* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/user */ "./client/store/user.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -530,6 +504,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var AllUsers = /*#__PURE__*/function (_React$Component) {
   _inherits(AllUsers, _React$Component);
 
@@ -544,43 +519,33 @@ var AllUsers = /*#__PURE__*/function (_React$Component) {
   _createClass(AllUsers, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log(this.props);
+      console.log('in component did mount', this.props);
       this.props.getAllUsers();
+      this.props.getUser();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (!prevProps.user.id && this.props.user.id) {
+        this.props.getAllUsers();
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      console.log('USERS', this.props);
+      console.log('in render ---------- this.props', this.props);
+
+      if (this.props.users.length === 0) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "No users to view!");
+      } // console.log('USERS', this.props)
+
 
       var _ref = this.props || [],
           users = _ref.users;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
+        className: "container mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "dropdown mb-4 mt-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary dropdown-toggle",
-        type: "button",
-        id: "dropdownMenuButton",
-        "data-toggle": "dropdown"
-      }, "Action"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "dropdown-menu",
-        "aria-labelledby": "dropdownMenuButton"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "dropdown-item disabled",
-        href: "#"
-      }, "Action"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "dropdown-item",
-        href: "#"
-      }, "Another action"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "dropdown-item",
-        href: "#"
-      }, "Something else here"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, users.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -599,48 +564,7 @@ var AllUsers = /*#__PURE__*/function (_React$Component) {
         }, "P: ", user.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "card-text"
         }, "Address: ", user.address))));
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12 d-flex justify-content-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "pagination"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "Previous")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "1")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "2")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "3")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "4")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "5")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "Next")))))));
+      })));
     }
   }]);
 
@@ -649,7 +573,8 @@ var AllUsers = /*#__PURE__*/function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    users: state.users
+    users: state.users,
+    user: state.user
   };
 };
 
@@ -657,6 +582,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getAllUsers: function getAllUsers() {
       return dispatch(Object(_store_users__WEBPACK_IMPORTED_MODULE_2__["setUsers"])());
+    },
+    getUser: function getUser() {
+      return dispatch(Object(_store_user__WEBPACK_IMPORTED_MODULE_3__["me"])());
     }
   };
 };
@@ -681,12 +609,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
 /* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/user */ "./client/store/user.js");
 /* harmony import */ var _Checkout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Checkout */ "./client/components/Checkout.js");
-<<<<<<< HEAD
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
-/* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
-=======
-/* harmony import */ var _EmptyCartMessage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./EmptyCartMessage */ "./client/components/EmptyCartMessage.js");
->>>>>>> master
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'react-toastify'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'react-toastify/dist/ReactToastify.css'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _EmptyCartMessage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EmptyCartMessage */ "./client/components/EmptyCartMessage.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -730,10 +655,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-<<<<<<< HEAD
- // toast.configure()
-=======
->>>>>>> master
+
+
 
 var Cart = /*#__PURE__*/function (_React$Component) {
   _inherits(Cart, _React$Component);
@@ -787,8 +710,7 @@ var Cart = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(evt, productId) {
       evt.preventDefault();
-<<<<<<< HEAD
-      react_toastify__WEBPACK_IMPORTED_MODULE_6__["toast"].success('Quantity updated!', {
+      !(function webpackMissingModule() { var e = new Error("Cannot find module 'react-toastify'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).success('Quantity updated!', {
         position: 'bottom-right',
         autoClose: 5001,
         hideProgressBar: false,
@@ -797,8 +719,6 @@ var Cart = /*#__PURE__*/function (_React$Component) {
         draggable: true,
         progress: undefined
       });
-=======
->>>>>>> master
 
       if (this.props.loggedIn) {
         var cart = this.props.cart || [];
@@ -841,9 +761,8 @@ var Cart = /*#__PURE__*/function (_React$Component) {
           cart: updatedCart
         });
       }
-<<<<<<< HEAD
 
-      react_toastify__WEBPACK_IMPORTED_MODULE_6__["toast"].warn('Item removed', {
+      !(function webpackMissingModule() { var e = new Error("Cannot find module 'react-toastify'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).warn('Item removed', {
         position: 'bottom-right',
         autoClose: 5001,
         hideProgressBar: false,
@@ -852,8 +771,6 @@ var Cart = /*#__PURE__*/function (_React$Component) {
         draggable: true,
         progress: undefined
       });
-=======
->>>>>>> master
     }
   }, {
     key: "componentDidUpdate",
@@ -905,19 +822,10 @@ var Cart = /*#__PURE__*/function (_React$Component) {
       // console.log('product props*************', this.props.product)
       // console.log('user props****************', this.props.user)
       console.log('**********CART*********', this.props.cart);
-<<<<<<< HEAD
-      var cartToRender = !this.props.loggedIn ? this.state.cart || [] : this.props.cart || [];
-
-      if (cartToRender.length === 0) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Your cart is empty!!!");
-      } // define the subtotal for guests
-
-=======
       var cartToRender = !this.props.loggedIn ? this.state.cart || [] : this.props.cart || []; // if (cartToRender.length === 0) {
       //   return <div>Your cart is empty!!!</div>
       // }
       // define the subtotal for guests
->>>>>>> master
 
       var subTotal;
 
@@ -940,56 +848,6 @@ var Cart = /*#__PURE__*/function (_React$Component) {
 
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-<<<<<<< HEAD
-        className: "container"
-      }, cartToRender.map(function (product) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: product.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row mt-4"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-lg-4 col-md-6"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-12"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          alt: "whatever alt we want",
-          src: product.imageUrl
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-12 mt-4"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick() {
-            return _this2.removefromCart(product.id);
-          },
-          type: "button",
-          className: "btn btn-warning"
-        }, "Remove from cart")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-lg-8 col-md-6"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-12"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, "$", product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, "Quantity:", ' ', !_this2.props.loggedIn ? product.count : product.cartItem.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, product.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, product.lighting), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "list-item"
-        }, product.watering)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-12"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-=======
         className: "container container mt-5"
       }, cartToRender.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-flex justify-content-between"
@@ -1005,7 +863,7 @@ var Cart = /*#__PURE__*/function (_React$Component) {
         }
       }, "Proceed to checkout"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "subTotal"
-      }, "Total: $", subTotal)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EmptyCartMessage__WEBPACK_IMPORTED_MODULE_6__["default"], null), cartToRender.map(function (product) {
+      }, "Total: $", subTotal)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EmptyCartMessage__WEBPACK_IMPORTED_MODULE_7__["default"], null), cartToRender.map(function (product) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "card mb-3 mt-5",
           style: {
@@ -1030,7 +888,6 @@ var Cart = /*#__PURE__*/function (_React$Component) {
         }, "$", product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "card-text checkout-card-text"
         }, "Quantity:", ' ', !_this2.props.loggedIn ? product.count : product.cartItem.quantity)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
->>>>>>> master
           className: "main-form",
           onSubmit: function onSubmit(evt) {
             return _this2.handleSubmit(evt, product.id);
@@ -1047,32 +904,6 @@ var Cart = /*#__PURE__*/function (_React$Component) {
           onChange: _this2.handleChange,
           className: "form-control"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-<<<<<<< HEAD
-          className: "btn btn-info",
-          type: "submit"
-        }, "Update Quantity"), console.log('TOAST')))))));
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Subtotal: $", subTotal))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, cartToRender.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-success",
-        onClick: function onClick() {
-          return _this2.handleClick();
-        }
-      }, "Proceed to checkout"), this.state.checkout && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
-        to: "/checkout"
-      })) : 'Your cart is empty'))));
-=======
           className: "btn home-button btn-sm mr-2",
           type: "submit"
         }, "Update Quantity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1083,7 +914,6 @@ var Cart = /*#__PURE__*/function (_React$Component) {
           className: "btn home-button btn-sm"
         }, "Remove from cart")))));
       }));
->>>>>>> master
     }
   }]);
 
@@ -1169,6 +999,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Checkout = /*#__PURE__*/function (_React$Component) {
   _inherits(Checkout, _React$Component);
 
@@ -1185,25 +1016,25 @@ var Checkout = /*#__PURE__*/function (_React$Component) {
       orderSubmitted: false
     };
     _this.submitOrder = _this.submitOrder.bind(_assertThisInitialized(_this));
+    _this.redirect = _this.redirect.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Checkout, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevProps.user.id !== this.props.user.id || prevProps.cart.length !== this.props.cart.length) {
+        if (this.props.user.id) {
+          var userId = this.props.user.id;
+          this.props.getCartItems(userId);
+        }
+      }
+    }
+  }, {
     key: "submitOrder",
     value: function submitOrder() {
       if (this.props.loggedIn) {
-<<<<<<< HEAD
-        var cartId = this.props.cart[0].cartItem.cartId; // const updatedCart = this.props.cart.map((product) => {
-        //   if(product.cartItem.orderStatus === "Processing") {
-        //     product.cartItem.orderStatus = "Fullfilled";
-        //   }
-        //   return product;
-        // })
-        //console.log('SUBMIT ORDER', updatedCart)
-
-=======
         var cartId = this.props.cart[0].cartItem.cartId;
->>>>>>> master
         this.props.clearCart(cartId);
         this.setState(_objectSpread(_objectSpread({}, this.state), {}, {
           orderSubmitted: true
@@ -1213,18 +1044,25 @@ var Checkout = /*#__PURE__*/function (_React$Component) {
       if (!this.props.loggedIn) {
         this.setState({
           cart: localStorage.clear(),
-<<<<<<< HEAD
-          orderSubmitted: true
-=======
           orderSubmitted: !this.state.orderSubmitted
->>>>>>> master
         });
       }
+
+      this.redirect();
+    }
+  }, {
+    key: "redirect",
+    value: function redirect() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.props.history.push('/products');
+      }, 3000);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var cartToRender = !this.props.loggedIn ? this.state.cart || [] : this.props.cart || [];
       var subTotal;
@@ -1254,57 +1092,15 @@ var Checkout = /*#__PURE__*/function (_React$Component) {
         className: "d-flex justify-content-between"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "title"
-<<<<<<< HEAD
-      }, this.state.orderSubmitted ? "You're order has been submitted" : 'Order Summary'), !this.state.orderSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.submitOrder,
-        type: "button",
-        className: "btn home-button",
-        "data-toggle": "modal",
-        "data-target": "#exampleModal"
-      }, "Submit Order")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-=======
-      }, this.state.orderSubmitted ? "Thank you! Your order has been submitted" : 'Order Summary'), !this.state.orderSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, this.state.orderSubmitted ? 'Thank you! Your order has been submitted' : 'Order Summary'), !this.state.orderSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.submitOrder,
         type: "button",
         className: "btn btn-lg home-button",
         "data-toggle": "modal",
         "data-target": "#exampleModal"
       }, "Submit Order")), !this.state.orderSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
->>>>>>> master
         className: "subTotal"
-      }, "Total: $", subTotal), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal fade",
-        id: "exampleModal",
-        tabIndex: "-1",
-        role: "dialog",
-        "aria-labelledby": "exampleModalLabel",
-        "aria-hidden": "true"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-header"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        className: "modal-title",
-        id: "exampleModalLabel"
-      }, "Order Submitted"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "close btn btn-lg button-home",
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-body"
-      }, "Thank you for shopping with us!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-footer"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-lg button-home",
-        "data-dismiss": "modal"
-      }, "Close"))))), cartToRender.map(function (product) {
+      }, "Total: $", subTotal), cartToRender.map(function (product) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "card mb-3 mt-5",
           style: {
@@ -1328,7 +1124,7 @@ var Checkout = /*#__PURE__*/function (_React$Component) {
           className: "card-text checkout-card-text"
         }, "$", product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "card-text checkout-card-text"
-        }, "Quantity:", ' ', !_this2.props.loggedIn ? product.count : product.cartItem.quantity)))));
+        }, "Quantity:", ' ', !_this3.props.loggedIn ? product.count : product.cartItem.quantity)))));
       }));
     }
   }]);
@@ -1348,6 +1144,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     clearCart: function clearCart(cartId) {
       return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_2__["_checkout"])(cartId));
+    },
+    getCartItems: function getCartItems(userId) {
+      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_2__["_setCartItems"])(userId));
     }
   };
 };
@@ -1483,20 +1282,8 @@ var EditProductForm = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
-<<<<<<< HEAD
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary",
-        type: "button",
-        "data-toggle": "collapse",
-        "data-target": "#collapseExample",
-        "aria-expanded": "false",
-        "aria-controls": "collapseExample"
-      }, "Edit Product")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "collapse",
-=======
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "collapse mt-4",
->>>>>>> master
         id: "collapseExample"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card card-body"
@@ -1600,11 +1387,7 @@ var EditProductForm = /*#__PURE__*/function (_React$Component) {
         className: "form-control"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
-<<<<<<< HEAD
-        className: "btn btn-info ac-btn"
-=======
         className: "btn home-button btn-lg"
->>>>>>> master
       }, "Submit")))));
     }
   }]);
@@ -1642,8 +1425,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-<<<<<<< HEAD
-=======
 /***/ "./client/components/EmptyCartMessage.js":
 /*!***********************************************!*\
   !*** ./client/components/EmptyCartMessage.js ***!
@@ -1671,7 +1452,6 @@ var EmptyCartMessage = function EmptyCartMessage(props) {
 
 /***/ }),
 
->>>>>>> master
 /***/ "./client/components/Home.js":
 /*!***********************************!*\
   !*** ./client/components/Home.js ***!
@@ -1724,11 +1504,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
 /* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/user */ "./client/store/user.js");
 /* harmony import */ var _EditProductForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EditProductForm */ "./client/components/EditProductForm.js");
-<<<<<<< HEAD
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
-/* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
-=======
->>>>>>> master
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'react-toastify'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'react-toastify/dist/ReactToastify.css'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1760,12 +1537,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-<<<<<<< HEAD
 
 
-react_toastify__WEBPACK_IMPORTED_MODULE_6__["toast"].configure();
-=======
->>>>>>> master
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'react-toastify'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).configure();
 var SingleProduct = /*#__PURE__*/function (_React$Component) {
   _inherits(SingleProduct, _React$Component);
 
@@ -1777,12 +1551,8 @@ var SingleProduct = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, SingleProduct);
 
     _this = _super.call(this);
-<<<<<<< HEAD
     _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this)); // this.notifyAddToCart = this.notifyAddToCart.bind(this)
 
-=======
-    _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
->>>>>>> master
     return _this;
   }
 
@@ -1879,9 +1649,8 @@ var SingleProduct = /*#__PURE__*/function (_React$Component) {
 
         localStorage.setItem('cart', JSON.stringify(cart));
       }
-<<<<<<< HEAD
 
-      react_toastify__WEBPACK_IMPORTED_MODULE_6__["toast"].success('🍁Added to cart!', {
+      !(function webpackMissingModule() { var e = new Error("Cannot find module 'react-toastify'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).success('🍁Added to cart!', {
         position: 'bottom-right',
         autoClose: 2500,
         hideProgressBar: false,
@@ -1890,8 +1659,6 @@ var SingleProduct = /*#__PURE__*/function (_React$Component) {
         draggable: true,
         progress: undefined
       });
-=======
->>>>>>> master
     }
   }, {
     key: "render",
@@ -1932,8 +1699,7 @@ var SingleProduct = /*#__PURE__*/function (_React$Component) {
         onClick: this.addToCart,
         type: "button",
         className: "btn btn-lg home-button float-right"
-<<<<<<< HEAD
-      }, "Add to Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_6__["ToastContainer"], {
+      }, "Add to Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module 'react-toastify'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
         position: "bottom-right",
         autoClose: 2500,
         hideProgressBar: false,
@@ -1943,11 +1709,7 @@ var SingleProduct = /*#__PURE__*/function (_React$Component) {
         pauseOnFocusLoss: true,
         draggable: true,
         pauseOnHover: false
-      })))), adminStatus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col mt-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EditProductForm__WEBPACK_IMPORTED_MODULE_5__["default"], null))));
-=======
-      }, "Add to Cart")), adminStatus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), adminStatus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-lg home-button float-right",
@@ -1957,7 +1719,6 @@ var SingleProduct = /*#__PURE__*/function (_React$Component) {
         "aria-expanded": "false",
         "aria-controls": "collapseExample"
       }, "Edit Product"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EditProductForm__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
->>>>>>> master
     }
   }]);
 
@@ -2170,10 +1931,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store */ "./client/store/index.js");
 /* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/user */ "./client/store/user.js");
 /* harmony import */ var _lightseedslogo_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lightseedslogo.png */ "./client/components/lightseedslogo.png");
-<<<<<<< HEAD
-=======
 /* harmony import */ var _user_home__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./user-home */ "./client/components/user-home.js");
->>>>>>> master
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2207,10 +1965,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 var Navbar = /*#__PURE__*/function (_React$Component) {
   _inherits(Navbar, _React$Component);
 
@@ -2269,18 +2024,10 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-<<<<<<< HEAD
-      console.log('CART STATE', this.state.cart);
-
-      var _ref = this.props.user || '',
-          adminStatus = _ref.adminStatus;
-
-=======
       var _ref = this.props.user || '',
           adminStatus = _ref.adminStatus;
 
       console.log('CART STATE', adminStatus);
->>>>>>> master
       var show = this.state.showCollapsedMenu ? 'show' : '';
       var cart = !this.props.isLoggedIn ? JSON.parse(localStorage.getItem('cart')) || [] : this.props.cart || [];
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
@@ -2289,7 +2036,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
         className: "container-fluid"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "navbar-brand m-2",
-        href: "/home"
+        href: "/"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: _lightseedslogo_png__WEBPACK_IMPORTED_MODULE_6__["default"]
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -2306,11 +2053,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: 'collapse navbar-collapse justify-content-end m-0 ' + show,
         id: "navbarNav"
-<<<<<<< HEAD
-      }, this.props.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-=======
       }, this.props.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
->>>>>>> master
         className: "navbar-nav"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item"
@@ -2336,22 +2079,14 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
         to: "/logout",
         className: "nav-link",
         onClick: this.props.handleClick
-<<<<<<< HEAD
-      }, "Logout")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-=======
       }, "Logout")), !adminStatus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
->>>>>>> master
         className: "nav-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
         to: "/cart",
         className: "nav-link",
         tabIndex: "-1",
         "aria-disabled": "true"
-<<<<<<< HEAD
-      }, "Cart(", cart.length, ")"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-=======
       }, "Cart"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_home__WEBPACK_IMPORTED_MODULE_7__["default"], null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
->>>>>>> master
         className: "navbar-nav"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item"
@@ -2381,11 +2116,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
         className: "nav-link",
         tabIndex: "-1",
         "aria-disabled": "true"
-<<<<<<< HEAD
-      }, "Cart(", cart.length, ")")))))));
-=======
       }, "Cart")))))));
->>>>>>> master
     }
   }]);
 
@@ -2451,15 +2182,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var UserHome = function UserHome(props) {
   var email = props.email;
-<<<<<<< HEAD
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Welcome, ", email));
-=======
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "welcome-msg"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "light-color text-right"
   }, "Welcome, ", email));
->>>>>>> master
 };
 /**
  * CONTAINER
@@ -2625,17 +2352,6 @@ var Routes = /*#__PURE__*/function (_Component) {
         // had to remove the Switch to get the welcome message to load correctly. Also had to change component={Home} to exact path -- JC
         // <Switch>
         // {/* Routes placed here are available to all visitors */}
-<<<<<<< HEAD
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, isLoggedIn &&
-        /*#__PURE__*/
-        // <Switch>
-        // {/* Routes placed here are only available after logging in */}
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-          path: "/",
-          component: _components__WEBPACK_IMPORTED_MODULE_4__["UserHome"]
-        }) // {/* </Switch> */}
-        , /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-=======
         // <div>
         //   {isLoggedIn && (
         // <Switch>
@@ -2644,7 +2360,6 @@ var Routes = /*#__PURE__*/function (_Component) {
         // {/* </Switch> */}
         // )}
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
->>>>>>> master
           exact: true,
           path: "/login",
           component: _components__WEBPACK_IMPORTED_MODULE_4__["Login"]
@@ -2894,11 +2609,7 @@ var _removeItemFromCart = function _removeItemFromCart(cartId, productId) {
             case 0:
               _context3.prev = 0;
               _context3.next = 3;
-<<<<<<< HEAD
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/cart/".concat(cartId, "/").concat(productId));
-=======
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/cart/".concat(cartId, "/product/").concat(productId));
->>>>>>> master
 
             case 3:
               _yield$axios$delete = _context3.sent;
@@ -8091,62 +7802,6 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/clsx/dist/clsx.m.js":
-/*!******************************************!*\
-  !*** ./node_modules/clsx/dist/clsx.m.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function toVal(mix) {
-	var k, y, str='';
-
-	if (typeof mix === 'string' || typeof mix === 'number') {
-		str += mix;
-	} else if (typeof mix === 'object') {
-		if (Array.isArray(mix)) {
-			for (k=0; k < mix.length; k++) {
-				if (mix[k]) {
-					if (y = toVal(mix[k])) {
-						str && (str += ' ');
-						str += y;
-					}
-				}
-			}
-		} else {
-			for (k in mix) {
-				if (mix[k]) {
-					str && (str += ' ');
-					str += k;
-				}
-			}
-		}
-	}
-
-	return str;
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-	var i=0, tmp, x, str='';
-	while (i < arguments.length) {
-		if (tmp = arguments[i++]) {
-			if (x = toVal(tmp)) {
-				str && (str += ' ');
-				str += x
-			}
-		}
-	}
-	return str;
-});
-
-
-/***/ }),
-
-=======
->>>>>>> master
 /***/ "./node_modules/component-bind/index.js":
 /*!**********************************************!*\
   !*** ./node_modules/component-bind/index.js ***!
@@ -17744,154 +17399,6 @@ module.exports = __webpack_require__(/*! ../modules/_core */ "./node_modules/cor
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/react-toastify/dist/ReactToastify.css":
-/*!**************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/react-toastify/dist/ReactToastify.css ***!
-  \**************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../css-loader/dist/runtime/cssWithMappingToString.js */ "./node_modules/css-loader/dist/runtime/cssWithMappingToString.js");
-/* harmony import */ var _css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-// Imports
-
-
-var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()(_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default.a);
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".Toastify__toast-container {\n  z-index: 9999;\n  -webkit-transform: translate3d(0, 0, 9999px);\n  position: fixed;\n  padding: 4px;\n  width: 320px;\n  box-sizing: border-box;\n  color: #fff;\n}\n.Toastify__toast-container--top-left {\n  top: 1em;\n  left: 1em;\n}\n.Toastify__toast-container--top-center {\n  top: 1em;\n  left: 50%;\n  transform: translateX(-50%);\n}\n.Toastify__toast-container--top-right {\n  top: 1em;\n  right: 1em;\n}\n.Toastify__toast-container--bottom-left {\n  bottom: 1em;\n  left: 1em;\n}\n.Toastify__toast-container--bottom-center {\n  bottom: 1em;\n  left: 50%;\n  transform: translateX(-50%);\n}\n.Toastify__toast-container--bottom-right {\n  bottom: 1em;\n  right: 1em;\n}\n\n@media only screen and (max-width : 480px) {\n  .Toastify__toast-container {\n    width: 100vw;\n    padding: 0;\n    left: 0;\n    margin: 0;\n  }\n  .Toastify__toast-container--top-left, .Toastify__toast-container--top-center, .Toastify__toast-container--top-right {\n    top: 0;\n    transform: translateX(0);\n  }\n  .Toastify__toast-container--bottom-left, .Toastify__toast-container--bottom-center, .Toastify__toast-container--bottom-right {\n    bottom: 0;\n    transform: translateX(0);\n  }\n  .Toastify__toast-container--rtl {\n    right: 0;\n    left: initial;\n  }\n}\n.Toastify__toast {\n  position: relative;\n  min-height: 64px;\n  box-sizing: border-box;\n  margin-bottom: 1rem;\n  padding: 8px;\n  border-radius: 4px;\n  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 15px 0 rgba(0, 0, 0, 0.05);\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: justify;\n      justify-content: space-between;\n  max-height: 800px;\n  overflow: hidden;\n  font-family: sans-serif;\n  cursor: pointer;\n  direction: ltr;\n}\n.Toastify__toast--rtl {\n  direction: rtl;\n}\n.Toastify__toast--dark {\n  background: #121212;\n  color: #fff;\n}\n.Toastify__toast--default {\n  background: #fff;\n  color: #aaa;\n}\n.Toastify__toast--info {\n  background: #3498db;\n}\n.Toastify__toast--success {\n  background: #07bc0c;\n}\n.Toastify__toast--warning {\n  background: #f1c40f;\n}\n.Toastify__toast--error {\n  background: #e74c3c;\n}\n.Toastify__toast-body {\n  margin: auto 0;\n  padding: 6px;\n}\n\n.Toastify--animate {\n  animation-fill-mode: both;\n  animation-duration: 0.7s;\n}\n\n@media only screen and (max-width : 480px) {\n  .Toastify__toast {\n    margin-bottom: 0;\n  }\n}\n.Toastify__close-button {\n  color: #fff;\n  background: transparent;\n  outline: none;\n  border: none;\n  padding: 0;\n  cursor: pointer;\n  opacity: 0.7;\n  transition: 0.3s ease;\n  -ms-flex-item-align: start;\n      align-self: flex-start;\n}\n.Toastify__close-button--default {\n  color: #000;\n  opacity: 0.3;\n}\n.Toastify__close-button > svg {\n  fill: currentColor;\n  height: 16px;\n  width: 14px;\n}\n.Toastify__close-button:hover, .Toastify__close-button:focus {\n  opacity: 1;\n}\n\n@keyframes Toastify__trackProgress {\n  0% {\n    transform: scaleX(1);\n  }\n  100% {\n    transform: scaleX(0);\n  }\n}\n.Toastify__progress-bar {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 5px;\n  z-index: 9999;\n  opacity: 0.7;\n  background-color: rgba(255, 255, 255, 0.7);\n  transform-origin: left;\n}\n.Toastify__progress-bar--animated {\n  animation: Toastify__trackProgress linear 1 forwards;\n}\n.Toastify__progress-bar--controlled {\n  transition: transform 0.2s;\n}\n.Toastify__progress-bar--rtl {\n  right: 0;\n  left: initial;\n  transform-origin: right;\n}\n.Toastify__progress-bar--default {\n  background: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);\n}\n.Toastify__progress-bar--dark {\n  background: #bb86fc;\n}\n@keyframes Toastify__bounceInRight {\n  from, 60%, 75%, 90%, to {\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n  from {\n    opacity: 0;\n    transform: translate3d(3000px, 0, 0);\n  }\n  60% {\n    opacity: 1;\n    transform: translate3d(-25px, 0, 0);\n  }\n  75% {\n    transform: translate3d(10px, 0, 0);\n  }\n  90% {\n    transform: translate3d(-5px, 0, 0);\n  }\n  to {\n    transform: none;\n  }\n}\n@keyframes Toastify__bounceOutRight {\n  20% {\n    opacity: 1;\n    transform: translate3d(-20px, 0, 0);\n  }\n  to {\n    opacity: 0;\n    transform: translate3d(2000px, 0, 0);\n  }\n}\n@keyframes Toastify__bounceInLeft {\n  from, 60%, 75%, 90%, to {\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n  0% {\n    opacity: 0;\n    transform: translate3d(-3000px, 0, 0);\n  }\n  60% {\n    opacity: 1;\n    transform: translate3d(25px, 0, 0);\n  }\n  75% {\n    transform: translate3d(-10px, 0, 0);\n  }\n  90% {\n    transform: translate3d(5px, 0, 0);\n  }\n  to {\n    transform: none;\n  }\n}\n@keyframes Toastify__bounceOutLeft {\n  20% {\n    opacity: 1;\n    transform: translate3d(20px, 0, 0);\n  }\n  to {\n    opacity: 0;\n    transform: translate3d(-2000px, 0, 0);\n  }\n}\n@keyframes Toastify__bounceInUp {\n  from, 60%, 75%, 90%, to {\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n  from {\n    opacity: 0;\n    transform: translate3d(0, 3000px, 0);\n  }\n  60% {\n    opacity: 1;\n    transform: translate3d(0, -20px, 0);\n  }\n  75% {\n    transform: translate3d(0, 10px, 0);\n  }\n  90% {\n    transform: translate3d(0, -5px, 0);\n  }\n  to {\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes Toastify__bounceOutUp {\n  20% {\n    transform: translate3d(0, -10px, 0);\n  }\n  40%, 45% {\n    opacity: 1;\n    transform: translate3d(0, 20px, 0);\n  }\n  to {\n    opacity: 0;\n    transform: translate3d(0, -2000px, 0);\n  }\n}\n@keyframes Toastify__bounceInDown {\n  from, 60%, 75%, 90%, to {\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n  0% {\n    opacity: 0;\n    transform: translate3d(0, -3000px, 0);\n  }\n  60% {\n    opacity: 1;\n    transform: translate3d(0, 25px, 0);\n  }\n  75% {\n    transform: translate3d(0, -10px, 0);\n  }\n  90% {\n    transform: translate3d(0, 5px, 0);\n  }\n  to {\n    transform: none;\n  }\n}\n@keyframes Toastify__bounceOutDown {\n  20% {\n    transform: translate3d(0, 10px, 0);\n  }\n  40%, 45% {\n    opacity: 1;\n    transform: translate3d(0, -20px, 0);\n  }\n  to {\n    opacity: 0;\n    transform: translate3d(0, 2000px, 0);\n  }\n}\n.Toastify__bounce-enter--top-left, .Toastify__bounce-enter--bottom-left {\n  animation-name: Toastify__bounceInLeft;\n}\n.Toastify__bounce-enter--top-right, .Toastify__bounce-enter--bottom-right {\n  animation-name: Toastify__bounceInRight;\n}\n.Toastify__bounce-enter--top-center {\n  animation-name: Toastify__bounceInDown;\n}\n.Toastify__bounce-enter--bottom-center {\n  animation-name: Toastify__bounceInUp;\n}\n\n.Toastify__bounce-exit--top-left, .Toastify__bounce-exit--bottom-left {\n  animation-name: Toastify__bounceOutLeft;\n}\n.Toastify__bounce-exit--top-right, .Toastify__bounce-exit--bottom-right {\n  animation-name: Toastify__bounceOutRight;\n}\n.Toastify__bounce-exit--top-center {\n  animation-name: Toastify__bounceOutUp;\n}\n.Toastify__bounce-exit--bottom-center {\n  animation-name: Toastify__bounceOutDown;\n}\n\n@keyframes Toastify__zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n  50% {\n    opacity: 1;\n  }\n}\n@keyframes Toastify__zoomOut {\n  from {\n    opacity: 1;\n  }\n  50% {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n  to {\n    opacity: 0;\n  }\n}\n.Toastify__zoom-enter {\n  animation-name: Toastify__zoomIn;\n}\n\n.Toastify__zoom-exit {\n  animation-name: Toastify__zoomOut;\n}\n\n@keyframes Toastify__flipIn {\n  from {\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n  40% {\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    animation-timing-function: ease-in;\n  }\n  60% {\n    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    opacity: 1;\n  }\n  80% {\n    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n  }\n  to {\n    transform: perspective(400px);\n  }\n}\n@keyframes Toastify__flipOut {\n  from {\n    transform: perspective(400px);\n  }\n  30% {\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    opacity: 1;\n  }\n  to {\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    opacity: 0;\n  }\n}\n.Toastify__flip-enter {\n  animation-name: Toastify__flipIn;\n}\n\n.Toastify__flip-exit {\n  animation-name: Toastify__flipOut;\n}\n\n@keyframes Toastify__slideInRight {\n  from {\n    transform: translate3d(110%, 0, 0);\n    visibility: visible;\n  }\n  to {\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes Toastify__slideInLeft {\n  from {\n    transform: translate3d(-110%, 0, 0);\n    visibility: visible;\n  }\n  to {\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes Toastify__slideInUp {\n  from {\n    transform: translate3d(0, 110%, 0);\n    visibility: visible;\n  }\n  to {\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes Toastify__slideInDown {\n  from {\n    transform: translate3d(0, -110%, 0);\n    visibility: visible;\n  }\n  to {\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes Toastify__slideOutRight {\n  from {\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    visibility: hidden;\n    transform: translate3d(110%, 0, 0);\n  }\n}\n@keyframes Toastify__slideOutLeft {\n  from {\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    visibility: hidden;\n    transform: translate3d(-110%, 0, 0);\n  }\n}\n@keyframes Toastify__slideOutDown {\n  from {\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    visibility: hidden;\n    transform: translate3d(0, 500px, 0);\n  }\n}\n@keyframes Toastify__slideOutUp {\n  from {\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    visibility: hidden;\n    transform: translate3d(0, -500px, 0);\n  }\n}\n.Toastify__slide-enter--top-left, .Toastify__slide-enter--bottom-left {\n  animation-name: Toastify__slideInLeft;\n}\n.Toastify__slide-enter--top-right, .Toastify__slide-enter--bottom-right {\n  animation-name: Toastify__slideInRight;\n}\n.Toastify__slide-enter--top-center {\n  animation-name: Toastify__slideInDown;\n}\n.Toastify__slide-enter--bottom-center {\n  animation-name: Toastify__slideInUp;\n}\n\n.Toastify__slide-exit--top-left, .Toastify__slide-exit--bottom-left {\n  animation-name: Toastify__slideOutLeft;\n}\n.Toastify__slide-exit--top-right, .Toastify__slide-exit--bottom-right {\n  animation-name: Toastify__slideOutRight;\n}\n.Toastify__slide-exit--top-center {\n  animation-name: Toastify__slideOutUp;\n}\n.Toastify__slide-exit--bottom-center {\n  animation-name: Toastify__slideOutDown;\n}\n\n/*# sourceMappingURL=ReactToastify.css.map */", "",{"version":3,"sources":["webpack://./node_modules/react-toastify/scss/_toastContainer.scss","webpack://./node_modules/react-toastify/scss/_variables.scss","webpack://./node_modules/react-toastify/dist/ReactToastify.css","webpack://./node_modules/react-toastify/scss/_toast.scss","webpack://./node_modules/react-toastify/scss/_closeButton.scss","webpack://./node_modules/react-toastify/scss/_progressBar.scss","webpack://./node_modules/react-toastify/scss/animations/_bounce.scss","webpack://./node_modules/react-toastify/scss/animations/_zoom.scss","webpack://./node_modules/react-toastify/scss/animations/_flip.scss","webpack://./node_modules/react-toastify/scss/animations/_slide.scss"],"names":[],"mappings":"AAAA;EACI,aCmBS;EDlBT,4CAAA;EACA,eAAA;EACA,YAAA;EACA,YCJa;EDKb,sBAAA;EACA,WAAA;AECJ;AFAI;EACI,QAAA;EACA,SAAA;AEER;AFAI;EACI,QAAA;EACA,SAAA;EACA,2BAAA;AEER;AFAI;EACI,QAAA;EACA,UAAA;AEER;AFAI;EACI,WAAA;EACA,SAAA;AEER;AFAI;EACI,WAAA;EACA,SAAA;EACA,2BAAA;AEER;AFAI;EACI,WAAA;EACA,UAAA;AEER;;AFEA;EACI;IACI,YAAA;IACA,UAAA;IACA,OAAA;IACA,SAAA;EECN;EFAM;IAGI,MAAA;IACA,wBAAA;EEAV;EFEM;IAGI,SAAA;IACA,wBAAA;EEFV;EFIM;IACE,QAAA;IACA,aAAA;EEFR;AACF;ACvDA;EACE,kBAAA;EACA,gBFCoB;EEApB,sBAAA;EACA,mBAAA;EACA,YAAA;EACA,kBAAA;EACA,6EAAA;EACA,oBAAA;EAAA,aAAA;EACA,sBAAA;MAAA,8BAAA;EACA,iBFNoB;EEOpB,gBAAA;EACA,uBFOe;EENf,eAAA;EACA,cAAA;ADyDF;ACxDE;EACE,cAAA;AD0DJ;ACxDE;EACE,mBFZY;EEaZ,WFNiB;ACgErB;ACxDE;EACE,gBFjBe;EEkBf,WFXoB;ACqExB;ACxDE;EACE,mBFnBY;AC6EhB;ACxDE;EACE,mBFrBe;AC+EnB;ACxDE;EACE,mBFvBe;ACiFnB;ACxDE;EACE,mBFzBa;ACmFjB;ACxDE;EACE,cAAA;EACA,YAAA;AD0DJ;;ACtDA;EACE,yBAAA;EACA,wBAAA;ADyDF;;ACtDA;EACE;IACE,gBAAA;EDyDF;AACF;AE7GA;EACE,WAAA;EACA,uBAAA;EACA,aAAA;EACA,YAAA;EACA,UAAA;EACA,eAAA;EACA,YAAA;EACA,qBAAA;EACA,0BAAA;MAAA,sBAAA;AF+GF;AE7GE;EACE,WAAA;EACA,YAAA;AF+GJ;AE5GE;EACE,kBAAA;EACA,YAAA;EACA,WAAA;AF8GJ;AE3GE;EACE,UAAA;AF6GJ;;AGpIA;EACE;IACE,oBAAA;EHuIF;EGrIA;IACE,oBAAA;EHuIF;AACF;AGpIA;EACE,kBAAA;EACA,SAAA;EACA,OAAA;EACA,WAAA;EACA,WAAA;EACA,aJKW;EIJX,YAAA;EACA,0CAAA;EACA,sBAAA;AHsIF;AGpIE;EACE,oDAAA;AHsIJ;AGnIE;EACE,0BAAA;AHqIJ;AGlIE;EACE,QAAA;EACA,aAAA;EACA,uBAAA;AHoIJ;AGjIE;EACE,2FJnBwB;ACsJ5B;AGhIE;EACE,mBJtBqB;ACwJzB;AIrKA;EACI;IAJA,8DAAA;EJ4KF;EIjKE;IACI,UAAA;IACA,oCAAA;EJmKN;EIjKE;IACI,UAAA;IACA,mCAAA;EJmKN;EIjKE;IACI,kCAAA;EJmKN;EIjKE;IACI,kCAAA;EJmKN;EIjKE;IACI,eAAA;EJmKN;AACF;AIhKA;EACI;IACI,UAAA;IACA,mCAAA;EJkKN;EIhKE;IACI,UAAA;IACA,oCAAA;EJkKN;AACF;AI/JA;EACI;IA1CA,8DAAA;EJ4MF;EI3JE;IACI,UAAA;IACA,qCAAA;EJ6JN;EI3JE;IACI,UAAA;IACA,kCAAA;EJ6JN;EI3JE;IACI,mCAAA;EJ6JN;EI3JE;IACI,iCAAA;EJ6JN;EI3JE;IACI,eAAA;EJ6JN;AACF;AI1JA;EACI;IACI,UAAA;IACA,kCAAA;EJ4JN;EI1JE;IACI,UAAA;IACA,qCAAA;EJ4JN;AACF;AIzJA;EACI;IAhFA,8DAAA;EJ4OF;EIrJE;IACI,UAAA;IACA,oCAAA;EJuJN;EIrJE;IACI,UAAA;IACA,mCAAA;EJuJN;EIrJE;IACI,kCAAA;EJuJN;EIrJE;IACI,kCAAA;EJuJN;EIrJE;IACI,+BAAA;EJuJN;AACF;AIpJA;EACI;IACI,mCAAA;EJsJN;EIpJE;IAEI,UAAA;IACA,kCAAA;EJqJN;EInJE;IACI,UAAA;IACA,qCAAA;EJqJN;AACF;AIlJA;EACI;IA1HA,8DAAA;EJ+QF;EI9IE;IACI,UAAA;IACA,qCAAA;EJgJN;EI9IE;IACI,UAAA;IACA,kCAAA;EJgJN;EI9IE;IACI,mCAAA;EJgJN;EI9IE;IACI,iCAAA;EJgJN;EI9IE;IACI,eAAA;EJgJN;AACF;AI7IA;EACI;IACI,kCAAA;EJ+IN;EI7IE;IAEI,UAAA;IACA,mCAAA;EJ8IN;EI5IE;IACI,UAAA;IACA,oCAAA;EJ8IN;AACF;AI1II;EAEI,sCAAA;AJ2IR;AIzII;EAEI,uCAAA;AJ0IR;AIxII;EACI,sCAAA;AJ0IR;AIxII;EACI,oCAAA;AJ0IR;;AIrII;EAEI,uCAAA;AJuIR;AIrII;EAEI,wCAAA;AJsIR;AIpII;EACI,qCAAA;AJsIR;AIpII;EACI,uCAAA;AJsIR;;AKxUA;EACI;IACI,UAAA;IACA,iCAAA;EL2UN;EKzUE;IACI,UAAA;EL2UN;AACF;AKxUA;EACI;IACI,UAAA;EL0UN;EKxUE;IACI,UAAA;IACA,iCAAA;EL0UN;EKxUE;IACI,UAAA;EL0UN;AACF;AKvUA;EACI,gCAAA;ALyUJ;;AKtUA;EACI,iCAAA;ALyUJ;;AMrWA;EACI;IACI,sDAAA;IACA,kCAAA;IACA,UAAA;ENwWN;EMtWE;IACI,uDAAA;IACA,kCAAA;ENwWN;EMtWE;IACI,sDAAA;IACA,UAAA;ENwWN;EMtWE;IACI,sDAAA;ENwWN;EMtWE;IACI,6BAAA;ENwWN;AACF;AMrWA;EACI;IACI,6BAAA;ENuWN;EMrWE;IACI,uDAAA;IACA,UAAA;ENuWN;EMrWE;IACI,sDAAA;IACA,UAAA;ENuWN;AACF;AMpWA;EACI,gCAAA;ANsWJ;;AMnWA;EACI,iCAAA;ANsWJ;;AO3YA;EACI;IACI,kCAAA;IACA,mBAAA;EP8YN;EO5YE;IARA,+BAAA;EPuZF;AACF;AO3YA;EACI;IACI,mCAAA;IACA,mBAAA;EP6YN;EO3YE;IAlBA,+BAAA;EPgaF;AACF;AO1YA;EACI;IACI,kCAAA;IACA,mBAAA;EP4YN;EO1YE;IA5BA,+BAAA;EPyaF;AACF;AOzYA;EACI;IACI,mCAAA;IACA,mBAAA;EP2YN;EOzYE;IAtCA,+BAAA;EPkbF;AACF;AOxYA;EACI;IA5CA,+BAAA;EPubF;EOxYE;IACI,kBAAA;IACA,kCAAA;EP0YN;AACF;AOvYA;EACI;IAtDA,+BAAA;EPgcF;EOvYE;IACI,kBAAA;IACA,mCAAA;EPyYN;AACF;AOtYA;EACI;IAhEA,+BAAA;EPycF;EOtYE;IACI,kBAAA;IACA,mCAAA;EPwYN;AACF;AOrYA;EACI;IA1EA,+BAAA;EPkdF;EOrYE;IACI,kBAAA;IACA,oCAAA;EPuYN;AACF;AOnYI;EAEI,qCAAA;APoYR;AOlYI;EAEI,sCAAA;APmYR;AOjYI;EACI,qCAAA;APmYR;AOjYI;EACI,mCAAA;APmYR;;AO9XI;EAEI,sCAAA;APgYR;AO9XI;EAEI,uCAAA;AP+XR;AO7XI;EACI,oCAAA;AP+XR;AO7XI;EACI,sCAAA;AP+XR;;AAKA,4CAA4C","sourceRoot":""}]);
-// Exports
-/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/api.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-// eslint-disable-next-line func-names
-module.exports = function (cssWithMappingToString) {
-  var list = []; // return the list of modules as css string
-
-  list.toString = function toString() {
-    return this.map(function (item) {
-      var content = cssWithMappingToString(item);
-
-      if (item[2]) {
-        return "@media ".concat(item[2], " {").concat(content, "}");
-      }
-
-      return content;
-    }).join("");
-  }; // import a list of modules into the list
-  // eslint-disable-next-line func-names
-
-
-  list.i = function (modules, mediaQuery, dedupe) {
-    if (typeof modules === "string") {
-      // eslint-disable-next-line no-param-reassign
-      modules = [[null, modules, ""]];
-    }
-
-    var alreadyImportedModules = {};
-
-    if (dedupe) {
-      for (var i = 0; i < this.length; i++) {
-        // eslint-disable-next-line prefer-destructuring
-        var id = this[i][0];
-
-        if (id != null) {
-          alreadyImportedModules[id] = true;
-        }
-      }
-    }
-
-    for (var _i = 0; _i < modules.length; _i++) {
-      var item = [].concat(modules[_i]);
-
-      if (dedupe && alreadyImportedModules[item[0]]) {
-        // eslint-disable-next-line no-continue
-        continue;
-      }
-
-      if (mediaQuery) {
-        if (!item[2]) {
-          item[2] = mediaQuery;
-        } else {
-          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
-        }
-      }
-
-      list.push(item);
-    }
-  };
-
-  return list;
-};
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/cssWithMappingToString.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/cssWithMappingToString.js ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-module.exports = function cssWithMappingToString(item) {
-  var _item = _slicedToArray(item, 4),
-      content = _item[1],
-      cssMapping = _item[3];
-
-  if (typeof btoa === "function") {
-    // eslint-disable-next-line no-undef
-    var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(cssMapping))));
-    var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
-    var sourceMapping = "/*# ".concat(data, " */");
-    var sourceURLs = cssMapping.sources.map(function (source) {
-      return "/*# sourceURL=".concat(cssMapping.sourceRoot || "").concat(source, " */");
-    });
-    return [content].concat(sourceURLs).concat([sourceMapping]).join("\n");
-  }
-
-  return [content].join("\n");
-};
-
-/***/ }),
-
-=======
->>>>>>> master
 /***/ "./node_modules/debug/src/browser.js":
 /*!*******************************************!*\
   !*** ./node_modules/debug/src/browser.js ***!
@@ -52933,1355 +52440,6 @@ function pathToRegexp (path, keys, options) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/react-toastify/dist/ReactToastify.css":
-/*!************************************************************!*\
-  !*** ./node_modules/react-toastify/dist/ReactToastify.css ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ReactToastify_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../css-loader/dist/cjs.js!./ReactToastify.css */ "./node_modules/css-loader/dist/cjs.js!./node_modules/react-toastify/dist/ReactToastify.css");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ReactToastify_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = (_css_loader_dist_cjs_js_ReactToastify_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
-
-/***/ }),
-
-/***/ "./node_modules/react-toastify/dist/react-toastify.esm.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/react-toastify/dist/react-toastify.esm.js ***!
-  \****************************************************************/
-/*! exports provided: Bounce, Flip, Slide, ToastContainer, Zoom, collapseToast, cssTransition, toast, useToast, useToastContainer */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bounce", function() { return Bounce; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Flip", function() { return Flip; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Slide", function() { return Slide; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToastContainer", function() { return ToastContainer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Zoom", function() { return Zoom; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "collapseToast", function() { return collapseToast; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cssTransition", function() { return cssTransition; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toast", function() { return toast; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useToast", function() { return useToast; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useToastContainer", function() { return useToastContainer; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-
-function _extends() {
-  _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-function isNum(v) {
-  return typeof v === 'number' && !isNaN(v);
-}
-function isBool(v) {
-  return typeof v === 'boolean';
-}
-function isStr(v) {
-  return typeof v === 'string';
-}
-function isFn(v) {
-  return typeof v === 'function';
-}
-function parseClassName(v) {
-  return isStr(v) || isFn(v) ? v : null;
-}
-function isToastIdValid(toastId) {
-  return toastId === 0 || toastId;
-}
-function getAutoCloseDelay(toastAutoClose, containerAutoClose) {
-  return toastAutoClose === false || isNum(toastAutoClose) && toastAutoClose > 0 ? toastAutoClose : containerAutoClose;
-}
-var canUseDom = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-function canBeRendered(content) {
-  return Object(react__WEBPACK_IMPORTED_MODULE_0__["isValidElement"])(content) || isStr(content) || isFn(content) || isNum(content);
-}
-
-var POSITION = {
-  TOP_LEFT: 'top-left',
-  TOP_RIGHT: 'top-right',
-  TOP_CENTER: 'top-center',
-  BOTTOM_LEFT: 'bottom-left',
-  BOTTOM_RIGHT: 'bottom-right',
-  BOTTOM_CENTER: 'bottom-center'
-};
-var TYPE = {
-  INFO: 'info',
-  SUCCESS: 'success',
-  WARNING: 'warning',
-  ERROR: 'error',
-  DEFAULT: 'default',
-  DARK: 'dark'
-};
-
-/**
- * Used to collapse toast after exit animation
- */
-function collapseToast(node, done, duration
-/* COLLAPSE_DURATION */
-) {
-  if (duration === void 0) {
-    duration = 300;
-  }
-
-  var height = node.scrollHeight;
-  var style = node.style;
-  requestAnimationFrame(function () {
-    style.minHeight = 'initial';
-    style.height = height + 'px';
-    style.transition = "all " + duration + "ms";
-    requestAnimationFrame(function () {
-      style.height = '0';
-      style.padding = '0';
-      style.margin = '0';
-      setTimeout(done, duration);
-    });
-  });
-}
-
-/**
- * Css animation that just work.
- * You could use animate.css for instance
- *
- *
- * ```
- * cssTransition({
- *   enter: "animate__animated animate__bounceIn",
- *   exit: "animate__animated animate__bounceOut"
- * })
- * ```
- *
- */
-
-function cssTransition(_ref) {
-  var enter = _ref.enter,
-      exit = _ref.exit,
-      _ref$appendPosition = _ref.appendPosition,
-      appendPosition = _ref$appendPosition === void 0 ? false : _ref$appendPosition,
-      _ref$collapse = _ref.collapse,
-      collapse = _ref$collapse === void 0 ? true : _ref$collapse,
-      _ref$collapseDuration = _ref.collapseDuration,
-      collapseDuration = _ref$collapseDuration === void 0 ? 300 : _ref$collapseDuration;
-  return function ToastTransition(_ref2) {
-    var children = _ref2.children,
-        position = _ref2.position,
-        preventExitTransition = _ref2.preventExitTransition,
-        done = _ref2.done,
-        nodeRef = _ref2.nodeRef,
-        isIn = _ref2.isIn;
-    var enterClassName = appendPosition ? enter + "--" + position : enter;
-    var exitClassName = appendPosition ? exit + "--" + position : exit;
-    var baseClassName = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
-    var animationStep = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(0
-    /* Enter */
-    );
-    Object(react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"])(function () {
-      onEnter();
-    }, []);
-    Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-      if (!isIn) preventExitTransition ? onExited() : onExit();
-    }, [isIn]);
-
-    function onEnter() {
-      var node = nodeRef.current;
-      baseClassName.current = node.className;
-      node.className += " " + enterClassName;
-      node.addEventListener('animationend', onEntered);
-    }
-
-    function onEntered() {
-      var node = nodeRef.current;
-      node.removeEventListener('animationend', onEntered);
-
-      if (animationStep.current === 0
-      /* Enter */
-      ) {
-          node.className = baseClassName.current;
-        }
-    }
-
-    function onExit() {
-      animationStep.current = 1
-      /* Exit */
-      ;
-      var node = nodeRef.current;
-      node.className += " " + exitClassName;
-      node.addEventListener('animationend', onExited);
-    }
-
-    function onExited() {
-      var node = nodeRef.current;
-      node.removeEventListener('animationend', onExited);
-      collapse ? collapseToast(node, done, collapseDuration) : done();
-    }
-
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, children);
-  };
-}
-
-var eventManager = {
-  list: /*#__PURE__*/new Map(),
-  emitQueue: /*#__PURE__*/new Map(),
-  on: function on(event, callback) {
-    this.list.has(event) || this.list.set(event, []);
-    this.list.get(event).push(callback);
-    return this;
-  },
-  off: function off(event, callback) {
-    if (callback) {
-      var cb = this.list.get(event).filter(function (cb) {
-        return cb !== callback;
-      });
-      this.list.set(event, cb);
-      return this;
-    }
-
-    this.list["delete"](event);
-    return this;
-  },
-  cancelEmit: function cancelEmit(event) {
-    var timers = this.emitQueue.get(event);
-
-    if (timers) {
-      timers.forEach(clearTimeout);
-      this.emitQueue["delete"](event);
-    }
-
-    return this;
-  },
-
-  /**
-   * Enqueue the event at the end of the call stack
-   * Doing so let the user call toast as follow:
-   * toast('1')
-   * toast('2')
-   * toast('3')
-   * Without setTimemout the code above will not work
-   */
-  emit: function emit(event) {
-    var _this = this;
-
-    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    this.list.has(event) && this.list.get(event).forEach(function (callback) {
-      var timer = setTimeout(function () {
-        // @ts-ignore
-        callback.apply(void 0, args);
-      }, 0);
-      _this.emitQueue.has(event) || _this.emitQueue.set(event, []);
-
-      _this.emitQueue.get(event).push(timer);
-    });
-  }
-};
-
-/**
- * `useKeeper` is a helper around `useRef`.
- *
- * You don't need to access the `.current`property to get the value
- * If refresh is set to true. The ref will be updated every render
- */
-
-function useKeeper(arg, refresh) {
-  if (refresh === void 0) {
-    refresh = false;
-  }
-
-  var ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(arg);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (refresh) ref.current = arg;
-  });
-  return ref.current;
-}
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 0
-    /* ADD */
-    :
-      return [].concat(state, [action.toastId]).filter(function (id) {
-        return id !== action.staleId;
-      });
-
-    case 1
-    /* REMOVE */
-    :
-      return isToastIdValid(action.toastId) ? state.filter(function (id) {
-        return id !== action.toastId;
-      }) : [];
-  }
-}
-
-function useToastContainer(props) {
-  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(function (x) {
-    return x + 1;
-  }, 0),
-      forceUpdate = _useReducer[1];
-
-  var _useReducer2 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(reducer, []),
-      toast = _useReducer2[0],
-      dispatch = _useReducer2[1];
-
-  var containerRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var toastCount = useKeeper(0);
-  var queue = useKeeper([]);
-  var collection = useKeeper({});
-  var instance = useKeeper({
-    toastKey: 1,
-    displayedToast: 0,
-    props: props,
-    containerId: null,
-    isToastActive: isToastActive,
-    getToast: function getToast(id) {
-      return collection[id] || null;
-    }
-  });
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    instance.containerId = props.containerId;
-    eventManager.cancelEmit(3
-    /* WillUnmount */
-    ).on(0
-    /* Show */
-    , buildToast).on(1
-    /* Clear */
-    , function (toastId) {
-      return containerRef.current && removeToast(toastId);
-    }).on(5
-    /* ClearWaitingQueue */
-    , clearWaitingQueue).emit(2
-    /* DidMount */
-    , instance);
-    return function () {
-      return eventManager.emit(3
-      /* WillUnmount */
-      , instance);
-    };
-  }, []);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    instance.isToastActive = isToastActive;
-    instance.displayedToast = toast.length;
-    eventManager.emit(4
-    /* Change */
-    , toast.length, props.containerId);
-  }, [toast]);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    instance.props = props;
-  });
-
-  function isToastActive(id) {
-    return toast.indexOf(id) !== -1;
-  }
-
-  function clearWaitingQueue(_ref) {
-    var containerId = _ref.containerId;
-    var _instance$props = instance.props,
-        limit = _instance$props.limit,
-        enableMultiContainer = _instance$props.enableMultiContainer;
-
-    if (limit && (!containerId || instance.containerId === containerId && enableMultiContainer)) {
-      toastCount -= queue.length;
-      queue = [];
-    }
-  }
-
-  function removeToast(toastId) {
-    dispatch({
-      type: 1
-      /* REMOVE */
-      ,
-      toastId: toastId
-    });
-  }
-
-  function dequeueToast() {
-    var _queue$shift = queue.shift(),
-        toastContent = _queue$shift.toastContent,
-        toastProps = _queue$shift.toastProps,
-        staleId = _queue$shift.staleId;
-
-    appendToast(toastContent, toastProps, staleId);
-  }
-  /**
-   * check if a container is attached to the dom
-   * check for multi-container, build only if associated
-   * check for duplicate toastId if no update
-   */
-
-
-  function isNotValid(_ref2) {
-    var containerId = _ref2.containerId,
-        toastId = _ref2.toastId,
-        updateId = _ref2.updateId;
-    return !containerRef.current || instance.props.enableMultiContainer && containerId !== instance.props.containerId || collection[toastId] && updateId == null ? true : false;
-  } // this function and all the function called inside needs to rely on ref(`useKeeper`)
-
-
-  function buildToast(content, _ref3) {
-    var delay = _ref3.delay,
-        staleId = _ref3.staleId,
-        options = _objectWithoutPropertiesLoose(_ref3, ["delay", "staleId"]);
-
-    if (!canBeRendered(content) || isNotValid(options)) return;
-    var toastId = options.toastId,
-        updateId = options.updateId;
-    var props = instance.props;
-
-    var closeToast = function closeToast() {
-      return removeToast(toastId);
-    };
-
-    var isNotAnUpdate = options.updateId == null;
-    if (isNotAnUpdate) toastCount++;
-    var toastProps = {
-      toastId: toastId,
-      updateId: updateId,
-      isIn: false,
-      key: options.key || instance.toastKey++,
-      type: options.type,
-      closeToast: closeToast,
-      closeButton: options.closeButton,
-      rtl: props.rtl,
-      position: options.position || props.position,
-      transition: options.transition || props.transition,
-      className: parseClassName(options.className || props.toastClassName),
-      bodyClassName: parseClassName(options.bodyClassName || props.bodyClassName),
-      style: options.style || props.toastStyle,
-      bodyStyle: options.bodyStyle || props.bodyStyle,
-      onClick: options.onClick || props.onClick,
-      pauseOnHover: isBool(options.pauseOnHover) ? options.pauseOnHover : props.pauseOnHover,
-      pauseOnFocusLoss: isBool(options.pauseOnFocusLoss) ? options.pauseOnFocusLoss : props.pauseOnFocusLoss,
-      draggable: isBool(options.draggable) ? options.draggable : props.draggable,
-      draggablePercent: isNum(options.draggablePercent) ? options.draggablePercent : props.draggablePercent,
-      draggableDirection: options.draggableDirection || props.draggableDirection,
-      closeOnClick: isBool(options.closeOnClick) ? options.closeOnClick : props.closeOnClick,
-      progressClassName: parseClassName(options.progressClassName || props.progressClassName),
-      progressStyle: options.progressStyle || props.progressStyle,
-      autoClose: getAutoCloseDelay(options.autoClose, props.autoClose),
-      hideProgressBar: isBool(options.hideProgressBar) ? options.hideProgressBar : props.hideProgressBar,
-      progress: options.progress,
-      role: isStr(options.role) ? options.role : props.role,
-      deleteToast: function deleteToast() {
-        removeFromCollection(toastId);
-      }
-    };
-    if (isFn(options.onOpen)) toastProps.onOpen = options.onOpen;
-    if (isFn(options.onClose)) toastProps.onClose = options.onClose; //  tweak for vertical dragging
-
-    if (toastProps.draggableDirection === "y"
-    /* Y */
-    && toastProps.draggablePercent === 80
-    /* DRAGGABLE_PERCENT */
-    ) {
-        toastProps.draggablePercent *= 1.5;
-      }
-
-    var closeButton = props.closeButton;
-
-    if (options.closeButton === false || canBeRendered(options.closeButton)) {
-      closeButton = options.closeButton;
-    } else if (options.closeButton === true) {
-      closeButton = canBeRendered(props.closeButton) ? props.closeButton : true;
-    }
-
-    toastProps.closeButton = closeButton;
-    var toastContent = content;
-
-    if (Object(react__WEBPACK_IMPORTED_MODULE_0__["isValidElement"])(content) && !isStr(content.type)) {
-      toastContent = Object(react__WEBPACK_IMPORTED_MODULE_0__["cloneElement"])(content, {
-        closeToast: closeToast,
-        toastProps: toastProps
-      });
-    } else if (isFn(content)) {
-      toastContent = content({
-        closeToast: closeToast,
-        toastProps: toastProps
-      });
-    } // not handling limit + delay by design. Waiting for user feedback first
-
-
-    if (props.limit && props.limit > 0 && toastCount > props.limit && isNotAnUpdate) {
-      queue.push({
-        toastContent: toastContent,
-        toastProps: toastProps,
-        staleId: staleId
-      });
-    } else if (isNum(delay) && delay > 0) {
-      setTimeout(function () {
-        appendToast(toastContent, toastProps, staleId);
-      }, delay);
-    } else {
-      appendToast(toastContent, toastProps, staleId);
-    }
-  }
-
-  function appendToast(content, toastProps, staleId) {
-    var toastId = toastProps.toastId;
-    if (staleId) delete collection[staleId];
-    collection[toastId] = {
-      content: content,
-      props: toastProps
-    };
-    dispatch({
-      type: 0
-      /* ADD */
-      ,
-      toastId: toastId,
-      staleId: staleId
-    });
-  }
-
-  function removeFromCollection(toastId) {
-    delete collection[toastId];
-    var queueLen = queue.length;
-    toastCount = isToastIdValid(toastId) ? toastCount - 1 : toastCount - instance.displayedToast;
-    if (toastCount < 0) toastCount = 0;
-
-    if (queueLen > 0) {
-      var freeSlot = isToastIdValid(toastId) ? 1 : instance.props.limit;
-
-      if (queueLen === 1 || freeSlot === 1) {
-        instance.displayedToast++;
-        dequeueToast();
-      } else {
-        var toDequeue = freeSlot > queueLen ? queueLen : freeSlot;
-        instance.displayedToast = toDequeue;
-
-        for (var i = 0; i < toDequeue; i++) {
-          dequeueToast();
-        }
-      }
-    } else {
-      forceUpdate();
-    }
-  }
-
-  function getToastToRender(cb) {
-    var toastToRender = {};
-    var toastList = props.newestOnTop ? Object.keys(collection).reverse() : Object.keys(collection);
-
-    for (var i = 0; i < toastList.length; i++) {
-      var _toast = collection[toastList[i]];
-      var position = _toast.props.position;
-      toastToRender[position] || (toastToRender[position] = []);
-      toastToRender[position].push(_toast);
-    }
-
-    return Object.keys(toastToRender).map(function (p) {
-      return cb(p, toastToRender[p]);
-    });
-  }
-
-  return {
-    getToastToRender: getToastToRender,
-    collection: collection,
-    containerRef: containerRef,
-    isToastActive: isToastActive
-  };
-}
-
-function getX(e) {
-  return e.targetTouches && e.targetTouches.length >= 1 ? e.targetTouches[0].clientX : e.clientX;
-}
-
-function getY(e) {
-  return e.targetTouches && e.targetTouches.length >= 1 ? e.targetTouches[0].clientY : e.clientY;
-}
-
-function useToast(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
-      isRunning = _useState[0],
-      setIsRunning = _useState[1];
-
-  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      preventExitTransition = _useState2[0],
-      setPreventExitTransition = _useState2[1];
-
-  var toastRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var drag = useKeeper({
-    start: 0,
-    x: 0,
-    y: 0,
-    delta: 0,
-    removalDistance: 0,
-    canCloseOnClick: true,
-    canDrag: false,
-    boundingRect: null
-  });
-  var syncProps = useKeeper(props, true);
-  var autoClose = props.autoClose,
-      pauseOnHover = props.pauseOnHover,
-      closeToast = props.closeToast,
-      onClick = props.onClick,
-      closeOnClick = props.closeOnClick;
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (isFn(props.onOpen)) props.onOpen(Object(react__WEBPACK_IMPORTED_MODULE_0__["isValidElement"])(props.children) && props.children.props);
-    return function () {
-      if (isFn(syncProps.onClose)) syncProps.onClose(Object(react__WEBPACK_IMPORTED_MODULE_0__["isValidElement"])(syncProps.children) && syncProps.children.props);
-    };
-  }, []);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    props.draggable && bindDragEvents();
-    return function () {
-      props.draggable && unbindDragEvents();
-    };
-  }, [props.draggable]);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    props.pauseOnFocusLoss && bindFocusEvents();
-    return function () {
-      props.pauseOnFocusLoss && unbindFocusEvents();
-    };
-  }, [props.pauseOnFocusLoss]);
-
-  function onDragStart(e) {
-    if (props.draggable) {
-      var toast = toastRef.current;
-      drag.canCloseOnClick = true;
-      drag.canDrag = true;
-      drag.boundingRect = toast.getBoundingClientRect();
-      toast.style.transition = '';
-      drag.x = getX(e.nativeEvent);
-      drag.y = getY(e.nativeEvent);
-
-      if (props.draggableDirection === "x"
-      /* X */
-      ) {
-          drag.start = drag.x;
-          drag.removalDistance = toast.offsetWidth * (props.draggablePercent / 100);
-        } else {
-        drag.start = drag.y;
-        drag.removalDistance = toast.offsetHeight * (props.draggablePercent / 100);
-      }
-    }
-  }
-
-  function onDragTransitionEnd() {
-    if (drag.boundingRect) {
-      var _drag$boundingRect = drag.boundingRect,
-          top = _drag$boundingRect.top,
-          bottom = _drag$boundingRect.bottom,
-          left = _drag$boundingRect.left,
-          right = _drag$boundingRect.right;
-
-      if (props.pauseOnHover && drag.x >= left && drag.x <= right && drag.y >= top && drag.y <= bottom) {
-        pauseToast();
-      } else {
-        playToast();
-      }
-    }
-  }
-
-  function playToast() {
-    setIsRunning(true);
-  }
-
-  function pauseToast() {
-    setIsRunning(false);
-  }
-
-  function bindFocusEvents() {
-    if (!document.hasFocus()) pauseToast();
-    window.addEventListener('focus', playToast);
-    window.addEventListener('blur', pauseToast);
-  }
-
-  function unbindFocusEvents() {
-    window.removeEventListener('focus', playToast);
-    window.removeEventListener('blur', pauseToast);
-  }
-
-  function bindDragEvents() {
-    document.addEventListener('mousemove', onDragMove);
-    document.addEventListener('mouseup', onDragEnd);
-    document.addEventListener('touchmove', onDragMove);
-    document.addEventListener('touchend', onDragEnd);
-  }
-
-  function unbindDragEvents() {
-    document.removeEventListener('mousemove', onDragMove);
-    document.removeEventListener('mouseup', onDragEnd);
-    document.removeEventListener('touchmove', onDragMove);
-    document.removeEventListener('touchend', onDragEnd);
-  }
-
-  function onDragMove(e) {
-    if (drag.canDrag) {
-      e.preventDefault();
-      var toast = toastRef.current;
-      if (isRunning) pauseToast();
-      drag.x = getX(e);
-      drag.y = getY(e);
-
-      if (props.draggableDirection === "x"
-      /* X */
-      ) {
-          drag.delta = drag.x - drag.start;
-        } else {
-        drag.delta = drag.y - drag.start;
-      } // prevent false positif during a toast click
-
-
-      if (drag.start !== drag.x) drag.canCloseOnClick = false;
-      toast.style.transform = "translate" + props.draggableDirection + "(" + drag.delta + "px)";
-      toast.style.opacity = "" + (1 - Math.abs(drag.delta / drag.removalDistance));
-    }
-  }
-
-  function onDragEnd() {
-    var toast = toastRef.current;
-
-    if (drag.canDrag) {
-      drag.canDrag = false;
-
-      if (Math.abs(drag.delta) > drag.removalDistance) {
-        setPreventExitTransition(true);
-        props.closeToast();
-        return;
-      }
-
-      toast.style.transition = 'transform 0.2s, opacity 0.2s';
-      toast.style.transform = "translate" + props.draggableDirection + "(0)";
-      toast.style.opacity = '1';
-    }
-  }
-
-  var eventHandlers = {
-    onMouseDown: onDragStart,
-    onTouchStart: onDragStart,
-    onMouseUp: onDragTransitionEnd,
-    onTouchEnd: onDragTransitionEnd
-  };
-
-  if (autoClose && pauseOnHover) {
-    eventHandlers.onMouseEnter = pauseToast;
-    eventHandlers.onMouseLeave = playToast;
-  } // prevent toast from closing when user drags the toast
-
-
-  if (closeOnClick) {
-    eventHandlers.onClick = function (e) {
-      onClick && onClick(e);
-      drag.canCloseOnClick && closeToast();
-    };
-  }
-
-  return {
-    playToast: playToast,
-    pauseToast: pauseToast,
-    isRunning: isRunning,
-    preventExitTransition: preventExitTransition,
-    toastRef: toastRef,
-    eventHandlers: eventHandlers
-  };
-}
-
-function CloseButton(_ref) {
-  var closeToast = _ref.closeToast,
-      type = _ref.type,
-      _ref$ariaLabel = _ref.ariaLabel,
-      ariaLabel = _ref$ariaLabel === void 0 ? 'close' : _ref$ariaLabel;
-  return Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
-    className: "Toastify"
-    /* CSS_NAMESPACE */
-    + "__close-button " + "Toastify"
-    /* CSS_NAMESPACE */
-    + "__close-button--" + type,
-    type: "button",
-    onClick: function onClick(e) {
-      e.stopPropagation();
-      closeToast(e);
-    },
-    "aria-label": ariaLabel
-  }, Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("svg", {
-    "aria-hidden": "true",
-    viewBox: "0 0 14 16"
-  }, Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("path", {
-    fillRule: "evenodd",
-    d: "M7.71 8.23l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75L1 11.98l3.75-3.75L1 4.48 2.48 3l3.75 3.75L9.98 3l1.48 1.48-3.75 3.75z"
-  })));
-}
-
-function ProgressBar(_ref) {
-  var _cx, _animationEvent;
-
-  var delay = _ref.delay,
-      isRunning = _ref.isRunning,
-      closeToast = _ref.closeToast,
-      type = _ref.type,
-      hide = _ref.hide,
-      className = _ref.className,
-      userStyle = _ref.style,
-      controlledProgress = _ref.controlledProgress,
-      progress = _ref.progress,
-      rtl = _ref.rtl,
-      isIn = _ref.isIn;
-
-  var style = _extends({}, userStyle, {
-    animationDuration: delay + "ms",
-    animationPlayState: isRunning ? 'running' : 'paused',
-    opacity: hide ? 0 : 1
-  });
-
-  if (controlledProgress) style.transform = "scaleX(" + progress + ")";
-  var defaultClassName = Object(clsx__WEBPACK_IMPORTED_MODULE_1__["default"])("Toastify"
-  /* CSS_NAMESPACE */
-  + "__progress-bar", controlledProgress ? "Toastify"
-  /* CSS_NAMESPACE */
-  + "__progress-bar--controlled" : "Toastify"
-  /* CSS_NAMESPACE */
-  + "__progress-bar--animated", "Toastify"
-  /* CSS_NAMESPACE */
-  + "__progress-bar--" + type, (_cx = {}, _cx["Toastify"
-  /* CSS_NAMESPACE */
-  + "__progress-bar--rtl"] = rtl, _cx));
-  var classNames = isFn(className) ? className({
-    rtl: rtl,
-    type: type,
-    defaultClassName: defaultClassName
-  }) : Object(clsx__WEBPACK_IMPORTED_MODULE_1__["default"])(defaultClassName, className); // 🧐 controlledProgress is derived from progress
-  // so if controlledProgress is set
-  // it means that this is also the case for progress
-
-  var animationEvent = (_animationEvent = {}, _animationEvent[controlledProgress && progress >= 1 ? 'onTransitionEnd' : 'onAnimationEnd'] = controlledProgress && progress < 1 ? null : function () {
-    isIn && closeToast();
-  }, _animationEvent); // TODO: add aria-valuenow, aria-valuemax, aria-valuemin
-
-  return Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object.assign({
-    role: "progressbar",
-    className: classNames,
-    style: style
-  }, animationEvent));
-}
-ProgressBar.defaultProps = {
-  type: TYPE.DEFAULT,
-  hide: false
-};
-
-var Toast = function Toast(props) {
-  var _cx;
-
-  var _useToast = useToast(props),
-      isRunning = _useToast.isRunning,
-      preventExitTransition = _useToast.preventExitTransition,
-      toastRef = _useToast.toastRef,
-      eventHandlers = _useToast.eventHandlers;
-
-  var closeButton = props.closeButton,
-      children = props.children,
-      autoClose = props.autoClose,
-      onClick = props.onClick,
-      type = props.type,
-      hideProgressBar = props.hideProgressBar,
-      closeToast = props.closeToast,
-      Transition = props.transition,
-      position = props.position,
-      className = props.className,
-      style = props.style,
-      bodyClassName = props.bodyClassName,
-      bodyStyle = props.bodyStyle,
-      progressClassName = props.progressClassName,
-      progressStyle = props.progressStyle,
-      updateId = props.updateId,
-      role = props.role,
-      progress = props.progress,
-      rtl = props.rtl,
-      toastId = props.toastId,
-      deleteToast = props.deleteToast,
-      isIn = props.isIn;
-  var defaultClassName = Object(clsx__WEBPACK_IMPORTED_MODULE_1__["default"])("Toastify"
-  /* CSS_NAMESPACE */
-  + "__toast", "Toastify"
-  /* CSS_NAMESPACE */
-  + "__toast--" + type, (_cx = {}, _cx["Toastify"
-  /* CSS_NAMESPACE */
-  + "__toast--rtl"] = rtl, _cx));
-  var cssClasses = isFn(className) ? className({
-    rtl: rtl,
-    position: position,
-    type: type,
-    defaultClassName: defaultClassName
-  }) : Object(clsx__WEBPACK_IMPORTED_MODULE_1__["default"])(defaultClassName, className);
-  var isProgressControlled = !!progress;
-
-  function renderCloseButton(closeButton) {
-    if (!closeButton) return;
-    var props = {
-      closeToast: closeToast,
-      type: type
-    };
-    if (isFn(closeButton)) return closeButton(props);
-    if (Object(react__WEBPACK_IMPORTED_MODULE_0__["isValidElement"])(closeButton)) return Object(react__WEBPACK_IMPORTED_MODULE_0__["cloneElement"])(closeButton, props);
-  }
-
-  return Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Transition, {
-    isIn: isIn,
-    done: deleteToast,
-    position: position,
-    preventExitTransition: preventExitTransition,
-    nodeRef: toastRef
-  }, Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object.assign({
-    id: toastId,
-    onClick: onClick,
-    className: cssClasses
-  }, eventHandlers, {
-    style: style,
-    ref: toastRef
-  }), Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object.assign({}, isIn && {
-    role: role
-  }, {
-    className: isFn(bodyClassName) ? bodyClassName({
-      type: type
-    }) : Object(clsx__WEBPACK_IMPORTED_MODULE_1__["default"])("Toastify"
-    /* CSS_NAMESPACE */
-    + "__toast-body", bodyClassName),
-    style: bodyStyle
-  }), children), renderCloseButton(closeButton), (autoClose || isProgressControlled) && Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ProgressBar, Object.assign({}, updateId && !isProgressControlled ? {
-    key: "pb-" + updateId
-  } : {}, {
-    rtl: rtl,
-    delay: autoClose,
-    isRunning: isRunning,
-    isIn: isIn,
-    closeToast: closeToast,
-    hide: hideProgressBar,
-    type: type,
-    style: progressStyle,
-    className: progressClassName,
-    controlledProgress: isProgressControlled,
-    progress: progress
-  }))));
-};
-
-var Bounce = /*#__PURE__*/cssTransition({
-  enter: "Toastify"
-  /* CSS_NAMESPACE */
-  + "--animate " + "Toastify"
-  /* CSS_NAMESPACE */
-  + "__bounce-enter",
-  exit: "Toastify"
-  /* CSS_NAMESPACE */
-  + "--animate " + "Toastify"
-  /* CSS_NAMESPACE */
-  + "__bounce-exit",
-  appendPosition: true
-});
-var Slide = /*#__PURE__*/cssTransition({
-  enter: "Toastify"
-  /* CSS_NAMESPACE */
-  + "--animate " + "Toastify"
-  /* CSS_NAMESPACE */
-  + "__slide-enter",
-  exit: "Toastify"
-  /* CSS_NAMESPACE */
-  + "--animate " + "Toastify"
-  /* CSS_NAMESPACE */
-  + "__slide-exit",
-  appendPosition: true
-});
-var Zoom = /*#__PURE__*/cssTransition({
-  enter: "Toastify"
-  /* CSS_NAMESPACE */
-  + "--animate " + "Toastify"
-  /* CSS_NAMESPACE */
-  + "__zoom-enter",
-  exit: "Toastify"
-  /* CSS_NAMESPACE */
-  + "--animate " + "Toastify"
-  /* CSS_NAMESPACE */
-  + "__zoom-exit"
-});
-var Flip = /*#__PURE__*/cssTransition({
-  enter: "Toastify"
-  /* CSS_NAMESPACE */
-  + "--animate " + "Toastify"
-  /* CSS_NAMESPACE */
-  + "__flip-enter",
-  exit: "Toastify"
-  /* CSS_NAMESPACE */
-  + "--animate " + "Toastify"
-  /* CSS_NAMESPACE */
-  + "__flip-exit"
-});
-
-var ToastContainer = function ToastContainer(props) {
-  var _useToastContainer = useToastContainer(props),
-      getToastToRender = _useToastContainer.getToastToRender,
-      containerRef = _useToastContainer.containerRef,
-      isToastActive = _useToastContainer.isToastActive;
-
-  var className = props.className,
-      style = props.style,
-      rtl = props.rtl,
-      containerId = props.containerId;
-
-  function getClassName(position) {
-    var _cx;
-
-    var defaultClassName = Object(clsx__WEBPACK_IMPORTED_MODULE_1__["default"])("Toastify"
-    /* CSS_NAMESPACE */
-    + "__toast-container", "Toastify"
-    /* CSS_NAMESPACE */
-    + "__toast-container--" + position, (_cx = {}, _cx["Toastify"
-    /* CSS_NAMESPACE */
-    + "__toast-container--rtl"] = rtl, _cx));
-    return isFn(className) ? className({
-      position: position,
-      rtl: rtl,
-      defaultClassName: defaultClassName
-    }) : Object(clsx__WEBPACK_IMPORTED_MODULE_1__["default"])(defaultClassName, parseClassName(className));
-  }
-
-  return Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    ref: containerRef,
-    className: "Toastify"
-    /* CSS_NAMESPACE */
-    ,
-    id: containerId
-  }, getToastToRender(function (position, toastList) {
-    var containerStyle = toastList.length === 0 ? _extends({}, style, {
-      pointerEvents: 'none'
-    }) : _extends({}, style);
-    return Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: getClassName(position),
-      style: containerStyle,
-      key: "container-" + position
-    }, toastList.map(function (_ref) {
-      var content = _ref.content,
-          toastProps = _ref.props;
-      return Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Toast, Object.assign({}, toastProps, {
-        isIn: isToastActive(toastProps.toastId),
-        key: "toast-" + toastProps.key,
-        closeButton: toastProps.closeButton === true ? CloseButton : toastProps.closeButton
-      }), content);
-    }));
-  }));
-};
-ToastContainer.defaultProps = {
-  position: POSITION.TOP_RIGHT,
-  transition: Bounce,
-  rtl: false,
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeButton: CloseButton,
-  pauseOnHover: true,
-  pauseOnFocusLoss: true,
-  closeOnClick: true,
-  newestOnTop: false,
-  draggable: true,
-  draggablePercent: 80
-  /* DRAGGABLE_PERCENT */
-  ,
-  draggableDirection: "x"
-  /* X */
-  ,
-  role: 'alert'
-};
-
-var containers = /*#__PURE__*/new Map();
-var latestInstance;
-var containerDomNode;
-var containerConfig;
-var queue = [];
-var lazy = false;
-/**
- * Check whether any container is currently mounted in the DOM
- */
-
-function isAnyContainerMounted() {
-  return containers.size > 0;
-}
-/**
- * Get the toast by id, given it's in the DOM, otherwise returns null
- */
-
-
-function getToast(toastId, _ref) {
-  var containerId = _ref.containerId;
-  var container = containers.get(containerId || latestInstance);
-  if (!container) return null;
-  return container.getToast(toastId);
-}
-/**
- * Generate a random toastId
- */
-
-
-function generateToastId() {
-  return Math.random().toString(36).substr(2, 9);
-}
-/**
- * Generate a toastId or use the one provided
- */
-
-
-function getToastId(options) {
-  if (options && (isStr(options.toastId) || isNum(options.toastId))) {
-    return options.toastId;
-  }
-
-  return generateToastId();
-}
-/**
- * If the container is not mounted, the toast is enqueued and
- * the container lazy mounted
- */
-
-
-function dispatchToast(content, options) {
-  if (isAnyContainerMounted()) {
-    eventManager.emit(0
-    /* Show */
-    , content, options);
-  } else {
-    queue.push({
-      content: content,
-      options: options
-    });
-
-    if (lazy && canUseDom) {
-      lazy = false;
-      containerDomNode = document.createElement('div');
-      document.body.appendChild(containerDomNode);
-      Object(react_dom__WEBPACK_IMPORTED_MODULE_2__["render"])(Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ToastContainer, Object.assign({}, containerConfig)), containerDomNode);
-    }
-  }
-
-  return options.toastId;
-}
-/**
- * Merge provided options with the defaults settings and generate the toastId
- */
-
-
-function mergeOptions(type, options) {
-  return _extends({}, options, {
-    type: options && options.type || type,
-    toastId: getToastId(options)
-  });
-}
-
-var createToastByType = function createToastByType(type) {
-  return function (content, options) {
-    return dispatchToast(content, mergeOptions(type, options));
-  };
-};
-
-var toast = function toast(content, options) {
-  return dispatchToast(content, mergeOptions(TYPE.DEFAULT, options));
-};
-
-toast.success = /*#__PURE__*/createToastByType(TYPE.SUCCESS);
-toast.info = /*#__PURE__*/createToastByType(TYPE.INFO);
-toast.error = /*#__PURE__*/createToastByType(TYPE.ERROR);
-toast.warning = /*#__PURE__*/createToastByType(TYPE.WARNING);
-toast.dark = /*#__PURE__*/createToastByType(TYPE.DARK);
-toast.warn = toast.warning;
-/**
- * Remove toast programmaticaly
- */
-
-toast.dismiss = function (id) {
-  return eventManager.emit(1
-  /* Clear */
-  , id);
-};
-/**
- * Clear waiting queue when limit is used
- */
-
-
-toast.clearWaitingQueue = function (params) {
-  if (params === void 0) {
-    params = {};
-  }
-
-  return eventManager.emit(5
-  /* ClearWaitingQueue */
-  , params);
-};
-/**
- * return true if one container is displaying the toast
- */
-
-
-toast.isActive = function (id) {
-  var isToastActive = false;
-  containers.forEach(function (container) {
-    if (container.isToastActive && container.isToastActive(id)) {
-      isToastActive = true;
-    }
-  });
-  return isToastActive;
-};
-
-toast.update = function (toastId, options) {
-  if (options === void 0) {
-    options = {};
-  }
-
-  // if you call toast and toast.update directly nothing will be displayed
-  // this is why I defered the update
-  setTimeout(function () {
-    var toast = getToast(toastId, options);
-
-    if (toast) {
-      var oldOptions = toast.props,
-          oldContent = toast.content;
-
-      var nextOptions = _extends({}, oldOptions, options, {
-        toastId: options.toastId || toastId,
-        updateId: generateToastId()
-      });
-
-      if (nextOptions.toastId !== toastId) nextOptions.staleId = toastId;
-      var content = nextOptions.render || oldContent;
-      delete nextOptions.render;
-      dispatchToast(content, nextOptions);
-    }
-  }, 0);
-};
-/**
- * Used for controlled progress bar.
- */
-
-
-toast.done = function (id) {
-  toast.update(id, {
-    progress: 1
-  });
-};
-/**
- * Track changes. The callback get the number of toast displayed
- *
- */
-
-
-toast.onChange = function (callback) {
-  if (isFn(callback)) {
-    eventManager.on(4
-    /* Change */
-    , callback);
-  }
-
-  return function () {
-    isFn(callback) && eventManager.off(4
-    /* Change */
-    , callback);
-  };
-};
-/**
- * Configure the ToastContainer when lazy mounted
- */
-
-
-toast.configure = function (config) {
-  if (config === void 0) {
-    config = {};
-  }
-
-  lazy = true;
-  containerConfig = config;
-};
-
-toast.POSITION = POSITION;
-toast.TYPE = TYPE;
-/**
- * Wait until the ToastContainer is mounted to dispatch the toast
- * and attach isActive method
- */
-
-eventManager.on(2
-/* DidMount */
-, function (containerInstance) {
-  latestInstance = containerInstance.containerId || containerInstance;
-  containers.set(latestInstance, containerInstance);
-  queue.forEach(function (item) {
-    eventManager.emit(0
-    /* Show */
-    , item.content, item.options);
-  });
-  queue = [];
-}).on(3
-/* WillUnmount */
-, function (containerInstance) {
-  containers["delete"](containerInstance.containerId || containerInstance);
-
-  if (containers.size === 0) {
-    eventManager.off(0
-    /* Show */
-    ).off(1
-    /* Clear */
-    ).off(5
-    /* ClearWaitingQueue */
-    );
-  }
-
-  if (canUseDom && containerDomNode) {
-    document.body.removeChild(containerDomNode);
-  }
-});
-
-
-//# sourceMappingURL=react-toastify.esm.js.map
-
-
-/***/ }),
-
-=======
->>>>>>> master
 /***/ "./node_modules/react/cjs/react.development.js":
 /*!*****************************************************!*\
   !*** ./node_modules/react/cjs/react.development.js ***!
@@ -60981,289 +59139,6 @@ function isBuf(obj) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isOldIE = function isOldIE() {
-  var memo;
-  return function memorize() {
-    if (typeof memo === 'undefined') {
-      // Test for IE <= 9 as proposed by Browserhacks
-      // @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-      // Tests for existence of standard globals is to allow style-loader
-      // to operate correctly into non-standard environments
-      // @see https://github.com/webpack-contrib/style-loader/issues/177
-      memo = Boolean(window && document && document.all && !window.atob);
-    }
-
-    return memo;
-  };
-}();
-
-var getTarget = function getTarget() {
-  var memo = {};
-  return function memorize(target) {
-    if (typeof memo[target] === 'undefined') {
-      var styleTarget = document.querySelector(target); // Special case to return head of iframe instead of iframe itself
-
-      if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
-        try {
-          // This will throw an exception if access to iframe is blocked
-          // due to cross-origin restrictions
-          styleTarget = styleTarget.contentDocument.head;
-        } catch (e) {
-          // istanbul ignore next
-          styleTarget = null;
-        }
-      }
-
-      memo[target] = styleTarget;
-    }
-
-    return memo[target];
-  };
-}();
-
-var stylesInDom = [];
-
-function getIndexByIdentifier(identifier) {
-  var result = -1;
-
-  for (var i = 0; i < stylesInDom.length; i++) {
-    if (stylesInDom[i].identifier === identifier) {
-      result = i;
-      break;
-    }
-  }
-
-  return result;
-}
-
-function modulesToDom(list, options) {
-  var idCountMap = {};
-  var identifiers = [];
-
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i];
-    var id = options.base ? item[0] + options.base : item[0];
-    var count = idCountMap[id] || 0;
-    var identifier = "".concat(id, " ").concat(count);
-    idCountMap[id] = count + 1;
-    var index = getIndexByIdentifier(identifier);
-    var obj = {
-      css: item[1],
-      media: item[2],
-      sourceMap: item[3]
-    };
-
-    if (index !== -1) {
-      stylesInDom[index].references++;
-      stylesInDom[index].updater(obj);
-    } else {
-      stylesInDom.push({
-        identifier: identifier,
-        updater: addStyle(obj, options),
-        references: 1
-      });
-    }
-
-    identifiers.push(identifier);
-  }
-
-  return identifiers;
-}
-
-function insertStyleElement(options) {
-  var style = document.createElement('style');
-  var attributes = options.attributes || {};
-
-  if (typeof attributes.nonce === 'undefined') {
-    var nonce =  true ? __webpack_require__.nc : undefined;
-
-    if (nonce) {
-      attributes.nonce = nonce;
-    }
-  }
-
-  Object.keys(attributes).forEach(function (key) {
-    style.setAttribute(key, attributes[key]);
-  });
-
-  if (typeof options.insert === 'function') {
-    options.insert(style);
-  } else {
-    var target = getTarget(options.insert || 'head');
-
-    if (!target) {
-      throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");
-    }
-
-    target.appendChild(style);
-  }
-
-  return style;
-}
-
-function removeStyleElement(style) {
-  // istanbul ignore if
-  if (style.parentNode === null) {
-    return false;
-  }
-
-  style.parentNode.removeChild(style);
-}
-/* istanbul ignore next  */
-
-
-var replaceText = function replaceText() {
-  var textStore = [];
-  return function replace(index, replacement) {
-    textStore[index] = replacement;
-    return textStore.filter(Boolean).join('\n');
-  };
-}();
-
-function applyToSingletonTag(style, index, remove, obj) {
-  var css = remove ? '' : obj.media ? "@media ".concat(obj.media, " {").concat(obj.css, "}") : obj.css; // For old IE
-
-  /* istanbul ignore if  */
-
-  if (style.styleSheet) {
-    style.styleSheet.cssText = replaceText(index, css);
-  } else {
-    var cssNode = document.createTextNode(css);
-    var childNodes = style.childNodes;
-
-    if (childNodes[index]) {
-      style.removeChild(childNodes[index]);
-    }
-
-    if (childNodes.length) {
-      style.insertBefore(cssNode, childNodes[index]);
-    } else {
-      style.appendChild(cssNode);
-    }
-  }
-}
-
-function applyToTag(style, options, obj) {
-  var css = obj.css;
-  var media = obj.media;
-  var sourceMap = obj.sourceMap;
-
-  if (media) {
-    style.setAttribute('media', media);
-  } else {
-    style.removeAttribute('media');
-  }
-
-  if (sourceMap && typeof btoa !== 'undefined') {
-    css += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), " */");
-  } // For old IE
-
-  /* istanbul ignore if  */
-
-
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css;
-  } else {
-    while (style.firstChild) {
-      style.removeChild(style.firstChild);
-    }
-
-    style.appendChild(document.createTextNode(css));
-  }
-}
-
-var singleton = null;
-var singletonCounter = 0;
-
-function addStyle(obj, options) {
-  var style;
-  var update;
-  var remove;
-
-  if (options.singleton) {
-    var styleIndex = singletonCounter++;
-    style = singleton || (singleton = insertStyleElement(options));
-    update = applyToSingletonTag.bind(null, style, styleIndex, false);
-    remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-  } else {
-    style = insertStyleElement(options);
-    update = applyToTag.bind(null, style, options);
-
-    remove = function remove() {
-      removeStyleElement(style);
-    };
-  }
-
-  update(obj);
-  return function updateStyle(newObj) {
-    if (newObj) {
-      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap) {
-        return;
-      }
-
-      update(obj = newObj);
-    } else {
-      remove();
-    }
-  };
-}
-
-module.exports = function (list, options) {
-  options = options || {}; // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-  // tags it will allow on a page
-
-  if (!options.singleton && typeof options.singleton !== 'boolean') {
-    options.singleton = isOldIE();
-  }
-
-  list = list || [];
-  var lastIdentifiers = modulesToDom(list, options);
-  return function update(newList) {
-    newList = newList || [];
-
-    if (Object.prototype.toString.call(newList) !== '[object Array]') {
-      return;
-    }
-
-    for (var i = 0; i < lastIdentifiers.length; i++) {
-      var identifier = lastIdentifiers[i];
-      var index = getIndexByIdentifier(identifier);
-      stylesInDom[index].references--;
-    }
-
-    var newLastIdentifiers = modulesToDom(newList, options);
-
-    for (var _i = 0; _i < lastIdentifiers.length; _i++) {
-      var _identifier = lastIdentifiers[_i];
-
-      var _index = getIndexByIdentifier(_identifier);
-
-      if (stylesInDom[_index].references === 0) {
-        stylesInDom[_index].updater();
-
-        stylesInDom.splice(_index, 1);
-      }
-    }
-
-    lastIdentifiers = newLastIdentifiers;
-  };
-};
-
-/***/ }),
-
-=======
->>>>>>> master
 /***/ "./node_modules/symbol-observable/es/index.js":
 /*!****************************************************!*\
   !*** ./node_modules/symbol-observable/es/index.js ***!
